@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+        <title>competition/save and continue</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/rowwwapp_competition_mods_export.js" th:src="@{/js/rowwwapp_competition_mods_export.js}"></script>
+    </head>
+    <body>
+    <header>Organisation d'une compétition/documents</header>
+    <article>
+      <br/> 
+      <button id="ButtonModificationToggle">Modification</button><br/> 
+            <form id="formModification">
+                <label for="mod">Choix des informations à modifier: </label><br/>
+                <input type="submit" id="mod" value="Jour de compétition"/><br/>
+                <input type="submit" id="mod2" value="Courses"/><br/>
+            </form> 
+            <br/> 
+      <button id="ButtonPrintToggle">Exportation</button><br/>      
+        <form id="formExports">
+            <input type="submit" id="buttonLetter" value="Informations pour l'avant-programme"/><br/>
+            <input type="submit" id="buttonList" value="Informations pour le programme des courses"/><br/> 
+        </form>
+    </article>
+    <footer>Made by jolacascadeuse 2020</footer>
+    </body> 
+</html>    

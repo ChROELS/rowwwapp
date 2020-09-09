@@ -1,0 +1,14 @@
+$(document).ready(function(){
+    $(formModification).hide();
+    $(formExports).hide();
+});
+$(document).ready(function(){
+$(ButtonModificationToggle).click(function(){
+  $(formModification).toggle(1000);
+});
+});
+$(document).ready(function(){
+    $(ButtonPrintToggle).click(function(){
+      $(formExports).toggle(1000);
+    });
+    });
