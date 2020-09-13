@@ -6,19 +6,25 @@ import be.intecbrussel.repositories.CRUDOperationsRace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ExportRace {
-    @Autowired
+
     private CRUDOperationsRace races;
+    @Autowired
+    public ExportRace(CRUDOperationsRace races) {
+        this.races = races;
+    }
+
     /**
      * Handle request to download an Excel document
      */
-    @RequestMapping(value = "/rowwwapp/competition/documents/race", method = RequestMethod.GET)
+    @GetMapping(value = "/rowwwapp/competition/results/race")
     public String download(Model model) {
         model.addAttribute("races", races.findAll());
-        return "rowwwapp_competition_page_exports";
+        return "redirect:/rowwwapp/competition/documents";
     }
 }

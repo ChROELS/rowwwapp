@@ -35,9 +35,12 @@ public class Race {
     private RowingBoat admissRowingBoat;
     private String description;
     //Part used for registration
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    },fetch = FetchType.LAZY)
     private Competition competition;
-    @OneToMany
+    @OneToMany(mappedBy = "race", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Team> teams;
 
 
@@ -179,6 +182,14 @@ public class Race {
                     " "+rowingBoat.name()+" "+category.name()+" "+gender.name();
         }
         return"";
+    }
+    public void addTeam(Team team){
+        teams.add(team);
+        team.setRace(this);
+    }
+    public void removeTeam(Team team){
+        teams.remove(team);
+        team.setRace(null);
     }
     //override methods///////////////////////////////
 

@@ -13,121 +13,134 @@
         <header>Organisation des courses</header>
         <article>
             <button id="buttonRaceInfosToggle">Course >>></button><br/>
-            <h1></h1>
+            <br/>
+            <!--/*@thymesVar id="raceForm2" type="be.intecbrussel.models.competition.Race"*/-->
+            <form action="#" th:action="@{/}" th:object="${raceForm2}" method="post">
             <section id="raceForm">
+
                 <label for="raceNumber">Numéro d'identification:</label><br/>
-                <input type="number" id="raceNumber" value="000" title="par exemple: 120 pour 120ième course" required/><br/>
-                <label for="raceName">Nom officiel:</label><br/>
-                <input type="text" id="raceName" size=100 value ="" title="par exemple: challenge annuel des seniors" required/><br/>
-                <label for="raceStartingTime">Heure de départ:</label><br/>
-                <input type="text" id="raceStartingTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" required/><br/>
-                <label for="raceDistance">Distance (mètres):</label><br/>
-                <input type="number" id="raceDistance" required/><br/>
-                <label for="raceMaxTime">Temps maximum (mètres):</label><br/>
-                <input type="text" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" required/><br/>
-                <label>Caractère:</label>
+                <input type="number" id="raceNumber" value="000" title="par exemple: 120 pour 120ième course" th:field="*{number}" required/><br/>
+
+                    <label for="raceName">Nom officiel:</label><br/>
+                <input type="text" id="raceName" size=100 value ="" title="par exemple: challenge annuel des seniors" th:field="*{name}"  required/><br/>
+
+                    <label for="raceStartingTime">Heure de départ:</label><br/>
+                <input type="text" id="raceStartingTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{startingTime}"  required/><br/>
+
+                    <label for="raceDistance">Distance (mètres):</label><br/>
+                <input type="number" id="raceDistance" th:field="*{distance}"  required/><br/>
+
+                    <label for="raceMaxTime">Temps maximum:</label><br/>
+                <input type="text" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{maxTime}"  required/><br/>
+
+                    <label>Caractère:</label>
                 <label class="container" >International
-                    <input type="radio" checked="checked" name="radio">
+                    <input type="radio" name="radio" th:field="*{raceImpact}" >
                     <span class="checkmark" id="international"></span>
                 </label>
                 <label class="container" >National
-                    <input type="radio" name="radio">
+                    <input type="radio" name="radio" checked="checked"  th:field="*{raceImpact}" >
                     <span class="checkmark" id="national"></span>
                 </label>
-                <label>Expérience:</label>
+
+                    <label>Expérience:</label>
                 <label class="container">Débutants
-                    <input type="radio" checked="checked" name="radio">
+                    <input type="radio" name="radio" value="BEGINNER" th:field="*{raceExperience}" >
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">Tous
-                    <input type="radio" name="radio">
+                    <input type="radio" name="radio" value="ALL" th:field="*{raceExperience}" >
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">Non-débutants
-                    <input type="radio" name="radio">
+                    <input type="radio" name="radio" checked="checked" value="NON-BEGINNER" th:field="*{raceExperience}" >
                     <span class="checkmark"></span>
                 </label>
-                <label for="raceType">Type de course:</label><br/>
-                <select id="raceType">1 à sélectionner
-                  <option value="C1">C1</option>
-                  <option value="C2">C2</option>
-                  <option value="C4">C4</option>
-                  <option value="slalom">slalom</option>
-                  <option value="biathlon">biathlon</option>
-                  <option value="duathlon">duathlon</option>
-                  <option value="triathlon">triathlon</option>
-                  <option value="Tête de rivière">tête de rivière</option>
-                  <option value="open à handicap">open à handicap</option>
-                  <option value="régate">régate</option>
-                  <option value="randonnée">randonnée</option>
-                  <option value="challenge">challenge</option>
-                  <option value="non précisé">non précisé</option>
-                  <option value="non-répertoriée">non répertorié</option>
+
+                    <label for="raceType">Type de course:</label><br/>
+                <select id="raceType" th:field="*{racetype}" >1 à sélectionner
+                    <option value="non précisé" selected>non précisé</option>
+                    <option value="non-répertoriée" >non répertorié</option>
+                  <option value="C1" >C1</option>
+                  <option value="C2" >C2</option>
+                  <option value="C4" >C4</option>
+                  <option value="slalom" >slalom</option>
+                  <option value="biathlon" >biathlon</option>
+                  <option value="duathlon" >duathlon</option>
+                  <option value="triathlon" >triathlon</option>
+                  <option value="Tête de rivière" >tête de rivière</option>
+                  <option value="open à handicap" >open à handicap</option>
+                  <option value="régate" >régate</option>
+                  <option value="randonnée" >randonnée</option>
+                  <option value="challenge" >challenge</option>
+
                 </select><br/>
-                <label for="raceCustom">Type de course en quelques mots (si course non-répertoriée):</label><br/>
-                <input type="text" id="raceCustom" size=100 value=""/><br/>
-                <label for="boatType">Type d'embarcation admise:</label><br/>
-                  <select id="boatType" required>1 à sélectionner
-                    <option value="ALL">Au choix</option>
-                    <option value="2-">2-</option>
-                    <option value="4-">4-</option>
-                    <option value="2+">2+</option>
-                    <option value="4+">4+</option>
-                    <option value="8+">8+</option>
-                    <option value="1x">1x</option>
-                    <option value="2x">2x</option>
-                    <option value="3x">3x</option>
-                    <option value="4x">4x</option>
-                    <option value="8x">8x</option>
-                    <option value="4-">4-</option>
-                    <option value="dinghy">dinghy</option>
-                    <option value="tender">tender</option>
-                    <option value="yole">yole</option>
-                    <option value="canöe">canöe_skiff</option>
-                    <option value="canadian trek skiff">canadian_trek_skiff</option>
-                    <option value="trek_1x">trek_1x</option>
-                    <option value="trek_2x">trek_2x</option>
-                    <option value="trek_4x">trek_4x</option>  
+
+                    <label for="raceCustom">Type de course en quelques mots (si course non-répertoriée):</label><br/>
+                <input type="text" id="raceCustom" size=100 value="" th:field="*{customedRace}"  /><br/>
+
+                    <label for="boatType">Type d'embarcation admise:</label><br/>
+                  <select id="boatType" th:field="*{admissRowingBoat}" required>1 à sélectionner
+                    <option value="ALL" selected>Toutes/Au choix</option>
+                    <option value="2-" >2-</option>
+                    <option value="4-" >4-</option>
+                    <option value="2+" >2+</option>
+                    <option value="4+" >4+</option>
+                    <option value="8+" >8+</option>
+                    <option value="1x" >1x</option>
+                    <option value="2x" >2x</option>
+                    <option value="3x" >3x</option>
+                    <option value="4x" >4x</option>
+                    <option value="8x" >8x</option>
+                    <option value="4-" >4-</option>
+                    <option value="dinghy" >dinghy</option>
+                    <option value="tender" >tender</option>
+                    <option value="yole" >yole</option>
+                    <option value="canöe" >canöe_skiff</option>
+                    <option value="canadian trek skiff" >canadian_trek_skiff</option>
+                    <option value="trek_1x" >trek_1x</option>
+                    <option value="trek_2x" >trek_2x</option>
+                    <option value="trek_4x" >trek_4x</option>
                   </select><br/>
-                <label for="ageCategory">Catégorie admise:</label>
-                  <select id="ageCategory" required>1 à sélectionner
-                    <option value="ALL/OPEN">Open</option>
-                    <option value="PR3">PR3</option>
-                    <option value="PR2">PR2</option>
-                    <option value="PR1">PR1</option>
-                    <option value="J10">J10</option>
-                    <option value="J12">J12</option>
-                    <option value="J14">J14</option>
-                    <option value="J16">J16</option>
-                    <option value="J18">J18</option>
-                    <option value="U23">23</option>
-                    <option value="U23">23</option>
-                    <option value="S_A">S_A</option>
-                    <option value="S_B">S_B</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="I">I</option>
-                    <option value="J">J</option>
-                    <option value="K">K</option>
-                    <option value="L">L</option>
-                    <option value="M">M</option>
+
+                    <label for="ageCategory">Catégorie admise:</label>
+                  <select id="ageCategory"  th:field="*{admissCategory}"  >1 à sélectionner
+                    <option value="ALL/OPEN" selected>Toutes/Open</option>
+                    <option value="PR3" >PR3</option>
+                    <option value="PR2" >PR2</option>
+                    <option value="PR1" >PR1</option>
+                    <option value="J10" >J10</option>
+                    <option value="J12" >J12</option>
+                    <option value="J14" >J14</option>
+                    <option value="J16" >J16</option>
+                    <option value="J18"  >J18</option>
+                    <option value="U23" >23</option>
+                    <option value="U23" >23</option>
+                    <option value="S_A" >S_A</option>
+                    <option value="S_B" >S_B</option>
+                    <option value="A" >A</option>
+                    <option value="B" >B</option>
+                    <option value="C" >C</option>
+                    <option value="D" >D</option>
+                    <option value="E" >E</option>
+                    <option value="F" >F</option>
+                    <option value="G" >G</option>
+                    <option value="H" >H</option>
+                    <option value="I" >I</option>
+                    <option value="J" >J</option>
+                    <option value="K" >K</option>
+                    <option value="L" >L</option>
+                    <option value="M" >M</option>
                 </select><br/>
-                <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
-                <input type="text" id="raceDescription" size=200 value ="" required/>
+
+                    <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
+                <input type="text" id="raceDescription" size=200 value ="" th:field="*{description}"  required/>
                 <br/>
+                </form>
             </section>
             
                  <!-- part 3 -->
-            <input type="submit" id="newRaceInfos" value="Enregistrer et créer une course supplémentaire"/><br/>
-            <input type="submit" id="buttonCompleted" value="Enregistrer et passer à l'exportation"/><br/>
-            <input type="submit" id="buttonIncompleted" value="Enregistrer et quitter"/><br/> 
-            
+            <button id="newRaceInfos" value="Enregistrer et créer une course supplémentaire"></button><br/>
         </article>     
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body> 

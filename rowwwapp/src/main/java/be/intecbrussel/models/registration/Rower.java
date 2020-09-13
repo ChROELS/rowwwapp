@@ -6,6 +6,7 @@ import be.intecbrussel.models.enums.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,14 +16,18 @@ public class Rower {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull(message = "Le prénom est requis")
+    @Size(min=2, max=30)
     private String firstName;
     @NotNull(message = "Le nom est requis")
+    @Size(min=2, max=30)
     private String lastName;
     @NotNull(message = "Le genre est requis")
     private Gender gender;
     private String nationality;
     @NotNull(message = "La date de naissance est requise")
     private LocalDate birthDate;
+    @NotNull(message = "Le club est requis")
+    @Size(min=2, max=30)
     private String club;
     private String licenceNumber;
     private Disability disability;
@@ -33,7 +38,10 @@ public class Rower {
     private float genderCoef;
     private int age;
     private float rowerHandicap;
-    @ManyToOne
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    },fetch = FetchType.LAZY)
     private Team team;
     //Constructor///////////////////
     public Rower() {
@@ -158,6 +166,15 @@ public class Rower {
     public void setRowerHandicap(float rowerHandicap) {
         this.rowerHandicap = rowerHandicap(this.categoryCoef,this.genderCoef);
     }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     //specific methods///////////////////////////////
     public int calculateAge(LocalDate birthDate){
         int actualYear = LocalDate.now().getYear();

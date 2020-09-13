@@ -5,6 +5,8 @@ import be.intecbrussel.models.competition.Race;
 import be.intecbrussel.models.enums.RowingBoat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.*;
 
@@ -13,16 +15,21 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull(message = "Un nom est requis")
+    @Size(min=2, max=30)
     private String name;
     private RowingBoat type;
     private int sizeOfCrew;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    }, fetch = FetchType.LAZY)
     private Race race;
-    @OneToMany
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rower> crew;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Rower cox;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Rower stroke;
     private float teamHandicap;
 
@@ -30,6 +37,15 @@ public class Team {
     public Team() {
     }
     //Getters and setters//////////
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
     public Long getId() {
         return id;
     }
@@ -125,6 +141,14 @@ public class Team {
         return crewNames.values().stream().sorted().reduce((crewMember, output) -> output+" "+crewMember).isPresent()?
                 crewNames.values().stream().sorted().reduce((crewMember, output) -> output+" "+crewMember).get():"-";
    }
+    public void addRower(Rower rower){
+        crew.add(rower);
+        rower.setTeam(this);
+    }
+    public void removeRower(Rower rower){
+        crew.remove(rower);
+        rower.setTeam(null);
+    }
     //Override methods////////////////////////////
     @Override
     public boolean equals(Object o){

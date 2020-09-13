@@ -1,11 +1,11 @@
 package be.intecbrussel.configurations;
 
-import be.intecbrussel.viewResolvers.CsvViewResolverCompetition;
-import be.intecbrussel.viewResolvers.CvsViewResolver;
-import be.intecbrussel.viewResolvers.ExcelViewResolver;
+
+import be.intecbrussel.viewResolvers.ExcelViewResolverRegistration;
 import be.intecbrussel.viewResolvers.ExcelViewResolverCompetition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
@@ -27,6 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * Configure ContentNegotiatingViewResolver
      */
     @Bean
+    @Order(value = 5)
     public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
         ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
         resolver.setContentNegotiationManager(manager);
@@ -34,10 +35,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         // Define all possible view resolvers
         List<ViewResolver> resolvers = new ArrayList<>();
 
-        resolvers.add(csvViewResolver());
-        resolvers.add(excelViewResolver());
+
+        resolvers.add(excelViewResolverRegistration());
         resolvers.add(excelViewResolverCompetition());
-        resolvers.add(csvViewResolverCompetition());
         resolver.setViewResolvers(resolvers);
         return resolver;
     }
@@ -47,10 +47,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * generate XLS output for an object content
      */
     @Bean
-    public ViewResolver excelViewResolver() {
-        return new ExcelViewResolver();
+    @Order(value=3)
+    public ViewResolver excelViewResolverRegistration() {
+        return new ExcelViewResolverRegistration();
     }
     @Bean
+    @Order(value=4)
     public ViewResolver excelViewResolverCompetition() {
         return new ExcelViewResolverCompetition();
     }
@@ -59,14 +61,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * Configure View resolver to provide Csv output using Super Csv library to
      * generate Csv output for an object content
      */
-    @Bean
-    public ViewResolver csvViewResolver() {
-        return new CvsViewResolver();
-    }
-    @Bean
-    public ViewResolver csvViewResolverCompetition() {
-        return new CsvViewResolverCompetition();
-    }
+
 
     /*
      * Configure View resolver to provide Pdf output using iText library to

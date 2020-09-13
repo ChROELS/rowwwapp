@@ -3,6 +3,7 @@ package be.intecbrussel.models.competition;
 
 import be.intecbrussel.models.enums.Category;
 
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,29 +26,42 @@ public class Competition {
     @NotNull(message = "Un nom est requis")
     @Size(min=2, max=30)
     private String name;
+    @NotNull(message = "Une information est requise")
+    @Size(min=3, max=50)
     private String description;
     @NotNull(message = "Un lieu est requis")
     @Size(min=3, max=50)
     private String placeOfEvent;
     @NotNull(message = "Une date est requise")
     private LocalDate date;
+    @NotNull(message = "Une information est requise")
     private String registrationRules;
+    @NotNull(message = "Un contact est requis")
     private String RegistrationContact;
     @NotNull(message = "Un coût est requis")
     private BigDecimal registrationCost;
-    private LocalDateTime registrationLimit;
-    private LocalDateTime lotteryDate;
+    @NotNull(message = "Une date d'inscription est requise")
+    private LocalDate registrationLimit;
+    @NotNull(message = "Une date est requise")
+    private LocalDate lotteryDate;
+    @NotNull(message = "Une information est requise")
     private String lotteryRules;
+    @NotNull(message = "Un contact est requis")
     private String lotteryContact;
-    private LocalDateTime forfeitLimit;
+    @NotNull(message = "Une heure limite est requise")
+    private String forfeitLimitHour;
+    @NotNull(message = "Une date limite est requise")
+    private LocalDate forfeitLimit;
+    @NotNull(message = "Une information est requise")
     private String forfeitRules;
+    @NotNull(message = "Un contact est requis")
     private String forfeitContact;
+    @NotNull(message = "Une information est requise")
     private String complementaryRules;
-    private Float compensationMale;
-    private Float compensationFemale;
-    @OneToMany
-    private Map<Integer,Compensation> compensationCategories;
-    @OneToMany
+
+    @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Compensation> compensationCategories;
+    @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Race> races;
 
 
@@ -123,21 +137,7 @@ public class Competition {
     }
 
 
-    public LocalDateTime getRegistrationLimit() {
-        return registrationLimit;
-    }
 
-    public void setRegistrationLimit(LocalDateTime registrationLimit) {
-        this.registrationLimit = registrationLimit;
-    }
-
-    public LocalDateTime getLotteryDate() {
-        return lotteryDate;
-    }
-
-    public void setLotteryDate(LocalDateTime lotteryDate) {
-        this.lotteryDate = lotteryDate;
-    }
 
     public String getLotteryRules() {
         return lotteryRules;
@@ -155,11 +155,19 @@ public class Competition {
         this.lotteryContact = lotteryContact;
     }
 
-    public LocalDateTime getForfeitLimit() {
+    public String getForfeitLimitHour() {
+        return forfeitLimitHour;
+    }
+
+    public void setForfeitLimitHour(String forfeitLimitHour) {
+        this.forfeitLimitHour = forfeitLimitHour;
+    }
+
+    public LocalDate getForfeitLimit() {
         return forfeitLimit;
     }
 
-    public void setForfeitLimit(LocalDateTime forfeitLimit) {
+    public void setForfeitLimit(LocalDate forfeitLimit) {
         this.forfeitLimit = forfeitLimit;
     }
 
@@ -195,52 +203,48 @@ public class Competition {
         this.complementaryRules = complementaryRules;
     }
 
-    public Map<Integer,Compensation> getCompensationCategories() {
+    public LocalDate getRegistrationLimit() {
+        return registrationLimit;
+    }
+
+    public void setRegistrationLimit(LocalDate registrationLimit) {
+        this.registrationLimit = registrationLimit;
+    }
+
+    public LocalDate getLotteryDate() {
+        return lotteryDate;
+    }
+
+    public void setLotteryDate(LocalDate lotteryDate) {
+        this.lotteryDate = lotteryDate;
+    }
+
+    public List<Compensation> getCompensationCategories() {
         return compensationCategories;
     }
 
-    public void setCompensationCategories(Map<Integer,Compensation> compensationCategories) {
+    public void setCompensationCategories(List<Compensation> compensationCategories) {
         this.compensationCategories = compensationCategories;
     }
 
-    public  Float getCompensationMale() {
-        return compensationMale;
-    }
-    public  Float getCompensationFemale() {
-        return compensationFemale;
-    }
-
-    public void setCompensationMale(Float compensation) {
-        this.compensationMale = compensation;
-    }
-    public void setCompensationFemale(Float compensation) {
-        this.compensationMale = compensation;
-    }
-
     //specific methods///////////////////////////////
-    public String listCompensationsCategories(Map<Integer,Compensation> compensationCategories){
-
-        Compensation[] allCompensations = (Compensation[]) compensationCategories.values().stream().toArray();
-        List<Float> allCoefficients = new ArrayList<>();
-        for (Compensation c: allCompensations
-             ) {
-            allCoefficients.add(c.getCoefficient());
-        }
-
-        Integer[] allCategoriesOrdinals = (Integer[]) compensationCategories.keySet().toArray();
-        List<String> allCategories = new ArrayList<>();
-        List<Category> categories = Arrays.asList(Category.values());
-        for (Integer f: allCategoriesOrdinals
-             ) {
-            for (Category c: categories
-                 ) {
-                if(f==c.ordinal()){
-                    allCategories.add(c.name());
-                }
-            }
-        }
-        return Arrays.toString(allCategories.toArray())+"\n"+Arrays.toString(allCoefficients.toArray());
+    public void addRace(Race race){
+        races.add(race);
+        race.setCompetition(this);
     }
+    public void removeRace(Race race){
+        races.remove(race);
+        race.setCompetition(null);
+    }
+    public void addCompensation(Compensation compensation){
+        compensationCategories.add(compensation);
+        compensation.setCompetition(this);
+    }
+    public void removeCompensation(Compensation compensation){
+        compensationCategories.remove(compensation);
+        compensation.setCompetition(null);
+    }
+
     //override methods///////////////////////////////
     @Override
     public boolean equals(Object o){

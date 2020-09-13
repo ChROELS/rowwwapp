@@ -6,19 +6,25 @@ import be.intecbrussel.repositories.CRUDOperationsRower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ExportRower {
-    @Autowired
+
     private CRUDOperationsRower rowers;
+    @Autowired
+    public ExportRower(CRUDOperationsRower rowers) {
+        this.rowers = rowers;
+    }
+
     /**
      * Handle request to download an Excel document
      */
-    @RequestMapping(value = "/rowwwapp/registration/documents/rower", method = RequestMethod.GET)
+    @GetMapping(value = "/rowwwapp/registration/results/rower")
     public String download(Model model) {
         model.addAttribute("rowers", rowers.findAll());
-        return "";
+        return "redirect:/rowwwapp/registration/documents";
     }
 }
