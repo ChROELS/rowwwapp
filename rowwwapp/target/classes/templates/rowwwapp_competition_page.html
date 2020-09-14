@@ -16,11 +16,12 @@
             <button id="buttonCompetitionToggle">Compétition >>></button><br/>
             <br/>
             <!--/*@thymesVar id="competitionForm2" type="be.intecbrussel.models.competition.Competition"*/-->
-            <form action="#" th:action="@{/}" th:object="${competitionForm2}" method="post">
+            <form action="#" method="post" th:action="@{rowwwapp/competition}" th:object="${competitionForm2}">
             <section id="competitionForm">
 
                     <label for="location">Lieu:</label><br/>
-                    <input type="text" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel" th:field="*{placeOfEvent}" required/><br/>
+                    <input type="text" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel" th:field="${competitionForm2.placeOfEvent}"
+                           th: required/><br/>
                     <p th:if="${#fields.hasErrors('placeOfEvent')}" th:errors="*{placeOfEvent}">Faute d'encodage du lieu</p>
                     <label for="dateOfCompetition">Date:</label><br/>
                     <input type="date" id="dateOfCompetition" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" th:field="*{date}" required><br/>

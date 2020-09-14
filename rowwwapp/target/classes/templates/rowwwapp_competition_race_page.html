@@ -15,7 +15,7 @@
             <button id="buttonRaceInfosToggle">Course >>></button><br/>
             <br/>
             <!--/*@thymesVar id="raceForm2" type="be.intecbrussel.models.competition.Race"*/-->
-            <form action="#" th:action="@{/}" th:object="${raceForm2}" method="post">
+            <form action="#" method="post" th:action="@{/rowwwapp/competition/race}" th:object="${raceForm2}">
             <section id="raceForm">
 
                 <label for="raceNumber">Numéro d'identification:</label><br/>
@@ -136,11 +136,11 @@
                     <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
                 <input type="text" id="raceDescription" size=200 value ="" th:field="*{description}"  required/>
                 <br/>
-                </form>
             </section>
+                </form>
+
             
-                 <!-- part 3 -->
-            <button id="newRaceInfos" value="Enregistrer et créer une course supplémentaire"></button><br/>
+
         </article>     
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body> 

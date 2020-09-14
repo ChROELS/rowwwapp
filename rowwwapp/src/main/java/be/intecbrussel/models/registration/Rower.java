@@ -140,7 +140,11 @@ public class Rower {
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        if(this.disability==Disability.Option_0) {
+            this.category = Category.selectCategory(calculateAge(this.birthDate));
+        }else{
+            this.category = Category.selectCategory(this.disability);
+        }
     }
 
     public String getClub() {
@@ -184,6 +188,7 @@ public class Rower {
     public float rowerHandicap( float categoryCoef, float genderCoef){
         return this.categoryCoef*this.genderCoef;
     }
+
     //Override methods////////////////////////////
     @Override
     public boolean equals(Object o){

@@ -24,7 +24,7 @@ public class Team {
             CascadeType.PERSIST,
             CascadeType.MERGE
     }, fetch = FetchType.LAZY)
-    private Race race;
+    private ScheduledRace race;
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rower> crew;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -38,11 +38,11 @@ public class Team {
     }
     //Getters and setters//////////
 
-    public Race getRace() {
+    public ScheduledRace getRace() {
         return race;
     }
 
-    public void setRace(Race race) {
+    public void setRace(ScheduledRace race) {
         this.race = race;
     }
 

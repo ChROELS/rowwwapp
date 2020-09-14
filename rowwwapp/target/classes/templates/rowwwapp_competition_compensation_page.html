@@ -15,7 +15,7 @@
 <button id="buttonCompensationToggle">Compensations pour les courses open, mixtes, à handicap >>></button><br/>
 <br/>
     <!--/*@thymesVar id="compensationForm2" type="be.intecbrussel.models.competition.Compensation"*/-->
-    <form action="#" th:action="@{/}" th:object="${compensationForm2}" method="post">
+    <form action="#" method="post" th:action="@{/rowwwapp/competition/compensation}" th:object="${compensationForm2}">
 <section id="compensationForm">
         <label for="compensationMale">Homme :</label><br/>
         <input type="text" id="compensationMale" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{compensationMale}"/><br/>
@@ -71,8 +71,9 @@
         <input type="text" id="compensationL" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{l}" /><br/>
         <label for="compensationM">M :</label><br/>
         <input type="text" id="compensationM" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{m}" /><br/>
-    </form>
 </section>
+    </form>
+
 </article>
 
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>

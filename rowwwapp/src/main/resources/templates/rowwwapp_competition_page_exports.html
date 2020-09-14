@@ -12,15 +12,12 @@
     <body>
     <header>Organisation d'une compétition/documents</header>
     <article>
-      <br/>
-        <button id="buttonCompetitionXls" onclick="loadCompetXls()">Information sur le jour de compétition (.xls)</button><br/>
-        <br/>
-        <button id="buttonCompetitionCsv" onclick="loadCompetCsv()">Information sur le jour de compétition (.csv)</button><br/>
-        <br/>
-        <button id="buttonRaceXls" onclick="loadRaceXls()">Information sur les courses (.xls)</button><br/>
-        <br/>
-        <button id="buttonRaceCsv" onclick="loadRaceCsv()">Information sur les courses (.csv)</button><br/>
-
+        <!-- part 1 -->
+        <h1 align="center">Vos données</h1>
+        <!-- part 2 -->
+        <button id="newRaceInfos" onclick="loadPageCompetitionRace()">Créer une course supplémentaire</button><br/>
+        <button id="toCompetition" onclick="loadPageCompetition()">Organiser une autre compétition</button></br>
+        <button id="toDownload" onclick="loadPageDownload()">Télécharger ces données</button></br>
     </article>
     <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
     </body> 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+        <title>registration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/rowwwapp_registration_page.js" th:src="@{/js/rowwwapp_registration_page.js}"></script>
+    </head>
+    <body>
+    <header>Inscription aux courses/participants</header>
+    <article>
+      <!-- part form -->             
+      <br/>
+      <button id="buttonRowerToggle">Rameurs(euses)</button><br/>
+        <section id="rowerForm">            
+          <form id="rower1">
+            <label for="firstname">Prénom:</label><br>
+              <input type="text" name="Prénom" id="firstname" size=50 value="" required/><br/>
+            <label for="lastname">Nom:</label><br>
+              <input type="text" name="Nom" id="lastname" size=50 value="" required/><br/>
+            <label for="gender">Genre:</label><br/>
+                <select id="gender" required>
+                  <option value="M">M</option>
+                  <option value="F">F</option>
+                </select><br/>
+            <label for="nationality">Nationalité:</label><br>
+              <input type="text" name="Nationalité" id="nationality" value="" required/><br/>
+            <label for="birthdate">Date de naissance:</label><br>
+              <input type="date" name="Date de naissance" id="birthdate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/1940" required><br/>    
+            <label for="club">Nom du club/association:</label><br>
+              <input type="text" name="Club" id="club" value="" required/><br/>
+            <label for="clubNumber">Numéro de license:</label><br/>
+              <input type="number" id="clubNumber" pattern="[0-9]{2}.[0-9]{2}.[0-9]{3}" value="00.00.000" title="01.01.001"/><br/>
+            <label for="disabilityType">Type d'handicap:</label><br/>
+              <select id="disabilityType" required>1 à sélectionner:
+                <option value="UNKNOWN">UNKNOWN</option>
+                <option value="HEARING">HEARING</option>
+                <option value="SEEING">SEEING</option>
+                <option value="SPEAKING">SPEAKING</option>
+                <option value="LEARNING">LEARNING</option>
+                <option value="MOBILITY">MOBILITY</option>
+                <option value="AMPUTEE">AMPUTEE</option>
+                <option value="MUSCULAR">MUSCULAR</option>
+                <option value="CEREBRAL">CEREBRAL</option>
+                <option value="DOWNS_SYNDROME">DOWNS_SYNDROME</option>
+                <option value="NO_DISABILITY">NO_DISABILITY</option>
+              </select><br/>
+              <br/>
+            <label>Expérience:</label> 
+            <label class="container">Débutant<br/>
+              <input type="radio" checked="checked" name="radio">
+                <span class="checkmark"></span>
+              </label>
+            <label class="container">Non-débutant
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label><br/>
+            <label class="category">Catégorie:<br/>
+                <select id="category" required>1 à sélectionner
+                    <option value="PR3">PR3</option>
+                    <option value="PR2">PR2</option>
+                    <option value="PR1">PR1</option>
+                    <option value="J10">J10</option>
+                    <option value="J12">J12</option>
+                    <option value="J14">J14</option>
+                    <option value="J16">J16</option>
+                    <option value="J18">J18</option>
+                    <option value="U23">23</option>
+                    <option value="U23">23</option>
+                    <option value="S_A">S_A</option>
+                    <option value="S_B">S_B</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                </select><br/>
+            </label>
+            <label>Position:</label>
+            <label class="container">Rameur(euse)<br/>
+                <input type="radio" checked="checked" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+            <label class="container">Barreur(euse)<br/>
+              <input type="radio" checked="checked" name="radio">
+                <span class="checkmark"></span>
+              </label>
+            <label class="container">Nage<br/>
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label><br/>
+            <label for="categoryCoef">Coefficient relatif à la catégorie du rameur pour le calcul d'un handicap (si applicable):
+            </label><br/>
+            <input type="number" id="categoryCoef" pattern="[0-9]{1}.[0-9]{2}" value="0.00"/><br/>
+            <label for="genderCoef">Coefficient relatif au genre du rameur pour le calcul d'un handicap
+                (si applicable):</label><br/>
+            <input type="number" id="genderCoef" pattern="[0-9]{1}.[0-9]{2}" value="0.00"/><br/>
+            </form>
+            <!--part Infos-->
+           
+            <label for="buttonAge">Age du rameur:</label><br/>
+              <span id="buttonAge"></span><br/>
+            <label for="handi">Handicap du rameur:</label><br/>
+              <span id="handi"></span><br/>   
+             
+                     
+  </section><br/>
+   <!-- part 3 -->
+   <label for="newRower">Obtenir une nouvelle fois le formulaire ci-dessous (pour inscrire
+    un autre rameur) ?</label>
+    <!-- button -->
+        <input type="submit" id="newRower" value="Inscrire un rameur supplémentaire"/><br/>
+        <input type="submit" id="buttonCompleted" value="Enregistrer et passer à l'exportation"/><br/>
+        <input type="submit" id="buttonIncompleted" value="Enregistrer et quitter"/><br/>
+
+    
+             
+    </article>
+    <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
+    </body> 
+</html>

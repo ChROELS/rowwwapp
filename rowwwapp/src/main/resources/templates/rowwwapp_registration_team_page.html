@@ -7,52 +7,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/rowwwapp_registration_page.js" th:src="@{/js/rowwwapp_registration_page.js}"></script>
+    <script src="../static/js/rowwwapp_registration_team_page.js" th:src="@{/js/rowwwapp_registration_team_page.js}"></script>
     </head>
     <body>
     <header>Inscription aux courses/Equipes</header>
     <article>
        <!-- part 1 -->
-<br/>
-<button id="buttonRaceToggle">Courses</button><br/>
-  <section id="raceForm">
-      <label for="location">Lieu:</label><br/>
-        <input type="text" id="location" size=100 title=" par exemple: Centre nautique de Hazewinkel"required/><br/>
-      <label for=dateOfCompetition>Date:</label><br/>
-        <input type="date" id="dateOfCompetition" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" required><br/>
-        <form id="race1">
-          <label for="raceNumber">Numéro officiel de la course:</label><br/>
-          <input type="number" id="raceNumber" required/><br/>
-          <label for="raceType">Type de course:</label><br/>
-          <select id="raceType">1 à sélectionner: <br/>
-            <option value="C1">C1</option>
-            <option value="C2">C2</option>
-            <option value="C4">C4</option>
-            <option value="slalom">slalom</option>
-            <option value="biathlon">biathlon</option>
-            <option value="duathlon">duathlon</option>
-            <option value="triathlon">triathlon</option>
-            <option value="Tête de rivière">tête de rivière</option>
-            <option value="open à handicap">open à handicap</option>
-            <option value="régate">régate</option>
-            <option value="randonnée">randonnée</option>
-            <option value="challenge">challenge</option>
-            <option value="non précisé">non précisé</option>
-            <option value="non-répertoriée">non répertorié</option>
-          </select><br/>
-          <label for="raceCustom">Type de course en quelques mots (si course non-répertoriée):</label><br/>
-          <input type="text" id="raceCustom" size=100 value=""/><br/>
-        </form>
-    </section>      
-<!-- part 2 -->
+
 <br/>
 <button id="buttonTeamToggle">Equipe</button><br/>
     <section id="teamForm">
+        <!--/*@thymesVar id="teamForm" type="be.intecbrussel.models.registration.Team"*/-->
+        <form action="#" id="teamForm2" method="post" th:action="@{/rowwwapp/registration/team}" th:object="${teamForm}">
           <label for="teamName">Nom d'identification de l'équipe:</label><br/>
-            <input type="text" id="teamName" size="50" value="" required/><br/>
+            <input type="text" id="teamName" size="50" value="" th:field="*{name}" required/><br/>
           <label for="boatType">Type d'embarcation:</label><br/>
-          <select id="boatType"required>1 à sélectionner:<br/>
-            <option value="2-">2-</option>
+          <select id="boatType" th:field="*{type}"  required>1 à sélectionner:<br/>
+            <option value="2-" selected>2-</option>
             <option value="4-">4-</option>
             <option value="2+">2+</option>
             <option value="4+">4+</option>
@@ -72,26 +43,25 @@
             <option value="trek_2x">trek_2x</option>
             <option value="trek_4x">trek_4x</option>  
           </select><br/>
+            <label for="teamName">Barreur(euse):</label><br/>
+            <input type="text" id="cox" size="50" value="" th:field="*{cox}" required/><br/>
+            <label for="teamName">Nage:</label><br/>
+            <input type="text" id="nage" size="50" value="" th:field="*{stroke}" required/><br/>
+          <label for="crew">Equipe: </label> <br/>
+            <section id="crew">
+                <tr th:each="member: ${teamForm.getCrew()}">
+                    <td th:text="${member.firstName}"></td>
+                    <td th:text="${member.lastName}"></td>
+                    <td th:text="${member.category}"></td>
+                    <td th:text="${member.licenceNumber}"></td>
+                    <td th:text="${member.club}"></td>
+                    <td th:text="${member.rowerHandicap}"></td>
+                </tr>
+                <p th:text="${teamForm.teamHandicap}">Handicap</p>
+                <p th:text="${teamForm.sizeOfCrew}">Taille</p>
+            </section>
         </form>
-        <!-- part infos -->
-<label for="nameOfCrew">Nom de l'équipe:</label><br/>
-<span id="nameOfCrew"></span><br/>
-<label for="crew">Membres de l'équipe:</label><br/>
-<span id="crew"></span><br/>
-<label for="sizeOfCrew">Taille de l'équipe:</label><br/>
-<span id="sizeOfCrew"></span><br/>
-<label for="cox">Barreur(euse):</label><br/>
-<span id="cox"></span><br/> 
-<label for="stroke">Nage:</label><br/>
-<span id="stroke"></span><br/>
-<label for="boat">Type de bateau:</label><br/>
-<span id="boat"></span><br/> 
-<label for="handicap">Handicap de l'équipe:</label><br/>
-<span id="handicap"></span><br/>          
     </section>
-    <input type="submit" id="newRace" value="Enregistrer et inscrire une équipe supplémentaire"></input><br/>
-    <input type="submit" id="toRowers" value="Enregistrer et passer à l'inscription des rameurs"></input><br/>
-    <input type="submit" id="toQuit" value="Enregistrer et quitter"></input><br/>
 </article>
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body> 

@@ -23,16 +23,9 @@ $(document).ready(function(){
     $(modbuttons).toggle(1000);
   });
 });
+$(document).ready(function(){
+  $(buttonAge).click(function(){
+    $(buttonAge).after("<label>Age:</label><br/>"+ bir);
+  });
+});
 
-function loadTeamXls() {
-    window.location.assign("http://localhost:8080/rowwwapp/registration/documents/team");
-}
-function loadTeamCsv() {
-    window.location.assign("http://localhost:8080/rowwwapp/registration/documents/team");
-}
-function loadRowerXls() {
-    window.location.assign("http://localhost:8080/rowwwapp/registration/documents/rower");
-}
-function loadRowerCsv() {
-    window.location.assign("http://localhost:8080/rowwwapp/registration/documents/rower");
-}

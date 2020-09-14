@@ -40,8 +40,7 @@ public class Race {
             CascadeType.MERGE
     },fetch = FetchType.LAZY)
     private Competition competition;
-    @OneToMany(mappedBy = "race", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Team> teams;
+
 
 
     public Race() {
@@ -160,13 +159,6 @@ public class Race {
         this.competition = competition;
     }
 
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
-    }
 
 
 
@@ -177,20 +169,9 @@ public class Race {
             return this.name + " "+racetype.name()+" "+ raceExperience.name()+
                     " "+rowingBoat.name()+" "+category.name()+" "+gender.name();
         }
-        if(this.customedRace!=null &&this.customedRace.length()>=2){
-            return this.name + " "+customRace+" "+ raceExperience.name()+
-                    " "+rowingBoat.name()+" "+category.name()+" "+gender.name();
-        }
         return"";
     }
-    public void addTeam(Team team){
-        teams.add(team);
-        team.setRace(this);
-    }
-    public void removeTeam(Team team){
-        teams.remove(team);
-        team.setRace(null);
-    }
+
     //override methods///////////////////////////////
 
     @Override

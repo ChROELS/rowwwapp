@@ -10,7 +10,6 @@ import org.springframework.core.annotation.Order;
 public class WebH2DatabaseConfig {
     //To have access to a console where to query H2 Database
     @Bean
-    @Order(value = 2)
     ServletRegistrationBean h2servletRegistration(){
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new WebServlet());
         servletRegistrationBean.addUrlMappings("/console/*");
