@@ -28,4 +28,6 @@ $(document).ready(function(){
     $(buttonAge).after("<label>Age:</label><br/>"+ bir);
   });
 });
-
+function loadPageDownloadRegistration() {
+  window.location.assign("http://localhost:8080/rowwwapp/registration/results/document");
+}

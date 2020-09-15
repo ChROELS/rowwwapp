@@ -23,6 +23,16 @@
             <p>Coefficient d'handicap par catégories (si applicable):</p>
             <p>Coefficient d'handicap par genre (si applicable):</p>
         </section>
+        <!--/*@thymesVar id="scheduledRaceForm" type="be.intecbrussel.models.registration.ScheduledRace"*/-->
+        <tr th:text="${scheduledRaceForm.getId()}">
+            <td th:text="${scheduledRaceForm.location}"></td>
+            <td th:text="${scheduledRaceForm.date}"></td>
+            <td th:text="${scheduledRaceForm.number }"></td>
+            <td th:text="${scheduledRaceForm.raceType }"></td>
+            <td th:text="${scheduledRaceForm.customedRace }"></td>
+            <td th:text="${scheduledRaceForm.coefficientCategory }"></td>
+            <td th:text="${scheduledRaceForm.coefficientGender }"></td>
+        </tr>
       <!-- part form -->             
       <br/>
       <button id="buttonRowerToggle">Rameurs(euses). Inscrivez-vous ici!</button><br/>
@@ -31,10 +41,10 @@
           <form action="#" id="rower1" method="post" th:action="@{/rowwwapp/registration/rower}"
                 th:object="${rowerForm}">
             <label for="firstname">Prénom:</label><br>
-              <input type="text" name="Prénom" id="firstname" size=50 value="" th:field="*{firstName}" required/><br/>
+              <input type="text" name="Prénom" id="firstname" size=50 value="prénom" th:field="*{firstName}" required/><br/>
               <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur d'encodage du prénom</p>
             <label for="lastname">Nom:</label><br>
-              <input type="text" name="Nom" id="lastname" size=50 value="" th:field="*{lastName}"  required/><br/>
+              <input type="text" name="Nom" id="lastname" size=50 value="nom" th:field="*{lastName}"  required/><br/>
               <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Erreur d'encodage du nom</p>
             <label for="gender">Genre:</label><br/>
                 <select id="gender" th:field="*{gender}" required>
@@ -42,12 +52,12 @@
                   <option value="F">F</option>
                 </select><br/>
             <label for="nationality">Nationalité:</label><br>
-              <input type="text" name="Nationalité" id="nationality" value="" th:field="*{nationality}" required/><br/>
+              <input type="text" name="Nationalité" id="nationality" value="belge" th:field="*{nationality}" required/><br/>
               <p th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}">Erreur d'encodage de la nationalité</p>
             <label for="birthdate">Date de naissance:</label><br>
               <input type="date" name="Date de naissance" id="birthdate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/1940" th:field="*{birthDate}" required><br/>
             <label for="club">Nom du club/association:</label><br>
-              <input type="text" name="Club" id="club" value="" th:field="*{birthDate}" required/><br/>
+              <input type="text" name="Club" id="club" value="royal 1865" th:field="*{birthDate}" required/><br/>
             <label for="clubNumber">Numéro de license:</label><br/>
               <input type="number" id="clubNumber" pattern="[0-9]{2}.[0-9]{2}.[0-9]{3}" value="00.00.000" title="01.01.001" th:field="*{licenceNumber}" /><br/>
               <p th:if="${#fields.hasErrors('licenceNumber')}" th:errors="*{licenceNumber}">Erreur d'encodage du numéro de licence</p>
@@ -61,11 +71,11 @@
               <br/>
             <label>Expérience:</label> 
             <label class="container">Débutant<br/>
-              <input type="radio" checked="checked" name="radio" th:field="*{raceExperience}" >
+              <input type="radio" checked="checked" name="radio" value="Débutant" th:field="*{raceExperience}" >
                 <span class="checkmark"></span>
               </label>
             <label class="container">Non-débutant
-                <input type="radio" name="radio" th:field="*{raceExperience}">
+                <input type="radio" name="radio" value="Non-débutant" th:field="*{raceExperience}">
                 <span class="checkmark"></span>
             </label><br/>
               <label class="category">Catégorie:<br/></label>

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ViewResolver;
 
 import java.util.Locale;
 
-@Component
+
 public class ExcelViewResolverRegistration implements ViewResolver {
     @Override
     public View resolveViewName(String s, Locale locale) throws Exception {

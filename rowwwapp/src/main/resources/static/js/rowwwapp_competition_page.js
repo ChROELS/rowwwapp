@@ -3,7 +3,6 @@ $(document).ready(function(){
   $(inscriptionForm).hide();
   $(forfeitForm).hide();
   $(lotteryForm).hide();
-  $(compensationForm).hide();
   $(infosForm).hide();
 });
 $(document).ready(function(){
@@ -27,11 +26,7 @@ $(document).ready(function(){
       $(lotteryForm).toggle(1000);
     });
   });
-  $(document).ready(function(){
-    $(buttonCompensationToggle).click(function(){
-      $(compensationForm).toggle(1000);
-    });
-  });
+
   $(document).ready(function(){
     $(buttonInfosToggle).click(function(){
       $(infosForm).toggle(1000);

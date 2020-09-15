@@ -7,5 +7,5 @@ function loadPageCompetition() {
 
 }
  function loadPageDownload() {
-     window.location.assign("http://localhost:8080/rowwwapp/competition/documents/competition");
+     window.location.assign("http://localhost:8080/rowwwapp/competition/results/document");
  }

@@ -1,47 +1,72 @@
-
+/* Style the body (general style settings) */
 body{
     position: relative;
-    background-image: radial-gradient(darkgreen,darkslategray);
+    left:150px;
+    box-sizing: border-box;
+    max-width: 960px;
+    background-position: center;
+    height: 1500px;
+    background-image: linear-gradient(darkslategray,darkolivegreen);
+    background-color: darkslategray;
+    background-repeat: no-repeat;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+/* Style the header */
 header{
-    position: relative;
-    font-size: larger;
-    box-sizing: border-box;
-    left:300px;
-    top: 50px;
+    position: static;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
 }
 article{
     position: relative;
+    left: 150px;
     z-index: 1;
-    left: 300px;
-    top: 100px;
+    padding: 20px;
+    text-align: left;
     font-size: 14px;
     height:50%;
     width: 60%;
-    text-align: left;
-
 }
 footer{
-    position: fixed;
+    position:static;
+    padding: 20px;
+    text-align: center;
     font-size: 12px;
     font-weight: lighter;
-    left:575px;
-    top: 50px;
 }
 
 section{
     background-color: navy;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     box-sizing: border-box;
     color: #FFF;
 }
-image{
-    position: inherit;
-    left:575px;
-    top: 150px;
-}
-button {
+
+
+h1{
     position: relative;
+    text-align: center;
+}
+img{
+    position: static;
+    padding: 10px;
+    opacity: 0.5;
+    width: 100%;
+
+}
+img:hover {
+    opacity: 1.0;
+}
+
+button {
+    position: static;
+    margin-left: 10px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     border:1px solid black;
     text-align: center ;
@@ -52,13 +77,23 @@ button {
     cursor: pointer;
     background-color: transparent;
   }
-  button:hover{
+  button:hover {
     border:1px solid maroon;
-    color: maroon;
+    color: orangered;
   }
 
+  button:active{
+      border:1px solid black;
+
+  }
+
+button:active:after{
+    border:1px solid black;
+    color: black;
+}
+
 #newRaceInfos{
-    background-color: lightgray; 
+    background-color: maroon; 
     border: none;
     color: black;
     padding: 15px 32px;
@@ -71,7 +106,7 @@ button {
     cursor: pointer;
 }
 #newRaceInfos:hover{
-  background-color:darkred; 
+  background-color:darkgreen; 
 }
 input{
     outline:black 2px;

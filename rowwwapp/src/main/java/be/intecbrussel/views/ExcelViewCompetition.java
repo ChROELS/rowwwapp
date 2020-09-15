@@ -81,7 +81,7 @@ public class ExcelViewCompetition extends AbstractXlsView {
                 cRow.createCell(4).setCellValue(c.getDate());
                 cRow.createCell(5).setCellValue(c.getRegistrationRules());
                 cRow.createCell(6).setCellValue(c.getRegistrationContact());
-                cRow.createCell(7).setCellValue(c.getRegistrationCost().floatValue());
+                cRow.createCell(7).setCellValue(c.getRegistrationCost());
                 cRow.createCell(8).setCellValue(c.getRegistrationLimit());
                 cRow.createCell(9).setCellValue(c.getLotteryDate());
                 cRow.createCell(10).setCellValue(c.getLotteryRules());

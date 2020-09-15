@@ -74,6 +74,7 @@ public class Compensation {
     public Compensation() {
     }
 
+
     public Long getId() {
         return id;
     }

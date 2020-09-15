@@ -10,6 +10,27 @@
     <script src="../static/js/rowwwapp_registration_rower_results_page.js" th:src="@{/js/rowwwapp_registration_rower_results_page.js}"></script>
 </head>
 <body>
+<!-- part 1 -->
+<h1 align="center">Merci pour votre inscription! Vos données</h1>
+<section id="competitionForm3">
+    <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
+    <tr th:text="${rowerForm.getId()}">
+        <td th:text="${rowerForm.getFirstName()}"></td>
+        <td th:text="${rowerForm.getLastName()}"></td>
+        <td th:text="${rowerForm.getBirthDate() }"></td>
+        <td th:text="${rowerForm.getAge() }"></td>
+        <td th:text="${rowerForm.getCategory() }"></td>
+        <td th:text="${rowerForm.getCategoryCoef() }"></td>
+        <td th:text="${rowerForm.getGender() }"></td>
+        <td th:text="${rowerForm.getGenderCoef() }"></td>
+        <td th:text="${rowerForm.getClub() }"></td>
+        <td th:text="${rowerForm.getLicenceNumber() }"></td>
+        <td th:text="${rowerForm.getNationality() }"></td>
+        <td th:text="${rowerForm.getRaceExperience() }"></td>
+        <td th:text="${rowerForm.getRowerHandicap() }"></td>
+        <td th:text="${rowerForm.getTeam() }"></td>
+    </tr>
+</section>
 <button id="toDownload" onclick="loadPageDownloadRegistration()">Télécharger ces données</button></br>
 </body>
 </html>

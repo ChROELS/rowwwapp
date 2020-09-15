@@ -1,3 +1,8 @@
-function loadPageDownloadRegistration() {
-    window.location.assign("http://localhost:8080/rowwwapp/registration/rower/results");
-}
+$(document).ready(function(){
+    $(results).hide();
+});
+$(document).ready(function(){
+    $(buttonInfosToggle).click(function(){
+        $(results).toggle(1000);
+    });
+});

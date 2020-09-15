@@ -39,7 +39,7 @@ public class Competition {
     @NotNull(message = "Un contact est requis")
     private String RegistrationContact;
     @NotNull(message = "Un coût est requis")
-    private BigDecimal registrationCost;
+    private Double registrationCost;
     @NotNull(message = "Une date d'inscription est requise")
     private LocalDate registrationLimit;
     @NotNull(message = "Une date est requise")
@@ -64,12 +64,29 @@ public class Competition {
     @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Race> races;
 
-
-
-
-
     public Competition() {
+        this.name = "Régates";
+        this.description = "Courses organisées par le Royal 1865";
+        this.placeOfEvent = "Brussels";
+        this.date = LocalDate.of(2020,10,15);
+        this.registrationRules = "par mail";
+        RegistrationContact = "royal1865@gmail.com";
+        this.registrationCost = 4.00;
+        this.registrationLimit = LocalDate.of(2020,10,01);
+        this.lotteryDate = LocalDate.of(2020,10,10);
+        this.lotteryRules = "Sous regard d'huissier";
+        this.lotteryContact = "royal1865@gmail.com";
+        this.forfeitLimitHour = "23";
+        this.forfeitLimit = LocalDate.of(2020,10,14);
+        this.forfeitRules = "Envoyer le formulaire de forfait";
+        this.forfeitContact = "royal1865@gmail.com";
+        this.complementaryRules = "-";
+        this.compensationCategories = new ArrayList<>();
+        this.races = new ArrayList<>();
     }
+
+
+
     //getters/setters///////////////////////////////
 
     public Long getId() {
@@ -128,11 +145,11 @@ public class Competition {
         RegistrationContact = registrationContact;
     }
 
-    public BigDecimal getRegistrationCost() {
+    public Double getRegistrationCost() {
         return registrationCost;
     }
 
-    public void setRegistrationCost(BigDecimal registrationCost) {
+    public void setRegistrationCost(Double registrationCost) {
         this.registrationCost = registrationCost;
     }
 

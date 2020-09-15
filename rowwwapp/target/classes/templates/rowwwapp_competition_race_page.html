@@ -22,24 +22,24 @@
                 <input type="number" id="raceNumber" value="000" title="par exemple: 120 pour 120ième course" th:field="*{number}" required/><br/>
 
                     <label for="raceName">Nom officiel:</label><br/>
-                <input type="text" id="raceName" size=100 value ="" title="par exemple: challenge annuel des seniors" th:field="*{name}"  required/><br/>
+                <input type="text" id="raceName" size=100 value ="Challenge annuel des seniors" title="par exemple: challenge annuel des seniors" th:field="*{name}"  required/><br/>
 
                     <label for="raceStartingTime">Heure de départ:</label><br/>
                 <input type="text" id="raceStartingTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{startingTime}"  required/><br/>
 
                     <label for="raceDistance">Distance (mètres):</label><br/>
-                <input type="number" id="raceDistance" th:field="*{distance}"  required/><br/>
+                <input type="number" id="raceDistance" th:field="*{distance}"  value="1200" required/><br/>
 
                     <label for="raceMaxTime">Temps maximum:</label><br/>
                 <input type="text" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{maxTime}"  required/><br/>
 
                     <label>Caractère:</label>
                 <label class="container" >International
-                    <input type="radio" name="radio" th:field="*{raceImpact}" >
+                    <input type="radio" name="radio" th:field="*{raceImpact}" value="INTERNATIONAL" >
                     <span class="checkmark" id="international"></span>
                 </label>
                 <label class="container" >National
-                    <input type="radio" name="radio" checked="checked"  th:field="*{raceImpact}" >
+                    <input type="radio" name="radio" checked="checked"  th:field="*{raceImpact}" value="NATIONAL" >
                     <span class="checkmark" id="national"></span>
                 </label>
 
@@ -77,7 +77,7 @@
                 </select><br/>
 
                     <label for="raceCustom">Type de course en quelques mots (si course non-répertoriée):</label><br/>
-                <input type="text" id="raceCustom" size=100 value="" th:field="*{customedRace}"  /><br/>
+                <input type="text" id="raceCustom" size=100 value="Kermesse de la journée Ports Ouvertes" th:field="*{customedRace}"  /><br/>
 
                     <label for="boatType">Type d'embarcation admise:</label><br/>
                   <select id="boatType" th:field="*{admissRowingBoat}" required>1 à sélectionner
@@ -134,7 +134,7 @@
                 </select><br/>
 
                     <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
-                <input type="text" id="raceDescription" size=200 value ="" th:field="*{description}"  required/>
+                <input type="text" id="raceDescription" size=200 value ="-" th:field="*{description}"  required/>
                 <br/>
             </section>
                 </form>

@@ -13,14 +13,34 @@
     <header>Inscription aux courses/Equipes</header>
     <article>
        <!-- part 1 -->
-
+        <br/>
+        <button id="buttonInfosToggle">Course sélectionnée</button><br/>
+        <section id="info">
+            <p>Lieu:</p>
+            <p>Date:</p>
+            <p>Numéro officiel:</p>
+            <p>Type de course:</p>
+            <p>Type de course si non répertiorée ci-dessus:</p>
+            <p>Coefficient d'handicap par catégories (si applicable):</p>
+            <p>Coefficient d'handicap par genre (si applicable):</p>
+        </section>
+        <!--/*@thymesVar id="scheduledRaceForm" type="be.intecbrussel.models.registration.ScheduledRace"*/-->
+        <tr th:text="${scheduledRaceForm.getId()}">
+            <td th:text="${scheduledRaceForm.location}"></td>
+            <td th:text="${scheduledRaceForm.date}"></td>
+            <td th:text="${scheduledRaceForm.number }"></td>
+            <td th:text="${scheduledRaceForm.raceType }"></td>
+            <td th:text="${scheduledRaceForm.customedRace }"></td>
+            <td th:text="${scheduledRaceForm.coefficientCategory }"></td>
+            <td th:text="${scheduledRaceForm.coefficientGender }"></td>
+        </tr>
 <br/>
-<button id="buttonTeamToggle">Equipe</button><br/>
+<button id="buttonTeamToggle">Formulaire d'inscription</button><br/>
     <section id="teamForm">
         <!--/*@thymesVar id="teamForm" type="be.intecbrussel.models.registration.Team"*/-->
         <form action="#" id="teamForm2" method="post" th:action="@{/rowwwapp/registration/team}" th:object="${teamForm}">
           <label for="teamName">Nom d'identification de l'équipe:</label><br/>
-            <input type="text" id="teamName" size="50" value="" th:field="*{name}" required/><br/>
+            <input type="text" id="teamName" size="50" value="Les Royals" th:field="*{name}" required/><br/>
           <label for="boatType">Type d'embarcation:</label><br/>
           <select id="boatType" th:field="*{type}"  required>1 à sélectionner:<br/>
             <option value="2-" selected>2-</option>
@@ -44,10 +64,11 @@
             <option value="trek_4x">trek_4x</option>  
           </select><br/>
             <label for="teamName">Barreur(euse):</label><br/>
-            <input type="text" id="cox" size="50" value="" th:field="*{cox}" required/><br/>
+            <input type="text" id="cox" size="50" value="nom" th:field="*{cox}" required/><br/>
             <label for="teamName">Nage:</label><br/>
-            <input type="text" id="nage" size="50" value="" th:field="*{stroke}" required/><br/>
+            <input type="text" id="nage" size="50" value="nom" th:field="*{stroke}" required/><br/>
           <label for="crew">Equipe: </label> <br/>
+
             <section id="crew">
                 <tr th:each="member: ${teamForm.getCrew()}">
                     <td th:text="${member.firstName}"></td>

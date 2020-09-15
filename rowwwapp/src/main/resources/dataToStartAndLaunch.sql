@@ -1,3 +1,4 @@
-DROP TABLE IF EXISTS rower;
+DROP TABLE IF EXISTS Compensation,Competition,Race,Rower,ScheduledRace,Team;
+
 
 

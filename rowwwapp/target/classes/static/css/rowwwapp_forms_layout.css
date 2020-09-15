@@ -35,11 +35,16 @@ section{
     box-sizing: border-box;
     color: #FFF;
 }
-image{
-    position: inherit;
+img{
+    position: relative;
     left:575px;
     top: 150px;
+    opacity: 0.5;
 }
+img:hover {
+    opacity: 1.0;
+}
+
 button {
     position: relative;
     box-sizing: border-box;
