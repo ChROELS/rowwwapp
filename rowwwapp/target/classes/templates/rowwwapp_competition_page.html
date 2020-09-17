@@ -12,11 +12,15 @@
     <body>
         <header>Jour de compétition</header>
         <article>
-           
-            <button id="buttonCompetitionToggle">Compétition >>></button><br/>
+           <!--Thymeleaf uses th:xxx attributes inside HTML tags so it doesn’t break the structure of the page – unlike JSP and JSTL. So a Thymeleaf template file still looks like HTML in browser – very convenient for both designer and programmer.
+            In Thymeleaf, hyperlink is wrapped inside @{} and access a model object inside ${}.
+            Note that in this form tag, the th:object attribute points to the name of the model object sent
+            from Spring MVC controller.
+            */-->
+            <button id="buttonCompetitionToggle">Jour de compétition</button><br/>
             <br/>
             <!--/*@thymesVar id="competitionForm2" type="be.intecbrussel.models.competition.Competition"*/-->
-            <form id="competitionForm2" action="#" method="post" th:action="@{rowwwapp/competition}" th:object="${competitionForm2}">
+            <form id="competitionForm2" action="#" method="post" th:action="@{/rowwwapp/competition}" th:object="${competitionForm2}">
             <section id="competitionForm">
 
                     <label for="location">Lieu:</label><br/>
@@ -33,11 +37,11 @@
                     <input type="text" id="dayDescription" size=200 title="par exemple: Royal Sport Nautique de Bruxelles 1865" value="organisateurs" th:field="*{description}" required/><br/>
                     <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Faute d'encodage de la mention 'organisateurs'</p>
              </section>
-            <button id="buttonInscriptionToggle">Inscriptions >>></button><br/>
+            <button id="buttonInscriptionToggle">Inscriptions</button><br/>
             <br/>
             <section id="inscriptionForm">
                 <label for="inscriptionCost"> Coût (euros):</label><br/>
-                    <input type="text" id="inscriptionCost" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{registrationCost}" required/><br/>
+                    <input type="number" id="inscriptionCost" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{registrationCost}" required/><br/>
                     <p th:if="${#fields.hasErrors('registrationCost')}" th:errors="*{registrationCost}">Faute d'encodage d'un coût</p>
                 <label for="limitDate">Date limite d'inscription:</label><br/>
                     <input type="date" id="limitDate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" value="01/01/2000" th:field="*{registrationLimit}" required/><br/>
@@ -50,7 +54,7 @@
                     <p th:if="${#fields.hasErrors('registrationContact')}" th:errors="*{registrationContact}">Faute d'encodage d'un contact</p>
             </section>
 
-            <button id="buttonForfeitToggle">Forfaits >>></button><br/>
+            <button id="buttonForfeitToggle">Forfaits</button><br/>
             <br/>
             <section id="forfeitForm">
                 <label for="forfeitLimitHour"> Heure limite de déclaration des forfaits:</label><br/>
@@ -67,7 +71,7 @@
                 <p th:if="${#fields.hasErrors('forfeitContact')}" th:errors="*{forfeitContact}">Faute d'encodage d'un contact</p>
             </section>
 
-            <button id="buttonLotteryToggle">Tirage au sort des départs >>></button><br/>
+            <button id="buttonLotteryToggle">Tirage au sort des départs</button><br/>
             <h1></h1>
             <section id="lotteryForm">
                 <label for="lotteryLimitDate" >Date de rendez-vous:</label><br/>
@@ -81,14 +85,15 @@
                 <p th:if="${#fields.hasErrors('lotteryContact')}" th:errors="*{lotteryContact}">Faute d'encodage d'un contact</p>
             </section>
 
-                    <button id="buttonInfosToggle">Informations complémentaires >>></button><br/>
+                    <button id="buttonInfosToggle">Informations complémentaires</button><br/>
                     <br/>
                     <section id="infosForm">
                         <label for="infos">Règles concernant le classement, les récompenses, les dossards, la pesée...:</label><br/>
-                        <input type="text" id="infos" size=1000 value="" th:field="*{complementaryRules}"/><br/>
+                        <input type="text" id="infos" size=1000 value="-" th:field="*{complementaryRules}"/><br/>
                         <p th:if="${#fields.hasErrors('complementaryRules')}" th:errors="*{complementaryRules}">Faute d'encodage d'une information</p>
                     </section>
-                </form>
+                <input type="submit">Enregistrer</input>
+            </form>
 
 
 

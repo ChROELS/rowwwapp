@@ -72,8 +72,34 @@ public class Compensation {
     Competition competition;
 
     public Compensation() {
+        this.compensationMale = "00.00";
+        this.compensationFemale = "00.00";
+        this.BEG = "00.00";
+        this.PR3 = "00.00";
+        this.PR2 = "00.00";
+        this.PR1 = "00.00";
+        J10 = "00.00";
+        J12 = "00.00";
+        J14 = "00.00";
+        J16 = "00.00";
+        J18 = "00.00";
+        U23 = "00.00";
+        S_A = "00.00";
+        S_B = "00.00";
+        A = "00.00";
+        B = "00.00";
+        C = "00.00";
+        D = "00.00";
+        E = "00.00";
+        F = "00.00";
+        G = "00.00";
+        H = "00.00";
+        I = "00.00";
+        J = "00.00";
+        K = "00.00";
+        L = "00.00";
+        M = "00.00";
     }
-
 
     public Long getId() {
         return id;

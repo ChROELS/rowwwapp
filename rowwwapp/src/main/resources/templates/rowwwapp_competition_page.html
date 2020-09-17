@@ -12,15 +12,19 @@
     <body>
         <header>Jour de compétition</header>
         <article>
-           
+           <!--Thymeleaf uses th:xxx attributes inside HTML tags so it doesn’t break the structure of the page – unlike JSP and JSTL. So a Thymeleaf template file still looks like HTML in browser – very convenient for both designer and programmer.
+            In Thymeleaf, hyperlink is wrapped inside @{} and access a model object inside ${}.
+            Note that in this form tag, the th:object attribute points to the name of the model object sent
+            from Spring MVC controller.
+            */-->
             <button id="buttonCompetitionToggle">Jour de compétition</button><br/>
             <br/>
             <!--/*@thymesVar id="competitionForm2" type="be.intecbrussel.models.competition.Competition"*/-->
-            <form id="competitionForm2" action="#" method="post" th:action="@{rowwwapp/competition}" th:object="${competitionForm2}">
+            <form id="competition" action="#" method="post" th:action="@{/rowwwapp/competition}" th:object="${competitionForm2}">
             <section id="competitionForm">
 
                     <label for="location">Lieu:</label><br/>
-                    <input type="text" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel" th:field="*{placeOfEvent}"
+                    <input type="text" th:field="*{placeOfEvent}" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel"
                            value="lieu" required/><br/>
                     <p th:if="${#fields.hasErrors('placeOfEvent')}" th:errors="*{placeOfEvent}">Faute d'encodage du lieu</p>
                     <label for="dateOfCompetition">Date:</label><br/>
@@ -37,7 +41,7 @@
             <br/>
             <section id="inscriptionForm">
                 <label for="inscriptionCost"> Coût (euros):</label><br/>
-                    <input type="text" id="inscriptionCost" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{registrationCost}" required/><br/>
+                    <input type="number" id="inscriptionCost" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{registrationCost}" required/><br/>
                     <p th:if="${#fields.hasErrors('registrationCost')}" th:errors="*{registrationCost}">Faute d'encodage d'un coût</p>
                 <label for="limitDate">Date limite d'inscription:</label><br/>
                     <input type="date" id="limitDate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" value="01/01/2000" th:field="*{registrationLimit}" required/><br/>
@@ -88,7 +92,8 @@
                         <input type="text" id="infos" size=1000 value="-" th:field="*{complementaryRules}"/><br/>
                         <p th:if="${#fields.hasErrors('complementaryRules')}" th:errors="*{complementaryRules}">Faute d'encodage d'une information</p>
                     </section>
-                </form>
+                <input type="submit">Enregistrer</input>
+            </form>
 
 
 

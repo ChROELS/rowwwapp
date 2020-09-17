@@ -7,18 +7,22 @@ import be.intecbrussel.models.competition.Race;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class ExcelViewCompetition extends AbstractXlsView {
     @Override
-    protected void buildExcelDocument(Map<String, Object> map, Workbook workbook, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    protected void buildExcelDocument(Map<String, Object> map, Workbook workbook, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         // change the file name
         httpServletResponse.setHeader("Content-Disposition", "attachment; filename=\"rowwwapp_competition_data.xls\"");
 
@@ -231,5 +235,11 @@ public class ExcelViewCompetition extends AbstractXlsView {
                 rowComp.createCell(27).setCellValue(comp.getCompetition().getName());
             }
         }
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        workbook.write(servletOutputStream);
+        workbook.close();
+        servletOutputStream.close();
     }
+
+
 }

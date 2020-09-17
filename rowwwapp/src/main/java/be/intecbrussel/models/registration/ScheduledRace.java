@@ -24,6 +24,13 @@ public class ScheduledRace {
     List<Team> teams;
 
     public ScheduledRace() {
+        location = "Gent";
+        date = "12/11/2020";
+        number= 125;
+        raceType= RaceType.JUNIOR_SLALOM;
+        customedRace="-";
+        coefficientGender=0.0;
+        coefficientCategory=0.0;
     }
 
     public Long getId() {

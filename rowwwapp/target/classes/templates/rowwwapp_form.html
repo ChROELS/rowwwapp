@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-type" content="text/html:charset=UTF-8">
+    <!--defines the character set for the HTML file-->
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+    <title>rowwapp/login</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password
+</div>
+<div th:if="${param.logout}">
+    You have been logged out
+</div>
+<form th:action="@{/rowwwapp/login}" method="post">
+    <div>
+        <label>Nom
+            <input type="text"  name="username" value="nom" required/>
+        </label><br/>
+        <label>Mot de passe
+            <input type="text" name="password" required/>
+        </label><br/>
+    </div>
+    <div>
+        <input type="submit" value="Entrer"/>
+    </div>
+</form>
+<form th:action="@{/rowwwapp/logout}" method="post">
+    <input type="submit" value="Sign out"/>
+</form>
+</body>
+</html>

@@ -7,14 +7,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/rowwwapp_registration_team_page.js" th:src="@{/js/rowwwapp_registration_team_page.js}"></script>
+    <script src="../static/js/rowwwapp_registration_scheduledRace_page.js" th:src="@{/js/rowwwapp_registration_scheduledRace_page.js}"></script>
     </head>
     <body>
-    <header>Inscription aux courses/Equipes</header>
+    <header>Inscription aux courses/Course sélectionnée</header>
     <article>
        <!-- part 1 -->
 <br/>
-<button id="buttonRaceToggle">Courses</button><br/>
+<button id="buttonRaceToggle">Formulaire</button><br/>
   <section id="raceForm">
       <!--/*@thymesVar id="scheduledRaceForm" type="be.intecbrussel.models.registration.ScheduledRace"*/-->
       <form action="#" id="raceForm2" method="post" th:action="@{/rowwwapp/registration/scheduledRace}"

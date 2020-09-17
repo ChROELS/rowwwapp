@@ -1,14 +1,14 @@
 package be.intecbrussel.models.registration;
 
 
-import be.intecbrussel.models.competition.Competition;
+
 import be.intecbrussel.models.enums.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Objects;
+
 
 @Entity
 public class Rower {
@@ -44,8 +44,21 @@ public class Rower {
     },fetch = FetchType.LAZY)
     private Team team;
     //Constructor///////////////////
+
     public Rower() {
+        this.firstName = "Leen";
+        this.lastName = "VaartWel";
+        this.gender = Gender.FEMALE;
+        this.nationality = "Belge";
+        this.birthDate = LocalDate.of(1970,3,24);
+        this.club = "Royal 1865";
+        this.licenceNumber = "14.125.78";
+        this.disability = Disability.Option_0;
+        this.raceExperience = RaceExperience.NON_BEGINNER;
+        this.categoryCoef = 0;
+        this.genderCoef = 0.2f;
     }
+
     //Getters and setters//////////
     public Long getId() {
         return id;
@@ -123,7 +136,7 @@ public class Rower {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge() {
         this.age = calculateAge(this.birthDate);
     }
 
@@ -139,11 +152,11 @@ public class Rower {
         return category;
     }
 
-    public void setCategory(Category category) {
-        if(this.disability==Disability.Option_0) {
-            this.category = Category.selectCategory(calculateAge(this.birthDate));
+    public void setCategory() {
+        if(disability==Disability.Option_0) {
+            this.category = Category.selectCategory(calculateAge(birthDate));
         }else{
-            this.category = Category.selectCategory(this.disability);
+            this.category = Category.selectCategory(disability);
         }
     }
 
@@ -167,7 +180,7 @@ public class Rower {
         return rowerHandicap;
     }
 
-    public void setRowerHandicap(float rowerHandicap) {
+    public void setRowerHandicap() {
         this.rowerHandicap = rowerHandicap(this.categoryCoef,this.genderCoef);
     }
 

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/rowwwapp_competition_page.js" th:src="@{/js/rowwwapp_competition_page.js}"></script>
+    <script src="../static/js/rowwwapp_competition_compensation_page.js" th:src="@{/js/rowwwapp_competition_compensation_page.js}"></script>
 </head>
 <body>
 <header>Organisation des courses</header>
@@ -16,7 +16,7 @@
 <br/>
     <!--/*@thymesVar id="compensationForm2" type="be.intecbrussel.models.competition.Compensation"*/-->
     <form action="#" method="post" th:action="@{/rowwwapp/competition/compensation}" th:object="${compensationForm2}">
-<section id="compensationForm">
+        <section id="compensationForm">
         <label for="compensationMale">Homme :</label><br/>
         <input type="text" id="compensationMale" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{compensationMale}"/><br/>
         <label for="compensationFemale">Femme :</label><br/>
@@ -71,11 +71,9 @@
         <input type="text" id="compensationL" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{l}" /><br/>
         <label for="compensationM">M :</label><br/>
         <input type="text" id="compensationM" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{m}" /><br/>
-</section>
+        </section>
     </form>
-
 </article>
-
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body>
 </html>

@@ -2,13 +2,12 @@ package be.intecbrussel.controllers;
 
 import be.intecbrussel.models.competition.Compensation;
 import be.intecbrussel.models.competition.Competition;
+
 import be.intecbrussel.models.competition.Race;
 import be.intecbrussel.models.registration.Rower;
 import be.intecbrussel.models.registration.ScheduledRace;
 import be.intecbrussel.models.registration.Team;
-
-import be.intecbrussel.repositories.*;
-import be.intecbrussel.viewResolvers.ExcelViewResolverRegistration;
+import be.intecbrussel.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,150 +18,146 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
 @Controller
 @RequestMapping("/")
 public class WebController implements WebMvcConfigurer {
-    private final CRUDOperationsCompensation compensationRepository;
-    private final CRUDOperationsCompetition competitionRepository;
-    private final CRUDOperationsRace raceRepository;
-    private final CRUDOperationsRower rowerRepository;
-    private final CRUDOperationsScheduledRace scheduledRaceRepository;
-    private final CRUDOperationsTeam teamRepository;
+
+private final CompetitionService competitionService;
+private final RaceService raceService;
+private final CompensationService compensationService;
+private final RowerService rowerService;
+private final ScheduledRaceService scheduledRaceService;
+private final TeamService teamService;
 
     @Autowired
-    public WebController(CRUDOperationsCompensation compensationRepository, CRUDOperationsCompetition competitionRepository, CRUDOperationsRace raceRepository, CRUDOperationsRower rowerRepository, CRUDOperationsScheduledRace scheduledRaceRepository, CRUDOperationsTeam teamRepository) {
-        this.compensationRepository = compensationRepository;
-        this.competitionRepository = competitionRepository;
-        this.raceRepository = raceRepository;
-        this.rowerRepository = rowerRepository;
-        this.scheduledRaceRepository = scheduledRaceRepository;
-        this.teamRepository = teamRepository;
+    public WebController(CompetitionService competitionService, RaceService raceService, CompensationService compensationService, RowerService rowerService, ScheduledRaceService scheduledRaceService, TeamService teamService) {
+        this.competitionService = competitionService;
+        this.raceService = raceService;
+        this.compensationService = compensationService;
+        this.rowerService = rowerService;
+        this.scheduledRaceService = scheduledRaceService;
+        this.teamService = teamService;
     }
 
-   //Get methods are also mapped to a specific url. In their implementations, comes a showForm method with for argument(s)
-    //a model so that the template can associate each fields of the forms to the models attributes. It return the name
-    //of a template of the page
 
-    @GetMapping("/rowwwapp")
-    public String showWelcome(){
-        return "rowwwapp_index_page";
-    }
+
+
+
+    /**Get methods are also mapped to a specific url. In their implementations, comes a showForm method with for argument(s)
+    *a model so that the template can associate each fields of the forms to the models attributes. It return the name
+    *of a template of the page*/
+
+    /**PostMapping methods have a similar structure except that with @Validated and BindinResult, the business logic will
+     *check if entries correspond to what is expected for each models and send the user to a page accordingly +
+     * One of the cool things about Spring MVC is that it will take your form parameters and automatically bind them to a Product object.
+     * The object is automatically created and passed into your controller method.
+     * The Spring Framework saves you from the mundane work of parsing out HTTP request parameters.*/
+
+
     ////////////////////////////Deel Competition//////////////////////////////////////////////////
     @GetMapping("/rowwwapp/competition")
-    public String showForm(Competition competitionForm2,Model model){
-        model.addAttribute("competitionForm2", new Competition());
+    public String showForm(Model model){
+        Competition competitionForm2 = new Competition();
+        model.addAttribute("competitionForm2", competitionForm2);
         return "rowwwapp_competition_page"; }
-    @GetMapping("/rowwwapp/competition/race")
-    public String showRace(Race raceForm2,Model model){
-        model.addAttribute("raceForm2", new Race());
-        return "rowwwapp_competition_race_page";
-    }
-    @GetMapping("/rowwwapp/competition/compensation")
-    public String showCompensation(Compensation compensationForm2,Model model){
-        model.addAttribute("compensationForm2", new Compensation());
-        return "rowwwapp_competition_compensation_page";
-    }
-    @GetMapping("/rowwwapp/competition/results")
-    public String showDownloadCompetition(){return "rowwwapp_competition_page_exports"; }
-    ////////////////////////////Deel Export//////////////////////////////////////////////////
-    @GetMapping("/rowwwapp/competition/results/document")
-    public String showDownloadXlsCompetition(Model model){
-        model.addAttribute("competitionRepository",competitionRepository.findAll());
-        model.addAttribute("raceRepository",raceRepository.findAll());
-        model.addAttribute("compensationRepository",compensationRepository.findAll());
-        return "redirect:/rowwwapp"; }
-    ////////////////////////////Deel Registration//////////////////////////////////////////////////
-    @GetMapping("/rowwwapp/registration/scheduledRace")
-    public String showRower(ScheduledRace scheduledRaceForm,Model model){
-        model.addAttribute("scheduledRaceForm", new ScheduledRace());
-        return "rowwwapp_registration_scheduledRace_page";
-    }
-
-    @GetMapping("/rowwwapp/registration/rower")
-    public String showRower(Rower rowerForm,Model model){
-        model.addAttribute("rowerForm",new Rower());
-        return "rowwwapp_registration_rower_page";
-    }
-    @GetMapping("/rowwwapp/registration/rower/results")
-    public String show(){return "rowwwapp_registration_rower_results";}
-
-
-    @GetMapping("/rowwwapp/registration/team")
-    public String showTeam(Team teamForm,Model model){
-        model.addAttribute("teamForm", new Team());
-        return "rowwwapp_registration_team_page";
-    }
-    @GetMapping("/rowwwapp/registration/results")
-    public String showDownloadRegistration(){return "rowwwapp_registration_page_exports"; }
-    ////////////////////////////Deel Export//////////////////////////////////////////////////
-    @GetMapping("/rowwwapp/registration/results/document")
-    public String showDownloadXls(Model model){
-        model.addAttribute("teamRepository",teamRepository.findAll());
-        model.addAttribute("rowerRepository",rowerRepository.findAll());
-        model.addAttribute("scheduledRaceRepository",scheduledRaceRepository.findAll());
-        return "redirect:/rowwwapp"; }
-    //PostMapping methods have a similar structure except that with @Validated and BindinResult, the business logic will
-    //check if entries correspond to what is expected for each models and send the user to a page accordingly
-
-    ////////////////////////////Deel Competition//////////////////////////////////////////////////
     @PostMapping("/rowwwapp/competition")
     public String checkCompetitionInfos(@Validated Competition competitionForm2, BindingResult bindingResult, Model model){
-
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_competition_page";
+        }else {
+            competitionService.createCompetitionDay(competitionForm2);
         }
-        competitionRepository.save(competitionForm2);
-        model.addAttribute("competitions", competitionRepository.findAll());
         return "redirect:/rowwwapp/competition/race";
+    }
+    //****************************************************************//
+    @GetMapping("/rowwwapp/competition/race")
+    public String showRace(Model model){
+        model.addAttribute("raceForm2", new Race());
+        return "rowwwapp_competition_race_page";
     }
     @PostMapping("/rowwwapp/competition/race")
     public String checkRaceInfos(@Validated Race raceForm2, BindingResult bindingResult, Model model){
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_competition_race_page";
+        }else {
+            raceService.createRace(raceForm2);
         }
-        raceRepository.save(raceForm2);
-        model.addAttribute("races", raceRepository.findAll());
         return "redirect:/rowwwapp/competition/compensation";
+    }
+    //****************************************************************//
+    @GetMapping("/rowwwapp/competition/compensation")
+    public String showCompensation(Model model){
+        model.addAttribute("compensationForm2", new Compensation());
+        return "rowwwapp_competition_compensation_page";
     }
     @PostMapping("/rowwwapp/competition/compensation")
     public String checkCompensationInfos(@Validated Compensation compensationForm2, BindingResult bindingResult, Model model){
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_competition_compensation_page";
         }
-        compensationRepository.save(compensationForm2);
-        model.addAttribute("compensations", compensationRepository.findAll());
+        compensationService.createCompensation(compensationForm2);
         return "redirect:/rowwwapp/competition/results";
     }
-    ///////////////////////////Deel Registration//////////////////////////////////////////////////
+    //****************************************************************//
+    @GetMapping("/rowwwapp/competition/results")
+    public String showDownloadCompetition(){return "rowwwapp_competition_page_exports"; }
+
+    @GetMapping("/rowwwapp/competition/results/document")
+    public void showDownloadXlsCompetition(Model model) {
+
+    }
+
+    ////////////////////////////Deel Registration//////////////////////////////////////////////////
+    @GetMapping("/rowwwapp/registration/scheduledRace")
+    public String showScheduledRace(Model model){
+        model.addAttribute("scheduledRaceForm", new ScheduledRace());
+        return "rowwwapp_registration_scheduledRace_page";
+    }
     @PostMapping("/rowwwapp/registration/scheduledRace")
-    public String checkTeamInfos(@Validated ScheduledRace scheduledRaceForm, BindingResult bindingResult, Model model){
+    public String checkScheduledRace(@Validated ScheduledRace scheduledRaceForm, BindingResult bindingResult, Model model){
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_registration_scheduledRace_page";
         }
-        scheduledRaceRepository.save(scheduledRaceForm);
-        model.addAttribute("scheduledRaces", scheduledRaceRepository.findAll());
+        scheduledRaceService.createScheduledRace(scheduledRaceForm);
         return "redirect:/rowwwapp";
     }
+    //****************************************************************//
+    @GetMapping("/rowwwapp/registration/rower")
+    public String showRower(Model model){
+        model.addAttribute("rowerForm",new Rower());
+        return "rowwwapp_registration_rower_page";
+    }
     @PostMapping("/rowwwapp/registration/rower")
-    public String checkTeamInfos(@Validated Rower rowerForm, BindingResult bindingResult,Model model){
+    public String checkRower(@Validated Rower rowerForm, BindingResult bindingResult,Model model){
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_registration_rower_page";
         }
-        rowerRepository.save(rowerForm);
-        model.addAttribute("rowers", rowerRepository.findAll());
+        rowerService.createRower(rowerForm);
         return "redirect:/rowwwapp/registration/rower/results";
     }
+    //****************************************************************//
+    @GetMapping("/rowwwapp/registration/team")
+    public String showTeam(Model model){
+        model.addAttribute("teamForm", new Team());
+        return "rowwwapp_registration_team_page";
+    }
     @PostMapping("/rowwwapp/registration/team")
-    public String checkRowerInfos(@Validated Team teamForm, BindingResult bindingResult,Model model){
+    public String checkTeam(@Validated Team teamForm, BindingResult bindingResult,Model model){
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_registration_team_page";
         }
-        teamRepository.save(teamForm);
-        model.addAttribute("teams", teamRepository.findAll());
+        teamService.createTeam(teamForm);
         return "redirect:/rowwwapp/registration/results";
     }
+    //****************************************************************//
+    @GetMapping("/rowwwapp/registration/rower/results")
+    public String show(){return "rowwwapp_registration_rower_results";}
+    @GetMapping("/rowwwapp/registration/results")
+    public String showDownloadRegistration(){return "rowwwapp_registration_page_exports"; }
 
-
-
-
+    @GetMapping("/rowwwapp/registration/results/document")
+    public String showDownloadXls(Model model) {
+        return "redirect:/rowwwapp";
+    }
 }

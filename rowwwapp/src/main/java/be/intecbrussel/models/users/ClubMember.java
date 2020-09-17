@@ -6,5 +6,5 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class ClubMember extends Person {
+public class ClubMember extends PersonForm {
 }

@@ -10,9 +10,26 @@
     <script src="../static/js/rowwwapp_registration_rower_results_page.js" th:src="@{/js/rowwwapp_registration_rower_results_page.js}"></script>
 </head>
 <body>
+<header>Inscriptions aux courses/Participants</header>
+<article>
 <!-- part 1 -->
-<h1 align="center">Merci pour votre inscription! Vos données</h1>
-<section id="competitionForm3">
+</br>
+<button id="buttonInfosToggle">Vos données</button><br/>
+<section id="results">
+    <p>Prénom:</p>
+    <p>Nom:</p>
+    <p>Date de naissance:</p>
+    <p>Age:</p>
+    <p>Catégorie:</p>
+    <p>Coefficient d'handicap pour la catégorie (si applicable):</p>
+    <p>Genre:</p>
+    <p>Coefficient d'handicap pour le genre (si applicable):</p>
+    <p>Club:</p>
+    <p>Numéro de licence:</p>
+    <p>Nationalité:</p>
+    <p>Expérience:</p>
+    <p>Handicap (si applicable):</p>
+    <p>Equipe:</p>
     <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
     <tr th:text="${rowerForm.getId()}">
         <td th:text="${rowerForm.getFirstName()}"></td>
@@ -31,6 +48,10 @@
         <td th:text="${rowerForm.getTeam() }"></td>
     </tr>
 </section>
+    <section>
 <button id="toDownload" onclick="loadPageDownloadRegistration()">Télécharger ces données</button></br>
+    </section>
+</article>
+<footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body>
 </html>

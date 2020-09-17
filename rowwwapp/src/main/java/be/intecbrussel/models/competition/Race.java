@@ -1,14 +1,13 @@
 package be.intecbrussel.models.competition;
 
 import be.intecbrussel.models.enums.*;
-import be.intecbrussel.models.registration.Team;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.Objects;
+
 
 @Entity
 public class Race {
@@ -41,9 +40,19 @@ public class Race {
     },fetch = FetchType.LAZY)
     private Competition competition;
 
-
-
     public Race() {
+        this.number = 120;
+        this.startingTime = LocalTime.of(23,23);
+        this.name = "Challenge des masters E";
+        this.distance = 1200;
+        this.maxTime = 30;
+        this.racetype = RaceType.CHALLENGE;
+        this.customedRace = "-";
+        this.raceExperience = RaceExperience.NON_BEGINNER;
+        this.raceImpact = RaceImpact.NATIONAL;
+        this.admissCategory = Category.Master_E;
+        this.admissRowingBoat = RowingBoat.SWEEP_COXLESS_PAIR_2_MINUS;
+        this.description = "-";
     }
     //getters/setters///////////////////////////////
 

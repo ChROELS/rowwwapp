@@ -22,7 +22,6 @@
             <p>Type de course si non répertiorée ci-dessus:</p>
             <p>Coefficient d'handicap par catégories (si applicable):</p>
             <p>Coefficient d'handicap par genre (si applicable):</p>
-        </section>
         <!--/*@thymesVar id="scheduledRaceForm" type="be.intecbrussel.models.registration.ScheduledRace"*/-->
         <tr th:text="${scheduledRaceForm.getId()}">
             <td th:text="${scheduledRaceForm.location}"></td>
@@ -33,9 +32,10 @@
             <td th:text="${scheduledRaceForm.coefficientCategory }"></td>
             <td th:text="${scheduledRaceForm.coefficientGender }"></td>
         </tr>
+        </section>
       <!-- part form -->             
       <br/>
-      <button id="buttonRowerToggle">Rameurs(euses). Inscrivez-vous ici!</button><br/>
+      <button id="buttonRowerToggle">Formulaire d'inscription</button><br/>
         <section id="rowerForm">
             <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
           <form action="#" id="rower1" method="post" th:action="@{/rowwwapp/registration/rower}"

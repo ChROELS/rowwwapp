@@ -35,6 +35,10 @@ public class Team {
 
     //Constructor///////////////////
     public Team() {
+        name="Three men in a boat";
+        type=RowingBoat.TRIPLE_SCULL_3X;
+        sizeOfCrew=3;
+        teamHandicap=0.3f;
     }
     //Getters and setters//////////
 

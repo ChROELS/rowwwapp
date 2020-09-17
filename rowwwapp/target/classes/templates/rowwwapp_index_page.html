@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
-    <title>rowwwapp</title>
+    <title>rowwwapp/bienvenue</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../static/js/rowwwapp_index_page.js" th:src="@{/js/rowwwapp_index_page.js}"></script>
 
 </head>
 <body>
-<h1 align="center">Bienvenue</h1>
-
-<img src="../static/images/1200px_Roeien_1907_(28844241024).jpg" width=50%
+<div class="header">
+    <h1 sec:authorize="isAuthenticated()">Bienvenue <span sec:authentication="name">!</span></h1>
+</div>
+<img src="../static/images/1200px_Roeien_1907_(28844241024).jpg"
      th:src="@{/images/1200px_Roeien_1907_(28844241024).jpg}" alt="Roeien in 1907..."/>
 </br>
 <button id="toCompetition" onclick="loadPageCompetition()">Organiser une compétition</button></br>
 </br>
 <button id="toRegistration" onclick="loadPageRegistration()">Participer à une compétition</button></br>
+
 </body>
 </html>
