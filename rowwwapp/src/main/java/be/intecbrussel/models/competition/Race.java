@@ -6,6 +6,7 @@ import be.intecbrussel.models.enums.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Time;
 import java.time.LocalTime;
 
 
@@ -15,7 +16,7 @@ public class Race {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int number;
-    private LocalTime startingTime;
+    private Time startingTime;
     @NotNull(message = "Un nom est requis")
     @Size(min=2, max=30)
     private String name;
@@ -42,7 +43,7 @@ public class Race {
 
     public Race() {
         this.number = 120;
-        this.startingTime = LocalTime.of(23,23);
+        this.startingTime = Time.valueOf(LocalTime.of(23,23));
         this.name = "Challenge des masters E";
         this.distance = 1200;
         this.maxTime = 30;
@@ -72,11 +73,11 @@ public class Race {
         this.number = number;
     }
 
-    public LocalTime getStartingTime() {
+    public Time getStartingTime() {
         return startingTime;
     }
 
-    public void setStartingTime(LocalTime startingTime) {
+    public void setStartingTime(Time startingTime) {
         this.startingTime = startingTime;
     }
 

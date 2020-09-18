@@ -10,8 +10,5 @@ public enum RaceExperience {
     public static RaceExperience findRaceExperience(String value){
         return valueOf(value);
     }
-    @Override
-    public String toString() {
-        return Arrays.toString(values());
-    }
+
 }

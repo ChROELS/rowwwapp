@@ -14,8 +14,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.Map;
 
@@ -145,7 +143,7 @@ public class ExcelViewCompetition extends AbstractXlsView {
                 Row cRace = sheetRace.createRow(rowCountRace++);
                 cRace.createCell(0).setCellValue(r.getId());
                 cRace.createCell(1).setCellValue(r.getNumber());
-                cRace.createCell(2).setCellValue(r.getStartingTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
+                cRace.createCell(2).setCellValue(String.valueOf(r.getStartingTime().getTime()));
                 cRace.createCell(3).setCellValue(r.getName());
                 cRace.createCell(4).setCellValue(r.getDistance());
                 cRace.createCell(5).setCellValue(r.getMaxTime());
@@ -158,7 +156,7 @@ public class ExcelViewCompetition extends AbstractXlsView {
                 cRace.createCell(12).setCellValue(r.getDescription());
             }
         }
-        //////////////////////////////////////////////////////RACE SHEET////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////compensation SHEET////////////////////////////////////////////////////////////
         List<Compensation> compensations = (List<Compensation>) map.get("compensations");
         // create excel xls sheet
         Sheet sheetComp = workbook.createSheet("Compensations Detail");
@@ -175,31 +173,62 @@ public class ExcelViewCompetition extends AbstractXlsView {
         // create header row
         Row headerComp = sheetComp.createRow(0);
         headerComp.createCell(0).setCellValue("Id");
-        headerComp.getCell(0).setCellStyle(style);
-        headerComp.createCell(1).setCellValue("Numéro");
-        headerComp.getCell(1).setCellStyle(style);
-        headerComp.createCell(2).setCellValue("Heure de départ");
-        headerComp.getCell(2).setCellStyle(style);
-        headerComp.createCell(3).setCellValue("Nom");
-        headerComp.getCell(3).setCellStyle(style);
-        headerComp.createCell(4).setCellValue("Distance");
-        headerComp.getCell(4).setCellStyle(style);
-        headerComp.createCell(5).setCellValue("Temps maximal");
-        headerComp.getCell(5).setCellStyle(style);
-        headerComp.createCell(6).setCellValue("Type de course");
-        headerComp.getCell(6).setCellStyle(style);
-        headerComp.createCell(7).setCellValue("Course sur-mesure");
-        headerComp.getCell(7).setCellStyle(style);
-        headerComp.createCell(8).setCellValue("Expérience admise");
-        headerComp.getCell(8).setCellStyle(style);
-        headerComp.createCell(9).setCellValue("Envergure");
-        headerComp.getCell(9).setCellStyle(style);
-        headerComp.createCell(10).setCellValue("Catégories admises");
-        headerComp.getCell(10).setCellStyle(style);
-        headerComp.createCell(11).setCellValue("Bateaux admis");
-        headerComp.getCell(11).setCellStyle(style);
-        headerComp.createCell(12).setCellValue("Description");
-        headerComp.getCell(12).setCellStyle(style);
+        headerComp.getCell(0).setCellStyle(styleComp);
+        headerComp.createCell(1).setCellValue("Male");
+        headerComp.getCell(1).setCellStyle(styleComp);
+        headerComp.createCell(2).setCellValue("Female");
+        headerComp.getCell(2).setCellStyle(styleComp);
+        headerComp.createCell(3).setCellValue("PR3");
+        headerComp.getCell(3).setCellStyle(styleComp);
+        headerComp.createCell(4).setCellValue("PR2");
+        headerComp.getCell(4).setCellStyle(styleComp);
+        headerComp.createCell(5).setCellValue("PR1");
+        headerComp.getCell(5).setCellStyle(styleComp);
+        headerComp.createCell(6).setCellValue("J10");
+        headerComp.getCell(6).setCellStyle(styleComp);
+        headerComp.createCell(7).setCellValue("J12");
+        headerComp.getCell(7).setCellStyle(styleComp);
+        headerComp.createCell(8).setCellValue("J14");
+        headerComp.getCell(8).setCellStyle(styleComp);
+        headerComp.createCell(9).setCellValue("J16");
+        headerComp.getCell(9).setCellStyle(styleComp);
+        headerComp.createCell(10).setCellValue("J18");
+        headerComp.getCell(10).setCellStyle(styleComp);
+        headerComp.createCell(11).setCellValue("U23");
+        headerComp.getCell(11).setCellStyle(styleComp);
+        headerComp.createCell(12).setCellValue("S_A");
+        headerComp.getCell(12).setCellStyle(styleComp);
+        headerComp.createCell(13).setCellValue("S_B");
+        headerComp.getCell(13).setCellStyle(styleComp);
+        headerComp.createCell(14).setCellValue("A");
+        headerComp.getCell(14).setCellStyle(styleComp);
+        headerComp.createCell(15).setCellValue("B");
+        headerComp.getCell(15).setCellStyle(styleComp);
+        headerComp.createCell(16).setCellValue("C");
+        headerComp.getCell(16).setCellStyle(styleComp);
+        headerComp.createCell(17).setCellValue("D");
+        headerComp.getCell(17).setCellStyle(styleComp);
+        headerComp.createCell(18).setCellValue("E");
+        headerComp.getCell(18).setCellStyle(styleComp);
+        headerComp.createCell(19).setCellValue("F");
+        headerComp.getCell(19).setCellStyle(styleComp);
+        headerComp.createCell(20).setCellValue("G");
+        headerComp.getCell(20).setCellStyle(styleComp);
+        headerComp.createCell(21).setCellValue("H");
+        headerComp.getCell(21).setCellStyle(styleComp);
+        headerComp.createCell(22).setCellValue("I");
+        headerComp.getCell(22).setCellStyle(styleComp);
+        headerComp.createCell(23).setCellValue("J");
+        headerComp.getCell(23).setCellStyle(styleComp);
+        headerComp.createCell(24).setCellValue("K");
+        headerComp.getCell(24).setCellStyle(styleComp);
+        headerComp.createCell(25).setCellValue("L");
+        headerComp.getCell(25).setCellStyle(styleComp);
+        headerComp.createCell(26).setCellValue("M");
+        headerComp.getCell(26).setCellStyle(styleComp);
+        headerComp.createCell(27).setCellValue("COMPETITION");
+        headerComp.getCell(27).setCellStyle(styleComp);
+
 
         int rowCountComp = 1;
         if(compensations!=null) {

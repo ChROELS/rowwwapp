@@ -7,6 +7,7 @@ import be.intecbrussel.models.enums.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Date;
 import java.time.LocalDate;
 
 
@@ -25,7 +26,7 @@ public class Rower {
     private Gender gender;
     private String nationality;
     @NotNull(message = "La date de naissance est requise")
-    private LocalDate birthDate;
+    private Date birthDate;
     @NotNull(message = "Le club est requis")
     @Size(min=2, max=30)
     private String club;
@@ -50,13 +51,14 @@ public class Rower {
         this.lastName = "VaartWel";
         this.gender = Gender.FEMALE;
         this.nationality = "Belge";
-        this.birthDate = LocalDate.of(1970,3,24);
+        this.birthDate = Date.valueOf(LocalDate.of(1970,3,24));
         this.club = "Royal 1865";
         this.licenceNumber = "14.125.78";
         this.disability = Disability.Option_0;
         this.raceExperience = RaceExperience.NON_BEGINNER;
         this.categoryCoef = 0;
         this.genderCoef = 0.2f;
+
     }
 
     //Getters and setters//////////
@@ -100,11 +102,11 @@ public class Rower {
         this.gender = gender;
     }
 
-    public LocalDate getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -193,9 +195,9 @@ public class Rower {
     }
 
     //specific methods///////////////////////////////
-    public int calculateAge(LocalDate birthDate){
+    public int calculateAge(Date birthDate){
         int actualYear = LocalDate.now().getYear();
-        int birthYear = birthDate.getYear();
+        int birthYear = birthDate.toLocalDate().getYear();
         return actualYear-birthYear;
     }
     public float rowerHandicap( float categoryCoef, float genderCoef){

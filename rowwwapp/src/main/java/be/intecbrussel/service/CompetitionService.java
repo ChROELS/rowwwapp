@@ -5,6 +5,7 @@ import be.intecbrussel.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +38,17 @@ public class CompetitionService {
             return true;
         }else{
             return false;
+        }
+    }
+    public List<Competition> getAllCompetitionDay(){
+        return (List<Competition>) (competitionRepository.findAll());
+    }
+    public Competition getCompetition(List<Competition> competition, Long id){
+        boolean CompetitionPresent = competition.stream().anyMatch(c ->c.getId().equals(id));
+        if(CompetitionPresent){
+            return competition.get(Math.toIntExact(id));
+        }else{
+            return null;
         }
     }
 }

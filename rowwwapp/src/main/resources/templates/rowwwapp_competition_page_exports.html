@@ -12,39 +12,11 @@
     <body>
     <header>Organisation d'une compétition/documents</header>
     <br>
-        <!-- part 1 -->
-        <h1 align="center">Vos données</h1>
-        <section id="competitionForm3">
-            <!--/*@thymesVar id="competitionForm2" type="be.intecbrussel.models.competition.Competition"*/-->
-            <p th:if="${competitionForm2.getId()==null}">Aucune compétition n'est encore enregistrée</p>
-            <div th:unless="${competitionForm2.getId()>=0}">
-            <tr th:text="${competitionForm2.getId()}">
-                <td th:text="${competitionForm2.getPlaceOfEvent()}"></td>
-                <td th:text="${competitionForm2.getDate()}"></td>
-                <td th:text="${competitionForm2.getDescription() }"></td>
-                <td th:text="${competitionForm2.getRegistrationCost() }"></td>
-                <td th:text="${competitionForm2.getRegistrationLimit() }"></td>
-                <td th:text="${competitionForm2.getRegistrationRules() }"></td>
-                <td th:text="${competitionForm2.getRegistrationContact() }"></td>
-                <td th:text="${competitionForm2.getLotteryDate() }"></td>
-                <td th:text="${competitionForm2.getLotteryRules() }"></td>
-                <td th:text="${competitionForm2.getLotteryContact() }"></td>
-                <td th:text="${competitionForm2.getForfeitLimit() }"></td>
-                <td th:text="${competitionForm2.getForfeitLimitHour() }"></td>
-                <td th:text="${competitionForm2.getForfeitRules() }"></td>
-                <td th:text="${competitionForm2.getForfeitContact() }"></td>
-                <td th:text="${competitionForm2.getRaces() }"></td>
-                <td th:text="${competitionForm2.getCompensationCategories() }"></td>
-                <td th:text="${competitionForm2.getComplementaryRules() }"></td>
-            </tr>
-            </div>
-        </section></br>
+    <article>
         <!-- part 2 -->
-        <section>
         <button id="newRaceInfos" onclick="loadPageCompetitionRace()">Créer une course supplémentaire</button><br/>
         <button id="toCompetition" onclick="loadPageCompetition()">Organiser une autre compétition</button></br>
         <a th:href="'/@{/rowwwapp/competition/results/document}'">Télécharger ces données</a></br>
-        </section>
     </article>
     <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
     </body> 

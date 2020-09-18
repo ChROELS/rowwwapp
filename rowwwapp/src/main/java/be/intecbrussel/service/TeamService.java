@@ -5,6 +5,7 @@ import be.intecbrussel.repositories.CRUDOperationsTeam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,7 +17,7 @@ public class TeamService {
         this.teamRepository = teamRepository;
     }
 
-    //Competition
+
     public void createTeam(Team team){
         teamRepository.save(team);
     }
@@ -38,5 +39,8 @@ public class TeamService {
         }else{
             return false;
         }
+    }
+    public List<Team> getAllTeams(){
+        return (List<Team>) (teamRepository.findAll());
     }
 }

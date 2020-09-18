@@ -12,6 +12,45 @@
 <body>
 <header>Organisation des courses</header>
 <article>
+    <!-- part 1 -->
+    <h1 align="center">Vos données</h1>
+    <div>
+        <table >
+            <tr>
+                <th>Id</th>
+                <th>Numéro</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Distance</th>
+                <th>Temps max.</th>
+                <th>Heure de départ</th>
+                <th>Type de course</th>
+                <th>Course sur-mesure</th>
+                <th>Envergure</th>
+                <th>Catégorie</th>
+                <th>Type de bateau</th>
+                <th>Expérience admise</th>
+                <th>Compétition</th>
+            </tr>
+        <tr th:each="race : ${races}">
+                <td th:if="${race.equals(null)}">Aucune course n'est encore enregistrée</td>
+                <td th:text="${race.getId()}">
+                <td th:text="${race.getNumber()}"></td>
+                <td th:text="${race.getName()}"></td>
+                <td th:text="${race.getDescription() }"></td>
+                <td th:text="${race.getDistance() }"></td>
+                <td th:text="${race.getMaxTime() }"></td>
+                <td th:text="${race.getStartingTime() }"></td>
+                <td th:text="${race.getRacetype() }"></td>
+                <td th:text="${race.getCustomedRace() }"></td>
+                <td th:text="${race.getRaceImpact() }"></td>
+                <td th:text="${race.getAdmissCategory() }"></td>
+                <td th:text="${race.getAdmissRowingBoat() }"></td>
+                <td th:text="${race.getRaceExperience() }"></td>
+                <td th:text="${race.getCompetition().getName()}"></td>
+        </tr>
+    </table>
+    </div><br/>
 <button id="buttonCompensationToggle">Compensations pour les courses open, mixtes, à handicap >>></button><br/>
 <br/>
     <!--/*@thymesVar id="compensationForm2" type="be.intecbrussel.models.competition.Compensation"*/-->

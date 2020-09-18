@@ -91,8 +91,9 @@
                         <label for="infos">Règles concernant le classement, les récompenses, les dossards, la pesée...:</label><br/>
                         <input type="text" id="infos" size=1000 value="-" th:field="*{complementaryRules}"/><br/>
                         <p th:if="${#fields.hasErrors('complementaryRules')}" th:errors="*{complementaryRules}">Faute d'encodage d'une information</p>
+
+                <input type="submit">Enregistrer </input>
                     </section>
-                <input type="submit">Enregistrer</input>
             </form>
 
 

@@ -40,7 +40,7 @@ public class RowerService {
             return false;
         }
     }
-    public List<Rower> findAllRowers(){
+    public List<Rower> getAllRowers(){
         return (List<Rower>) rowerRepository.findAll();
     }
 }

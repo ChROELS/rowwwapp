@@ -9,8 +9,5 @@ public enum Position {
     public static Position findPosition(String value){
         return valueOf(value);
     }
-    @Override
-    public String toString() {
-        return Arrays.toString(values());
-    }
+
 }

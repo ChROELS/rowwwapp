@@ -39,6 +39,7 @@ public class Team {
         type=RowingBoat.TRIPLE_SCULL_3X;
         sizeOfCrew=3;
         teamHandicap=0.3f;
+        crew=new ArrayList<>();
     }
     //Getters and setters//////////
 

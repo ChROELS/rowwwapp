@@ -20,11 +20,11 @@
             <button id="buttonCompetitionToggle">Jour de compétition</button><br/>
             <br/>
             <!--/*@thymesVar id="competitionForm2" type="be.intecbrussel.models.competition.Competition"*/-->
-            <form id="competitionForm2" action="#" method="post" th:action="@{/rowwwapp/competition}" th:object="${competitionForm2}">
+            <form id="competition" action="#" method="post" th:action="@{/rowwwapp/competition}" th:object="${competitionForm2}">
             <section id="competitionForm">
 
                     <label for="location">Lieu:</label><br/>
-                    <input type="text" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel" th:field="*{placeOfEvent}"
+                    <input type="text" th:field="*{placeOfEvent}" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel"
                            value="lieu" required/><br/>
                     <p th:if="${#fields.hasErrors('placeOfEvent')}" th:errors="*{placeOfEvent}">Faute d'encodage du lieu</p>
                     <label for="dateOfCompetition">Date:</label><br/>
@@ -91,8 +91,9 @@
                         <label for="infos">Règles concernant le classement, les récompenses, les dossards, la pesée...:</label><br/>
                         <input type="text" id="infos" size=1000 value="-" th:field="*{complementaryRules}"/><br/>
                         <p th:if="${#fields.hasErrors('complementaryRules')}" th:errors="*{complementaryRules}">Faute d'encodage d'une information</p>
+
+                <input type="submit">Enregistrer </input>
                     </section>
-                <input type="submit">Enregistrer</input>
             </form>
 
 

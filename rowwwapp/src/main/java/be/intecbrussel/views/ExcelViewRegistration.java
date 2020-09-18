@@ -14,14 +14,14 @@ import java.util.Map;
 
 public class ExcelViewRegistration extends AbstractXlsView {
     @Override
-    protected void buildExcelDocument(Map<String, Object> map, Workbook workbook, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+    protected void buildExcelDocument(Map<String, Object> map, Workbook workbook, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         // change the file name
         httpServletResponse.setHeader("Content-Disposition", "attachment; filename=\"rowwwapp_registration_data.xls\"");
 
         List<Team> teams = (List<Team>) map.get("teams");
         // create excel xls sheet
         Sheet sheet = workbook.createSheet("Teams Detail");
-        sheet.setDefaultColumnWidth(30);
+        sheet.setDefaultColumnWidth(50);
         // create style for header cells
         CellStyle style = workbook.createCellStyle();
         Font font = workbook.createFont();
@@ -71,7 +71,7 @@ public class ExcelViewRegistration extends AbstractXlsView {
         List<Rower> rowers = (List<Rower>) map.get("rowers");
         // create excel xls sheet
         Sheet sheetRower = workbook.createSheet("Rowers Detail");
-        sheet.setDefaultColumnWidth(30);
+        sheetRower.setDefaultColumnWidth(50);
         // create style for header cells
         CellStyle styleRower = workbook.createCellStyle();
         Font fontRower = workbook.createFont();
@@ -133,7 +133,7 @@ public class ExcelViewRegistration extends AbstractXlsView {
         List<ScheduledRace> scheduledRaces = (List<ScheduledRace>) map.get("scheduledRaces");
         // create excel xls sheet
         Sheet sheetScheduledRace = workbook.createSheet("Scheduled Races Detail");
-        sheetScheduledRace.setDefaultColumnWidth(30);
+        sheetScheduledRace.setDefaultColumnWidth(50);
         // create style for header cells
         CellStyle styleRace = workbook.createCellStyle();
         Font fontRace = workbook.createFont();

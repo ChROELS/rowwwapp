@@ -1,9 +1,9 @@
 /* Style the body (general style settings) */
 body{
     position: relative;
-    left:150px;
+    left:0px;
     box-sizing: border-box;
-    max-width: 960px;
+    max-width: 1060px;
     background-position: center;
     height: 1500px;
     background-image: linear-gradient(darkslategray,darkolivegreen);
@@ -15,7 +15,7 @@ body{
 header{
     position: static;
     padding: 20px;
-    text-align: center;
+    text-align: left;
     font-size: 24px;
     font-weight: bolder;
 }
@@ -30,7 +30,7 @@ article{
     width: 60%;
 }
 footer{
-    position:static;
+    position: static;
     padding: 20px;
     text-align: center;
     font-size: 12px;
@@ -38,7 +38,6 @@ footer{
 }
 
 section{
-    background-color: navy;
     margin-left: 20px;
     margin-bottom: 20px;
     padding-top: 5px;
@@ -46,7 +45,37 @@ section{
     box-sizing: border-box;
     color: #FFF;
 }
-
+label{
+    margin-left: 4px;
+    margin-bottom: 2px;
+}
+div{
+    overflow-x: auto;
+    overflow-y: auto;
+    margin-left: 20px;
+}
+table {
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+th {
+    background-color: maroon;
+    color: white;
+    text-align: left;
+    padding: 8px;
+}
+tr{
+    background-color: transparent;
+    position: relative;
+    text-align: left;
+    padding: 8px;
+    color: black;
+}
+tr:nth-child(even) {background-color: lightgrey; color: black;}
+td{
+    position: relative;
+    text-align: center;
+}
 
 h1{
     position: relative;
@@ -62,11 +91,37 @@ img{
 img:hover {
     opacity: 1.0;
 }
+a{
+    position: relative;
+    margin-left: 160px;
+    box-sizing: border-box;
+    border:1px solid black;
+    text-align: center ;
+    font-size: 24px;
+    font-weight: bolder;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    background-color: transparent;
+}
+a:hover{
+    border:1px solid lightgrey;
+    background-color: lightgrey;
+    color: black;
+}
+a:active{
+    border:1px solid black;
 
+}
+
+a:active:after{
+    border:1px solid black;
+    color: black;
+}
 button {
     position: static;
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     box-sizing: border-box;
     border:1px solid black;
     text-align: center ;
@@ -79,7 +134,8 @@ button {
   }
   button:hover {
     border:1px solid maroon;
-    color: orangered;
+      background-color: maroon;
+    color: white;
   }
 
   button:active{
@@ -92,22 +148,6 @@ button:active:after{
     color: black;
 }
 
-#newRaceInfos{
-    background-color: maroon; 
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    width: 250px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-#newRaceInfos:hover{
-  background-color:darkgreen; 
-}
 input{
     outline:black 2px;
     width:100%;
@@ -124,6 +164,7 @@ input:focus{
 input[type=number]{
     background-color:lightgray;
     color: black;
+    margin: 8px 0;
 }
 /* Remove arrow-spinner on Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -134,14 +175,17 @@ input::-webkit-inner-spin-button {
 /* on Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+    margin: 8px 0;
 }
 input[type=date]{
     background-color:lightgray;
     color: black;
+    margin: 8px 0;
 }
 input[type=text]{
     background-color:lightgray;
     color: black;
+    margin: 8px 0;
 }
 input[type=submit]{
     background-color: lightgray;
@@ -160,6 +204,7 @@ select {
     padding: 16px 20px;
     border: none;
     background-color: lightgray;
+    margin: 8px 0;
   }
 .container{
     position: relative;

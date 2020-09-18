@@ -5,6 +5,7 @@ import be.intecbrussel.repositories.CRUDOperationsScheduledRace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,7 +17,6 @@ public class ScheduledRaceService {
         this.operationsScheduledRace = scheduledRaceRepository;
     }
 
-    //Competition
     public void createScheduledRace(ScheduledRace race){
         operationsScheduledRace.save(race);
     }
@@ -38,5 +38,8 @@ public class ScheduledRaceService {
         }else{
             return false;
         }
+    }
+    public List<ScheduledRace> getAllScheduledRaces(){
+        return (List<ScheduledRace>) (operationsScheduledRace.findAll());
     }
 }

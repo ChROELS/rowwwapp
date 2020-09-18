@@ -6,6 +6,7 @@ import be.intecbrussel.repositories.CRUDOperationsRace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,7 +18,7 @@ public class RaceService {
         this.raceRepository = raceRepository1;
     }
 
-    //Competition
+
     public void createRace(Race race){
         raceRepository.save(race);
     }
@@ -39,5 +40,8 @@ public class RaceService {
         }else{
             return false;
         }
+    }
+    public List<Race> getAllRace(){
+        return (List<Race>) (raceRepository.findAll());
     }
 }

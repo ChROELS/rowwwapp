@@ -13,8 +13,5 @@ public enum RaceType {
     public static RaceType findRace(String value){
         return valueOf(value);
     }
-    @Override
-    public String toString() {
-        return Arrays.toString(values());
-    }
+
 }

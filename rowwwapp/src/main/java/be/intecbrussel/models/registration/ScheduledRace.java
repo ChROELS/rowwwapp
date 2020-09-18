@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +32,7 @@ public class ScheduledRace {
         customedRace="-";
         coefficientGender=0.0;
         coefficientCategory=0.0;
+        teams= new ArrayList<>();
     }
 
     public Long getId() {

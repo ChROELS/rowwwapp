@@ -1,22 +1,13 @@
 package be.intecbrussel.models.competition;
 
 
-import be.intecbrussel.models.enums.Category;
-
-
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-
-
-import javax.persistence.*;
-import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Competition {
@@ -33,7 +24,7 @@ public class Competition {
     @Size(min=3, max=50)
     private String placeOfEvent;
     @NotNull(message = "Une date est requise")
-    private LocalDate date;
+    private Date date;
     @NotNull(message = "Une information est requise")
     private String registrationRules;
     @NotNull(message = "Un contact est requis")
@@ -41,9 +32,9 @@ public class Competition {
     @NotNull(message = "Un coût est requis")
     private Double registrationCost;
     @NotNull(message = "Une date d'inscription est requise")
-    private LocalDate registrationLimit;
+    private Date registrationLimit;
     @NotNull(message = "Une date est requise")
-    private LocalDate lotteryDate;
+    private Date lotteryDate;
     @NotNull(message = "Une information est requise")
     private String lotteryRules;
     @NotNull(message = "Un contact est requis")
@@ -51,7 +42,7 @@ public class Competition {
     @NotNull(message = "Une heure limite est requise")
     private String forfeitLimitHour;
     @NotNull(message = "Une date limite est requise")
-    private LocalDate forfeitLimit;
+    private Date forfeitLimit;
     @NotNull(message = "Une information est requise")
     private String forfeitRules;
     @NotNull(message = "Un contact est requis")
@@ -68,16 +59,16 @@ public class Competition {
         this.name = "Régates";
         this.description = "Courses organisées par le Royal 1865";
         this.placeOfEvent = "Brussels";
-        this.date = LocalDate.of(2020,10,15);
+        this.date = Date.valueOf(LocalDate.of(2020,10,15));
         this.registrationRules = "par mail";
         RegistrationContact = "royal1865@gmail.com";
         this.registrationCost = 4.00;
-        this.registrationLimit = LocalDate.of(2020,10,01);
-        this.lotteryDate = LocalDate.of(2020,10,10);
+        this.registrationLimit = Date.valueOf(LocalDate.of(2020,10,1));
+        this.lotteryDate = Date.valueOf(LocalDate.of(2020,10,10));
         this.lotteryRules = "Sous regard d'huissier";
         this.lotteryContact = "royal1865@gmail.com";
         this.forfeitLimitHour = "23";
-        this.forfeitLimit = LocalDate.of(2020,10,14);
+        this.forfeitLimit = Date.valueOf(LocalDate.of(2020,10,14));
         this.forfeitRules = "Envoyer le formulaire de forfait";
         this.forfeitContact = "royal1865@gmail.com";
         this.complementaryRules = "-";
@@ -121,11 +112,11 @@ public class Competition {
         this.placeOfEvent = placeOfEvent;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -153,9 +144,6 @@ public class Competition {
         this.registrationCost = registrationCost;
     }
 
-
-
-
     public String getLotteryRules() {
         return lotteryRules;
     }
@@ -180,11 +168,11 @@ public class Competition {
         this.forfeitLimitHour = forfeitLimitHour;
     }
 
-    public LocalDate getForfeitLimit() {
+    public Date getForfeitLimit() {
         return forfeitLimit;
     }
 
-    public void setForfeitLimit(LocalDate forfeitLimit) {
+    public void setForfeitLimit(Date forfeitLimit) {
         this.forfeitLimit = forfeitLimit;
     }
 
@@ -220,19 +208,19 @@ public class Competition {
         this.complementaryRules = complementaryRules;
     }
 
-    public LocalDate getRegistrationLimit() {
+    public Date getRegistrationLimit() {
         return registrationLimit;
     }
 
-    public void setRegistrationLimit(LocalDate registrationLimit) {
+    public void setRegistrationLimit(Date registrationLimit) {
         this.registrationLimit = registrationLimit;
     }
 
-    public LocalDate getLotteryDate() {
+    public Date getLotteryDate() {
         return lotteryDate;
     }
 
-    public void setLotteryDate(LocalDate lotteryDate) {
+    public void setLotteryDate(Date lotteryDate) {
         this.lotteryDate = lotteryDate;
     }
 

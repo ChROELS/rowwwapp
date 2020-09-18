@@ -12,30 +12,36 @@
     <body>
     <header>Inscription aux courses/participants</header>
     <article>
-        <br/>
-        <button id="buttonInfosToggle">Course sélectionnée</button><br/>
-        <section id="info">
-            <p>Lieu:</p>
-            <p>Date:</p>
-            <p>Numéro officiel:</p>
-            <p>Type de course:</p>
-            <p>Type de course si non répertiorée ci-dessus:</p>
-            <p>Coefficient d'handicap par catégories (si applicable):</p>
-            <p>Coefficient d'handicap par genre (si applicable):</p>
-        <!--/*@thymesVar id="scheduledRaceForm" type="be.intecbrussel.models.registration.ScheduledRace"*/-->
-        <tr th:text="${scheduledRaceForm.getId()}">
-            <td th:text="${scheduledRaceForm.location}"></td>
-            <td th:text="${scheduledRaceForm.date}"></td>
-            <td th:text="${scheduledRaceForm.number }"></td>
-            <td th:text="${scheduledRaceForm.raceType }"></td>
-            <td th:text="${scheduledRaceForm.customedRace }"></td>
-            <td th:text="${scheduledRaceForm.coefficientCategory }"></td>
-            <td th:text="${scheduledRaceForm.coefficientGender }"></td>
+        <!-- part 1 -->
+        <h1 align="center">Course sélectionnée</h1>
+        <div>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Lieu</th>
+                <th>Date</th>
+                <th>Numéro officiel</th>
+                <th>Type de course</th>
+                <th>Type de course si non répertiorée ci-dessus</th>
+                <th>Coefficient d'handicap par catégories (si applicable)</th>
+                <th>Coefficient d'handicap par genre (si applicable)</th>
+            </tr>
+        <tr th:each="scheduledRace: ${scheduledRaces}">
+            <td th:if="${scheduledRace.equals(null)}">Aucune course n'est encore sélectionée</td>
+            <td th:text="${scheduledRace.getId()}"></td>
+            <td th:text="${scheduledRace.location}"></td>
+            <td th:text="${scheduledRace.date}"></td>
+            <td th:text="${scheduledRace.number }"></td>
+            <td th:text="${scheduledRace.raceType }"></td>
+            <td th:text="${scheduledRace.customedRace }"></td>
+            <td th:text="${scheduledRace.coefficientCategory }"></td>
+            <td th:text="${scheduledRace.coefficientGender }"></td>
         </tr>
-        </section>
+        </table>
+        </div>
       <!-- part form -->             
       <br/>
-      <button id="buttonRowerToggle">Formulaire d'inscription</button><br/>
+      <button id="buttonRowerToggle">Formulaire d'inscription >>></button><br/>
         <section id="rowerForm">
             <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
           <form action="#" id="rower1" method="post" th:action="@{/rowwwapp/registration/rower}"

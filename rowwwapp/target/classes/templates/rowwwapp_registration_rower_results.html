@@ -13,41 +13,44 @@
 <header>Inscriptions aux courses/Participants</header>
 <article>
 <!-- part 1 -->
-</br>
-<button id="buttonInfosToggle">Vos données</button><br/>
-<section id="results">
-    <p>Prénom:</p>
-    <p>Nom:</p>
-    <p>Date de naissance:</p>
-    <p>Age:</p>
-    <p>Catégorie:</p>
-    <p>Coefficient d'handicap pour la catégorie (si applicable):</p>
-    <p>Genre:</p>
-    <p>Coefficient d'handicap pour le genre (si applicable):</p>
-    <p>Club:</p>
-    <p>Numéro de licence:</p>
-    <p>Nationalité:</p>
-    <p>Expérience:</p>
-    <p>Handicap (si applicable):</p>
-    <p>Equipe:</p>
-    <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
-    <tr th:text="${rowerForm.getId()}">
-        <td th:text="${rowerForm.getFirstName()}"></td>
-        <td th:text="${rowerForm.getLastName()}"></td>
-        <td th:text="${rowerForm.getBirthDate() }"></td>
-        <td th:text="${rowerForm.getAge() }"></td>
-        <td th:text="${rowerForm.getCategory() }"></td>
-        <td th:text="${rowerForm.getCategoryCoef() }"></td>
-        <td th:text="${rowerForm.getGender() }"></td>
-        <td th:text="${rowerForm.getGenderCoef() }"></td>
-        <td th:text="${rowerForm.getClub() }"></td>
-        <td th:text="${rowerForm.getLicenceNumber() }"></td>
-        <td th:text="${rowerForm.getNationality() }"></td>
-        <td th:text="${rowerForm.getRaceExperience() }"></td>
-        <td th:text="${rowerForm.getRowerHandicap() }"></td>
-        <td th:text="${rowerForm.getTeam() }"></td>
+<h1 align="center">Vos données</h1><br/>
+    <div>
+<table>
+    <tr>
+    <th>Prénom</th>
+    <th>Nom</th>
+    <th>Date de naissance</th>
+    <th>Age</th>
+    <th>Catégorie</th>
+    <th>Coefficient d'handicap pour la catégorie (si applicable)</th>
+    <th>Genre</th>
+    <th>Coefficient d'handicap pour le genre (si applicable)</th>
+    <th>Club</th>
+    <th>Numéro de licence</th>
+    <th>Nationalité</th>
+    <th>Expérience</th>
+    <th>Handicap (si applicable)</th>
+    <th>Equipe</th>
     </tr>
-</section>
+    <tr th:each="rower: ${rowers}">
+        <td th:if="${rower.equals(null)}">Aucun participant n'est encore inscrit</td>
+        <td th:text="${rower.getId()}"></td>
+        <td th:text="${rower.getFirstName()}"></td>
+        <td th:text="${rower.getLastName()}"></td>
+        <td th:text="${rower.getBirthDate() }"></td>
+        <td th:text="${rower.getAge() }"></td>
+        <td th:text="${rower.getCategory() }"></td>
+        <td th:text="${rower.getCategoryCoef() }"></td>
+        <td th:text="${rower.getGender() }"></td>
+        <td th:text="${rower.getGenderCoef() }"></td>
+        <td th:text="${rower.getClub() }"></td>
+        <td th:text="${rower.getLicenceNumber() }"></td>
+        <td th:text="${rower.getNationality() }"></td>
+        <td th:text="${rower.getRaceExperience() }"></td>
+        <td th:text="${rower.getRowerHandicap() }"></td>
+    </tr>
+    </table>
+</div>
     <section>
 <button id="toDownload" onclick="loadPageDownloadRegistration()">Télécharger ces données</button></br>
     </section>

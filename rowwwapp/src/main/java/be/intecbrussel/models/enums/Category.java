@@ -89,8 +89,5 @@ public enum Category {
         }
         return category;
     }
-        @Override
-    public String toString() {
-        return Arrays.toString(values());
-    }
+
 }

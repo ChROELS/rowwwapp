@@ -14,7 +14,5 @@ public enum Disability {
         return valueOf(value);
     }
 
-    public String toString(){
-        return Arrays.toString(values());
-    }
+
 }
