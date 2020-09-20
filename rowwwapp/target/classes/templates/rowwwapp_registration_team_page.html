@@ -113,7 +113,7 @@
           <label for="crew">Equipe: </label> <br/>
 
             <section id="crew">
-                <tr th:each="member: ${teamForm.getCrew()}">
+                <tr th:each="member: ${rowers}">
                     <td th:text="${member.firstName}"></td>
                     <td th:text="${member.lastName}"></td>
                     <td th:text="${member.category}"></td>
@@ -124,6 +124,11 @@
                 <p th:text="${teamForm.teamHandicap}">Handicap</p>
                 <p th:text="${teamForm.sizeOfCrew}">Taille</p>
             </section>
+            <div class="input-group">
+                <input type="submit">Enregistrer</input>
+            </div>
+            <button id="newTeamInfos" onclick="loadPageTeam()">Créer une autre équipe</button>
+            <button id="newPageInfos" onclick="loadPageResults()">Passer à l'étape suivante</button>
         </form>
     </section>
 </article>

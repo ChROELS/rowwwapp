@@ -56,21 +56,21 @@ public class Competition {
     private List<Race> races;
 
     public Competition() {
-        this.name = "Régates";
-        this.description = "Courses organisées par le Royal 1865";
-        this.placeOfEvent = "Brussels";
+        this.name = "";
+        this.description = "";
+        this.placeOfEvent = "";
         this.date = Date.valueOf(LocalDate.of(2020,10,15));
-        this.registrationRules = "par mail";
-        RegistrationContact = "royal1865@gmail.com";
-        this.registrationCost = 4.00;
+        this.registrationRules = "";
+        RegistrationContact = "";
+        this.registrationCost = 0.00;
         this.registrationLimit = Date.valueOf(LocalDate.of(2020,10,1));
         this.lotteryDate = Date.valueOf(LocalDate.of(2020,10,10));
-        this.lotteryRules = "Sous regard d'huissier";
-        this.lotteryContact = "royal1865@gmail.com";
-        this.forfeitLimitHour = "23";
+        this.lotteryRules = "";
+        this.lotteryContact = "";
+        this.forfeitLimitHour = "";
         this.forfeitLimit = Date.valueOf(LocalDate.of(2020,10,14));
-        this.forfeitRules = "Envoyer le formulaire de forfait";
-        this.forfeitContact = "royal1865@gmail.com";
+        this.forfeitRules = "";
+        this.forfeitContact = "";
         this.complementaryRules = "-";
         this.compensationCategories = new ArrayList<>();
         this.races = new ArrayList<>();

@@ -92,7 +92,9 @@
                         <input type="text" id="infos" size=1000 value="-" th:field="*{complementaryRules}"/><br/>
                         <p th:if="${#fields.hasErrors('complementaryRules')}" th:errors="*{complementaryRules}">Faute d'encodage d'une information</p>
 
-                <input type="submit">Enregistrer </input>
+                        <div class="input-group">
+                            <input type="submit">Enregistrer et continuer</input>
+                        </div>
                     </section>
             </form>
 

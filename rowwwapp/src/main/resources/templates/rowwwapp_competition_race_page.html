@@ -78,7 +78,7 @@
                 <input type="number" id="raceDistance" th:field="*{distance}"  value="1200" required/><br/>
 
                     <label for="raceMaxTime">Temps maximum:</label><br/>
-                <input type="text" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{maxTime}"  required/><br/>
+                <input type="number" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{maxTime}"  required/><br/>
 
                     <label>Caractère:</label>
                 <label class="container" >International
@@ -108,7 +108,7 @@
                 <select id="raceType" th:field="*{racetype}" >1 à sélectionner
                     <option value="non précisé" selected>non précisé</option>
                     <option value="non-répertoriée" >non répertorié</option>
-                  <option value="C1" >C1</option>
+                  <option value="INLINE_C1" >C1</option>
                   <option value="C2" >C2</option>
                   <option value="C4" >C4</option>
                   <option value="slalom" >slalom</option>
@@ -183,7 +183,11 @@
                     <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
                 <input type="text" id="raceDescription" size=200 value ="-" th:field="*{description}"  required/>
                 <br/>
-
+                <div class="input-group">
+                    <input type="submit">Enregistrer</input>
+                </div><br/>
+                <button id="newRaceInfos" onclick="loadPageCompetitionRace()">Créer une course supplémentaire</button>
+                <button id="newPageInfos" onclick="loadPageCompensation()">Passer à l'étape suivante</button>
             </section>
                 </form>
 

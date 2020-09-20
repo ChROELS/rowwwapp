@@ -124,6 +124,11 @@
                 <p th:text="${teamForm.teamHandicap}">Handicap</p>
                 <p th:text="${teamForm.sizeOfCrew}">Taille</p>
             </section>
+            <div class="input-group">
+                <input type="submit">Enregistrer</input>
+            </div>
+            <button id="newTeamInfos" onclick="loadPageTeam()">Créer une autre équipe</button>
+            <button id="newPageInfos" onclick="loadPageResults()">Passer à l'étape suivante</button>
         </form>
     </section>
 </article>

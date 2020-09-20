@@ -110,6 +110,11 @@
         <input type="text" id="compensationL" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{l}" /><br/>
         <label for="compensationM">M :</label><br/>
         <input type="text" id="compensationM" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{m}" /><br/>
+            <div class="input-group">
+                <input type="submit">Enregistrer</input>
+            </div>
+            <button id="newCompensationInfos" onclick="loadPageCompensationRace()">Créer une compensation supplémentaire</button>
+            <button id="newPageInfos" onclick="loadPageResults()">Passer à l'étape suivante</button>
         </section>
     </form>
 </article>

@@ -183,7 +183,11 @@
                     <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
                 <input type="text" id="raceDescription" size=200 value ="-" th:field="*{description}"  required/>
                 <br/>
-
+                <div class="input-group">
+                    <input type="submit">Enregistrer</input>
+                </div><br/>
+                <button id="newRaceInfos" onclick="loadPageCompetitionRace()">Créer une course supplémentaire</button>
+                <button id="newPageInfos" onclick="loadPageCompensation()">Passer à l'étape suivante</button>
             </section>
                 </form>
 

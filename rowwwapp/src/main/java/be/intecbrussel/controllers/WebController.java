@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.ArrayList;
+import java.util.*;
 
 
 @Controller
@@ -81,14 +81,14 @@ private final TeamService teamService;
         return "rowwwapp_competition_race_page";
     }
     @PostMapping("/rowwwapp/competition/race")
-    public String checkRaceInfos(@Validated Race raceForm2,Model model, BindingResult bindingResult){
+    public String checkRaceInfos(Race raceForm2,Model model, BindingResult bindingResult){
         model.addAttribute("raceForm2", raceForm2);
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_competition_race_page";
         }else {
             raceService.createRace(raceForm2);
         }
-        return "redirect:/rowwwapp/competition/compensation";
+        return "redirect:/rowwwapp/competition/race";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/competition/compensation")
@@ -98,20 +98,24 @@ private final TeamService teamService;
         return "rowwwapp_competition_compensation_page";
     }
     @PostMapping("/rowwwapp/competition/compensation")
-    public String checkCompensationInfos(@Validated Compensation compensationForm2,Model model, BindingResult bindingResult){
+    public String checkCompensationInfos(Compensation compensationForm2,Model model, BindingResult bindingResult){
         model.addAttribute("compensationForm2",compensationForm2);
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_competition_compensation_page";
         }else {
             compensationService.createCompensation(compensationForm2);
         }
-        return "redirect:/rowwwapp/competition/results";
+        return "redirect:/rowwwapp/competition/compensation";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/competition/results")
-    public String showDownloadCompetition(){
+    public String showDownloadCompetition(Model model){
+        Map<String,List> attributes = new TreeMap<>();
+        attributes.put("competitions", competitionService.getAllCompetitionDay());
+        attributes.put("races", raceService.getAllRace());
+        attributes.put("compensations",compensationService.getAllCompensations());
+        model.addAllAttributes(attributes);
         return "rowwwapp_competition_page_exports"; }
-
     ////////////////////////////Deel Registration//////////////////////////////////////////////////
     @GetMapping("/rowwwapp/registration/scheduledRace")
     public String showScheduledRace(Model model){
@@ -119,14 +123,15 @@ private final TeamService teamService;
         return "rowwwapp_registration_scheduledRace_page";
     }
     @PostMapping("/rowwwapp/registration/scheduledRace")
-    public String checkScheduledRace(@Validated ScheduledRace scheduledRaceForm,Model model, BindingResult bindingResult){
+    public String checkScheduledRace(ScheduledRace scheduledRaceForm,Model model, BindingResult bindingResult){
         model.addAttribute("scheduledRaceForm", scheduledRaceForm);
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_registration_scheduledRace_page";
         }else {
             scheduledRaceService.createScheduledRace(scheduledRaceForm);
         }
-        return "redirect:/rowwwapp/registration/rower";
+        return "redirect:/rowwwapp/registration/scheduledRace";
+
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/registration/rower")
@@ -136,14 +141,14 @@ private final TeamService teamService;
         return "rowwwapp_registration_rower_page";
     }
     @PostMapping("/rowwwapp/registration/rower")
-    public String checkRower(@Validated Rower rowerForm,Model model, BindingResult bindingResult){
+    public String checkRower(Rower rowerForm,Model model, BindingResult bindingResult){
         model.addAttribute("rowerForm", rowerForm);
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_registration_rower_page";
         }else {
             rowerService.createRower(rowerForm);
         }
-        return "redirect:/rowwwapp/registration/team";
+        return "redirect:/rowwwapp/registration/rower";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/registration/rower/results")
@@ -167,7 +172,7 @@ private final TeamService teamService;
         }else {
             teamService.createTeam(teamForm);
         }
-        return "redirect:/rowwwapp/registration/results";
+        return "redirect:/rowwwapp/registration/team";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/registration/results")

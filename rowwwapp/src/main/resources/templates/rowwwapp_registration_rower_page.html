@@ -87,7 +87,12 @@
               <label class="category">Catégorie:<br/></label>
                 <p id="category" th:text="${rowerForm.category}"></p>
              <br/>
+              <div class="input-group">
+                  <input type="submit">Enregistrer</input>
+              </div>
           </form>
+            <button id="newTeamInfos" onclick="loadPageRower()">Créer un autre profil rameur(euse)</button>
+            <button id="newPageInfos" onclick="loadPageResults()">Passer à l'étape suivante</button>
   </section>
 
 
