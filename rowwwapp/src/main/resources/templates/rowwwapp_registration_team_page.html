@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
         <title>registration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/repeater.js" th:src="@{/js/repeater.js}"></script>
+    <!-- repeater plugin provided by vijaybajrot  -->
     <script src="../static/js/rowwwapp_registration_team_page.js" th:src="@{/js/rowwwapp_registration_team_page.js}"></script>
     </head>
     <body>
-    <header>Inscription aux courses/Equipes</header>
+    <header>Participer: étape 4</header>
     <article>
         <!-- part Infos Scheduled Races -->
-        <h1 align="center">Course sélectionnée</h1>
+        <h1>Vos données</h1><br/>
+        <h2>Course sélectionnée</h2>
         <div>
             <table>
                 <tr>
@@ -40,7 +43,7 @@
             </table>
         </div>
         <!-- part Infos Rowers -->
-        <h1 align="center">Participants inscrits</h1><br/>
+        <h1>Participants inscrits</h1><br/>
         <div>
             <table>
                 <tr>
@@ -77,15 +80,23 @@
                     <td th:text="${rower.getRowerHandicap() }"></td>
                 </tr>
             </table>
-        </div>
-        <button id="buttonTeamToggle">Formulaire d'inscription</button><br/>
+        </div><br/>
+        <button id="buttonTeamToggle">Equipe >>></button><br/>
     <section id="teamForm">
-        <!--/*@thymesVar id="teamForm" type="be.intecbrussel.models.registration.Team"*/-->
-        <form action="#" id="teamForm2" method="post" th:action="@{/rowwwapp/registration/team}" th:object="${teamForm}">
+        <section id="repeater">
+            <!-- Repeater Heading -->
+            <section class="repeater-heading">
+                <button class="btn btn-primary repeater-add-btn">Afficher le formulaire </button>
+                <p>*une ou plusieurs fois selon le nombre d'équipes à constituer</p>
+            </section>
+            <!-- Repeated Items -->
+            <section class="items" data-group="test">
+            <!--/*@thymesVar id="teamForm" type="be.intecbrussel.models.registration.Team"*/-->
+        <form action="#" id="teamForm2"  method="post" th:action="@{/rowwwapp/registration/team}" th:object="${teamForm}">
           <label for="teamName">Nom d'identification de l'équipe:</label><br/>
             <input type="text" id="teamName" size="50" value="Les Royals" th:field="*{name}" required/><br/>
           <label for="boatType">Type d'embarcation:</label><br/>
-          <select id="boatType" th:field="*{type}"  required>1 à sélectionner:<br/>
+          <select id="boatType" th:field="*{type}"  required>1 à sélectionner:
             <option value="2-" selected>2-</option>
             <option value="4-">4-</option>
             <option value="2+">2+</option>
@@ -106,31 +117,20 @@
             <option value="trek_2x">trek_2x</option>
             <option value="trek_4x">trek_4x</option>  
           </select><br/>
-            <label for="teamName">Barreur(euse):</label><br/>
+            <label for="cox">Barreur(euse):</label><br/>
             <input type="text" id="cox" size="50" value="nom" th:field="*{cox}" required/><br/>
-            <label for="teamName">Nage:</label><br/>
+            <label for="nage">Nage:</label><br/>
             <input type="text" id="nage" size="50" value="nom" th:field="*{stroke}" required/><br/>
-          <label for="crew">Equipe: </label> <br/>
-
-            <section id="crew">
-                <tr th:each="member: ${rowers}">
-                    <td th:text="${member.firstName}"></td>
-                    <td th:text="${member.lastName}"></td>
-                    <td th:text="${member.category}"></td>
-                    <td th:text="${member.licenceNumber}"></td>
-                    <td th:text="${member.club}"></td>
-                    <td th:text="${member.rowerHandicap}"></td>
-                </tr>
-                <p th:text="${teamForm.teamHandicap}">Handicap</p>
-                <p th:text="${teamForm.sizeOfCrew}">Taille</p>
-            </section>
-            <div class="input-group">
-                <input type="submit">Enregistrer</input>
-            </div>
-            <button id="newTeamInfos" onclick="loadPageTeam()">Créer une autre équipe</button>
-            <button id="newPageInfos" onclick="loadPageResults()">Passer à l'étape suivante</button>
+            <input type="submit"/>
         </form>
+            </section>
+            <!-- End of Repeated Items -->
+        </section>
+        <!-- End of Repeater -->
     </section>
+        <!-- End of Team Form -->
+
+
 </article>
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body> 

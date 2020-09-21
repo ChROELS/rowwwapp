@@ -70,8 +70,8 @@ private final TeamService teamService;
             return "rowwwapp_competition_page";
         }else {
             competitionService.createCompetitionDay(competitionForm2);
+            return "redirect:/rowwwapp/competition/race";
         }
-        return "redirect:/rowwwapp/competition/race";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/competition/race")
@@ -87,8 +87,8 @@ private final TeamService teamService;
             return "rowwwapp_competition_race_page";
         }else {
             raceService.createRace(raceForm2);
+            return "redirect:/rowwwapp/competition/compensation";
         }
-        return "redirect:/rowwwapp/competition/race";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/competition/compensation")
@@ -104,8 +104,8 @@ private final TeamService teamService;
             return "rowwwapp_competition_compensation_page";
         }else {
             compensationService.createCompensation(compensationForm2);
+            return "redirect:/rowwwapp/competition/results";
         }
-        return "redirect:/rowwwapp/competition/compensation";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/competition/results")
@@ -116,6 +116,8 @@ private final TeamService teamService;
         attributes.put("compensations",compensationService.getAllCompensations());
         model.addAllAttributes(attributes);
         return "rowwwapp_competition_page_exports"; }
+
+
     ////////////////////////////Deel Registration//////////////////////////////////////////////////
     @GetMapping("/rowwwapp/registration/scheduledRace")
     public String showScheduledRace(Model model){
@@ -165,7 +167,7 @@ private final TeamService teamService;
         return "rowwwapp_registration_team_page";
     }
     @PostMapping("/rowwwapp/registration/team")
-    public String checkTeam(@Validated Team teamForm,Model model, BindingResult bindingResult){
+    public String checkTeam(Team teamForm,Model model, BindingResult bindingResult){
         model.addAttribute("teamForm",teamForm);
         if(bindingResult.hasFieldErrors()){
             return "rowwwapp_registration_team_page";

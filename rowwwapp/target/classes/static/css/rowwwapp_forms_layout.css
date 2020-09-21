@@ -1,13 +1,12 @@
 /* Style the body (general style settings) */
 body{
     position: relative;
-    left:0px;
     box-sizing: border-box;
     max-width: 1060px;
     background-position: center;
-    height: 1500px;
+    height: auto;
     background-image: linear-gradient(darkslategray,darkolivegreen);
-    background-color: darkslategray;
+    background-color: darkolivegreen;
     background-repeat: no-repeat;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -78,6 +77,10 @@ td{
 }
 
 h1{
+    position: relative;
+    text-align: center;
+}
+h2{
     position: relative;
     text-align: center;
 }
@@ -186,6 +189,19 @@ input[type=text]{
     background-color:lightgray;
     color: black;
     margin: 8px 0;
+    position: center;
+}
+input[type=submit] {
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+    padding: 15px 32px;
+    width: 250px;
+    border: 1px solid darkgreen;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
 }
 .input-group input[type=submit] {
     background-color: lightgray;
@@ -200,11 +216,11 @@ input[type=text]{
     display: block;
 }
 
-.input-group input[type=submit]:not(:last-child) {
+input[type=submit]:not(:last-child) {
     border-bottom: none; /* Prevent double borders */
 }
 
-.input-group input[type=submit]:hover {
+input[type=submit]:hover {
     background-color:darkred;
     color:lightgray;
 }
@@ -218,7 +234,6 @@ select {
   }
 .container{
     position: relative;
-    border-radius: 0px;
     border: none;
     background-color: lightgray;
     color:black;

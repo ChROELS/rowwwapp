@@ -10,33 +10,34 @@
         <script src="../static/js/rowwwapp_competition_race_page.js" th:src="@{/js/rowwwapp_competition_race_page.js}"></script>
     </head>
     <body>
-        <header>Organisation des courses</header>
+        <header>Organiser: étape 2</header>
         <article>
             <!-- part 1 -->
-            <h1 align="center">Vos données</h1>
+            <h1>Vos données</h1><br/>
+            <h2>Jour de compétition</h2>
             <div>
-            <table >
-                <tr>
-                    <th>Id</th>
-                    <th>Lieu</th>
-                    <th>Date</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Date limite d'inscription</th>
-                    <th>Montant</th>
-                    <th>Règles d'inscription</th>
-                    <th>Contacts</th>
-                    <th>Date du tirage au sort</th>
-                    <th>Règles</th>
-                    <th>Contacts</th>
-                    <th>Date limite pour forfait</th>
-                    <th>Heure limite pour forfait</th>
-                    <th>Règles</th>
-                    <th>Contacts</th>
-                    <th>Règles complémentaires</th>
-                </tr>
-                <tr th:each="comp : ${competitions}">
-                <td th:if="${comp.equals(null)}">Aucune compétition n'est encore enregistrée</td>
+                <table >
+                    <tr>
+                        <th>Id</th>
+                        <th>Lieu</th>
+                        <th>Date</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Date limite d'inscription</th>
+                        <th>Montant</th>
+                        <th>Règles d'inscription</th>
+                        <th>Contacts</th>
+                        <th>Date du tirage au sort</th>
+                        <th>Règles</th>
+                        <th>Contacts</th>
+                        <th>Date limite pour forfait</th>
+                        <th>Heure limite pour forfait</th>
+                        <th>Règles</th>
+                        <th>Contacts</th>
+                        <th>Règles complémentaires</th>
+                    </tr>
+                    <tr th:each="comp : ${competitions}">
+                        <td th:if="${comp.equals(null)}">Aucune compétition n'est encore enregistrée</td>
                         <td th:text="${comp.getId()}">
                         <td th:text="${comp.getPlaceOfEvent()}"></td>
                         <td th:text="${comp.getDate().toGMTString()}"></td>
@@ -54,10 +55,10 @@
                         <td th:text="${comp.getForfeitRules() }"></td>
                         <td th:text="${comp.getForfeitContact() }"></td>
                         <td th:text="${comp.getComplementaryRules() }"></td>
-                </tr>
-            </table>
+                    </tr>
+                </table>
             </div>
-         </br>
+         <br/>
 
             <button id="buttonRaceInfosToggle">Course >>></button><br/>
             <br/>
@@ -66,19 +67,19 @@
             <section id="raceForm">
 
                 <label for="raceNumber">Numéro d'identification:</label><br/>
-                <input type="number" id="raceNumber" value="000" title="par exemple: 120 pour 120ième course" th:field="*{number}" required/><br/>
+                <input type="text" id="raceNumber" pattern="[0-9]+[0-9]+[0-9]" title="par exemple: 120 pour 120ième course" th:field="*{number}" required/><br/>
 
                     <label for="raceName">Nom officiel:</label><br/>
-                <input type="text" id="raceName" size=100 value ="Challenge annuel des seniors" title="par exemple: challenge annuel des seniors" th:field="*{name}"  required/><br/>
+                <input type="text" id="raceName" size=100 title="par exemple: challenge annuel des seniors" th:field="*{name}"  required/><br/>
 
                     <label for="raceStartingTime">Heure de départ:</label><br/>
                 <input type="text" id="raceStartingTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{startingTime}"  required/><br/>
 
                     <label for="raceDistance">Distance (mètres):</label><br/>
-                <input type="number" id="raceDistance" th:field="*{distance}"  value="1200" required/><br/>
+                <input type="text" id="raceDistance" th:field="*{distance}" required/><br/>
 
                     <label for="raceMaxTime">Temps maximum:</label><br/>
-                <input type="text" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{maxTime}"  required/><br/>
+                <input type="text" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" th:field="*{maxTime}"  required/><br/>
 
                     <label>Caractère:</label>
                 <label class="container" >International
@@ -106,20 +107,20 @@
 
                     <label for="raceType">Type de course:</label><br/>
                 <select id="raceType" th:field="*{racetype}" >1 à sélectionner
-                    <option value="non précisé" selected>non précisé</option>
-                    <option value="non-répertoriée" >non répertorié</option>
-                  <option value="C1" >C1</option>
-                  <option value="C2" >C2</option>
-                  <option value="C4" >C4</option>
-                  <option value="slalom" >slalom</option>
-                  <option value="biathlon" >biathlon</option>
-                  <option value="duathlon" >duathlon</option>
-                  <option value="triathlon" >triathlon</option>
-                  <option value="Tête de rivière" >tête de rivière</option>
-                  <option value="open à handicap" >open à handicap</option>
-                  <option value="régate" >régate</option>
-                  <option value="randonnée" >randonnée</option>
-                  <option value="challenge" >challenge</option>
+                    <option value="UNKNOWN" selected>UNKNOWN</option>
+                    <option value="UNCLASSIFIED" >UNCLASSIFIED</option>
+                  <option value="INLINE_C1" >INLINE_C1</option>
+                  <option value="INLINE_C2" >INLINE_C2</option>
+                  <option value="INLINE_C4" >INLINE_C4</option>
+                  <option value="JUNIOR_SLALOM" >JUNIOR_SLALOM</option>
+                  <option value="JUNIOR_BIATHLON" >JUNIOR_BIATHLON</option>
+                  <option value="JUNIOR_DUATHLON" >JUNIOR_DUATHLON</option>
+                  <option value="JUNIOR_TRIATHLON" >JUNIOR_TRIATHLON</option>
+                  <option value="TETE_DE_RIVIERE" >TETE_DE_RIVIERE</option>
+                  <option value="HANDICAP" >HANDICAP</option>
+                  <option value="REGATTA" >REGATTA</option>
+                  <option value="TREK" >TREK</option>
+                  <option value="CHALLENGE" >CHALLENGE</option>
 
                 </select><br/>
 
@@ -128,31 +129,31 @@
 
                     <label for="boatType">Type d'embarcation admise:</label><br/>
                   <select id="boatType" th:field="*{admissRowingBoat}" required>1 à sélectionner
-                    <option value="ALL" selected>Toutes/Au choix</option>
-                    <option value="2-" >2-</option>
-                    <option value="4-" >4-</option>
-                    <option value="2+" >2+</option>
-                    <option value="4+" >4+</option>
-                    <option value="8+" >8+</option>
-                    <option value="1x" >1x</option>
-                    <option value="2x" >2x</option>
-                    <option value="3x" >3x</option>
-                    <option value="4x" >4x</option>
-                    <option value="8x" >8x</option>
-                    <option value="4-" >4-</option>
-                    <option value="dinghy" >dinghy</option>
-                    <option value="tender" >tender</option>
-                    <option value="yole" >yole</option>
-                    <option value="canöe" >canöe_skiff</option>
-                    <option value="canadian trek skiff" >canadian_trek_skiff</option>
-                    <option value="trek_1x" >trek_1x</option>
-                    <option value="trek_2x" >trek_2x</option>
-                    <option value="trek_4x" >trek_4x</option>
+                    <option value="ALL" selected>ALL</option>
+                    <option value="SWEEP_COXLESS_PAIR_2_MINUS" >SWEEP_COXLESS_PAIR_2_MINUS</option>
+                    <option value="SWEEP_COXLESS_PAIR_4_MINUS" >SWEEP_COXLESS_PAIR_4_MINUS</option>
+                    <option value="SWEEP_COXLESS_PAIR_2_PLUS" >SWEEP_COXLESS_PAIR_2_PLUS</option>
+                    <option value="SWEEP_COXLESS_PAIR_4_PLUS" >SWEEP_COXLESS_PAIR_4_PLUS</option>
+                    <option value="SWEEP_EIGHT_8_PLUS" >SWEEP_EIGHT_8_PLUS</option>
+                    <option value="SINGLE_SCULL_1X" >SINGLE_SCULL_1X</option>
+                    <option value="DOUBLE_SCULL_2X" >DOUBLE_SCULL_2X</option>
+                    <option value="TRIPLE_SCULL_3X" >TRIPLE_SCULL_3X</option>
+                    <option value="QUAD_SCULL_4X" >QUAD_SCULL_4X</option>
+                    <option value="OCTUPLE_SCULL_8X" >OCTUPLE_SCULL_8X</option>
+                    <option value="QUEEP_4_MINUS" >QUEEP_4_MINUS</option>
+                    <option value="ROWING_DINGHY" >ROWING_DINGHY</option>
+                    <option value="Tender" >Tender</option>
+                    <option value="Yole" >Yole</option>
+                    <option value="Canöe" >Canöe</option>
+                    <option value="Canadian_trek" >Canadian_trek</option>
+                    <option value="Trek_1x" >Trek_1x</option>
+                    <option value="Trek_2x" >Trek_2x</option>
+                    <option value="Trek_4x" >Trek_4x</option>
                   </select><br/>
 
                     <label for="ageCategory">Catégorie admise:</label>
                   <select id="ageCategory"  th:field="*{admissCategory}"  >1 à sélectionner
-                    <option value="ALL/OPEN" selected>Toutes/Open</option>
+                    <option value="ALL_OPEN" selected>ALL_OPEN</option>
                     <option value="PR3" >PR3</option>
                     <option value="PR2" >PR2</option>
                     <option value="PR1" >PR1</option>
@@ -181,14 +182,12 @@
                 </select><br/>
 
                     <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
-                <input type="text" id="raceDescription" size=200 value ="-" th:field="*{description}"  required/>
+                <input type="text" id="raceDescription" size=200 th:field="*{description}"  required/>
                 <br/>
-                <div class="input-group">
-                    <input type="submit">Enregistrer</input>
-                </div><br/>
-                <button id="newRaceInfos" onclick="loadPageCompetitionRace()">Créer une course supplémentaire</button>
-                <button id="newPageInfos" onclick="loadPageCompensation()">Passer à l'étape suivante</button>
             </section>
+                <div class="input-group">
+                    <input type="submit" value="Enregistrer et continuer"/>
+                </div><br/>
                 </form>
 
             

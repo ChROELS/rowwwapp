@@ -7,13 +7,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/rowwwapp_registration_rower_results_page.js" th:src="@{/js/rowwwapp_registration_rower_results_page.js}"></script>
+    <script src="../static/js/repeater.js" th:src="@{/js/repeater.js}"></script>
+    <!-- repeater plugin provided by vijaybajrot  -->
+    <script src="../static/js/rowwwapp_registration_rower_results.js" th:src="@{/js/rowwwapp_registration_rower_results_page.js}"></script>
 </head>
 <body>
-<header>Inscriptions aux courses/Participants</header>
+<header>Participer: étape 3</header>
 <article>
 <!-- part 1 -->
-<h1 align="center">Vos données</h1><br/>
+<h1>Vos données</h1><br/>
     <div>
 <table>
     <tr>
@@ -51,8 +53,8 @@
     </tr>
     </table>
 </div>
-    <section>
-<button id="toDownload" onclick="loadPageDownloadRegistration()">Télécharger ces données</button></br>
+    <section><br/>
+<button id="toDownload" onclick="loadPageDownloadRegistration()">Télécharger ces données</button><br/>
     </section>
 </article>
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>

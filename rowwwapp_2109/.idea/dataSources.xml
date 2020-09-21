@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="default@localhost" uuid="72f85fee-0f3c-4e30-8330-6209d62fb9b9">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:tcp://localhost:9092/default</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="rowwwapp/Hibernate" uuid="b688ff17-72cc-4f16-abc0-7a6bf35839a4">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate</remarks>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:file:./data</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="H2 - default@localhost" uuid="7fdef623-8234-4175-a422-f53461e3dbc2">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:tcp://localhost:9092/default</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="default" uuid="3d69625f-cda9-4faa-b928-abb4483ac310">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:mem:default</jdbc-url>
+    </data-source>
+  </component>
+</project>

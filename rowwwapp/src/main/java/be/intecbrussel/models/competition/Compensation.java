@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Compensation {
     @Id
+    @GeneratedValue
     Long id;
     @NotNull(message = "Une entrée (00.00 au moins) est requise")
     private String compensationMale;

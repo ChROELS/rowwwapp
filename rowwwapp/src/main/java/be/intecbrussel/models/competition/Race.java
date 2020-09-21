@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Time;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -15,13 +17,13 @@ public class Race {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int number;
+    private String number;
     private Time startingTime;
     @NotNull(message = "Un nom est requis")
     @Size(min=2, max=30)
     private String name;
-    private int distance;
-    private int maxTime;
+    private String distance;
+    private String maxTime;
     @NotNull(message = "Ce descripteur est requis")
     private RaceType racetype;
     private String customedRace;
@@ -40,20 +42,12 @@ public class Race {
             CascadeType.MERGE
     },fetch = FetchType.LAZY)
     private Competition competition;
+    //Used for controlling if the user creates multiple races
+    private static List<Race> races = new ArrayList<>();
 
     public Race() {
-        this.number = 120;
         this.startingTime = Time.valueOf(LocalTime.of(23,23));
-        this.name = "Challenge des masters E";
-        this.distance = 1200;
-        this.maxTime = 30;
-        this.racetype = RaceType.CHALLENGE;
-        this.customedRace = "-";
-        this.raceExperience = RaceExperience.NON_BEGINNER;
-        this.raceImpact = RaceImpact.NATIONAL;
-        this.admissCategory = Category.Master_E;
-        this.admissRowingBoat = RowingBoat.SWEEP_COXLESS_PAIR_2_MINUS;
-        this.description = "-";
+        races.add(this);
     }
     //getters/setters///////////////////////////////
 
@@ -65,20 +59,28 @@ public class Race {
         this.id = id;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
+    }
+
+    public void setStartingTime(Time startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    public void setAdmissCategory(Category admissCategory) {
+        this.admissCategory = admissCategory;
     }
 
     public Time getStartingTime() {
         return startingTime;
     }
 
-    public void setStartingTime(Time startingTime) {
-        this.startingTime = startingTime;
+    public void setStartingTime(String startingTime) {
+        this.startingTime = Time.valueOf(startingTime);
     }
 
     public String getName() {
@@ -89,19 +91,19 @@ public class Race {
         this.name = name;
     }
 
-    public int getDistance() {
+    public String getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
 
-    public int getMaxTime() {
+    public String getMaxTime() {
         return maxTime;
     }
 
-    public void setMaxTime(int maxTime) {
+    public void setMaxTime(String maxTime) {
         this.maxTime = maxTime;
     }
 
@@ -141,8 +143,8 @@ public class Race {
         return admissCategory;
     }
 
-    public void setAdmissCategory(Category admissCategory) {
-        this.admissCategory = admissCategory;
+    public void setAdmissCategory(String admissCategory) {
+        this.admissCategory = Category.findCategory(admissCategory);
     }
 
     public RowingBoat getAdmissRowingBoat() {
@@ -169,8 +171,13 @@ public class Race {
         this.competition = competition;
     }
 
+    public static List<Race> getRaces() {
+        return races;
+    }
 
-
+    public static void setRaces(List<Race> races) {
+        Race.races = races;
+    }
 
     //specific methods///////////////////////////////
     public String composeName(RaceType racetype, String customRace, RaceExperience raceExperience, RowingBoat rowingBoat,

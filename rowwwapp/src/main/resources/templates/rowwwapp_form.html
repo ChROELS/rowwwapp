@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-type" content="text/html:charset=UTF-8">
     <!--defines the character set for the HTML file-->
@@ -7,16 +7,26 @@
     <title>rowwapp/login</title>
 </head>
 <body>
+<header>
+    <div th:if="${param.login}">
+    <h1>Bonjour!</h1>
+    </div><br/>
+    <div th:if="${param.logout}">
+        <h1>A bientôt!</h1>
+    </div><br/>
+</header>
+<article>
+    <section>
 <div th:if="${param.error}">
-    Invalid username and password
+    <p>Nom et/ou mot de passe invalides</p>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out
-</div>
-<form th:action="@{/rowwwapp/login}" method="post">
+        <div th:if="${param.logout}">
+            <p>Vous êtes déconnecté</p>
+        </div><br/>
+        <form th:action="@{/rowwwapp/login}" method="post">
     <div>
         <label>Nom
-            <input type="text"  name="username" value="nom" required/>
+            <input type="text" name="username" required/>
         </label><br/>
         <label>Mot de passe
             <input type="text" name="password" required/>
@@ -26,8 +36,8 @@
         <input type="submit" value="Entrer"/>
     </div>
 </form>
-<form th:action="@{/rowwwapp/logout}" method="post">
-    <input type="submit" value="Quitter"/>
-</form>
+    </section>
+</article>
+<footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body>
 </html>

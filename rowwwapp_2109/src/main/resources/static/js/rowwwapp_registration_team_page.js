@@ -1,0 +1,16 @@
+$(document).ready(function(){
+
+  $(teamForm).hide();
+});
+$(document).ready(function(){
+    $(buttonTeamToggle).click(function(){
+        $(teamForm).toggle(1000);
+    });
+});
+function loadPageResults(){
+    window.location.assign("http://localhost:8080/rowwwapp/competition/results");
+}
+function loadPageTeam(){
+    window.location.assign("http://localhost:8080/rowwwapp/competition/team");
+}
+  
