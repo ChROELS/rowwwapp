@@ -7,6 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- repeater plugin provided by vijaybajrot  -->
         <script src="../static/js/rowwwapp_competition_race_page.js" th:src="@{/js/rowwwapp_competition_race_page.js}"></script>
     </head>
     <body>
@@ -61,26 +62,27 @@
          <br/>
 
             <button id="buttonRaceInfosToggle">Course >>></button><br/>
-            <br/>
+            <section id="raceForm">
             <!--/*@thymesVar id="raceForm2" type="be.intecbrussel.models.competition.Race"*/-->
             <form action="#" method="post" th:action="@{/rowwwapp/competition/race}" th:object="${raceForm2}">
-            <section id="raceForm">
-
+                <section id="repeater">
+                    <!-- Repeater Heading -->
+                    <section class="repeater-heading">
+                        <button class="btn btn-primary repeater-add-btn">Afficher le formulaire (en cours de développement) </button>
+                        <p>*une ou plusieurs fois selon le nombre d'équipes à constituer</p>
+                    </section>
+                    <!-- Repeated Items -->
+                    <section class="items" data-group="test">
                 <label for="raceNumber">Numéro d'identification:</label><br/>
                 <input type="text" id="raceNumber" pattern="[0-9]+[0-9]+[0-9]" title="par exemple: 120 pour 120ième course" th:field="*{number}" required/><br/>
-
                     <label for="raceName">Nom officiel:</label><br/>
                 <input type="text" id="raceName" size=100 title="par exemple: challenge annuel des seniors" th:field="*{name}"  required/><br/>
-
                     <label for="raceStartingTime">Heure de départ:</label><br/>
                 <input type="text" id="raceStartingTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{startingTime}"  required/><br/>
-
                     <label for="raceDistance">Distance (mètres):</label><br/>
                 <input type="text" id="raceDistance" th:field="*{distance}" required/><br/>
-
                     <label for="raceMaxTime">Temps maximum:</label><br/>
                 <input type="text" id="raceMaxTime" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" th:field="*{maxTime}"  required/><br/>
-
                     <label>Caractère:</label>
                 <label class="container" >International
                     <input type="radio" name="radio" th:field="*{raceImpact}" value="INTERNATIONAL" >
@@ -90,7 +92,6 @@
                     <input type="radio" name="radio" checked="checked"  th:field="*{raceImpact}" value="NATIONAL" >
                     <span class="checkmark" id="national"></span>
                 </label>
-
                     <label>Expérience:</label>
                 <label class="container">Débutants
                     <input type="radio" name="radio" value="BEGINNER" th:field="*{raceExperience}" >
@@ -104,7 +105,6 @@
                     <input type="radio" name="radio" checked="checked" value="NON-BEGINNER" th:field="*{raceExperience}" >
                     <span class="checkmark"></span>
                 </label>
-
                     <label for="raceType">Type de course:</label><br/>
                 <select id="raceType" th:field="*{racetype}" >1 à sélectionner
                     <option value="UNKNOWN" selected>UNKNOWN</option>
@@ -121,12 +121,9 @@
                   <option value="REGATTA" >REGATTA</option>
                   <option value="TREK" >TREK</option>
                   <option value="CHALLENGE" >CHALLENGE</option>
-
                 </select><br/>
-
                     <label for="raceCustom">Type de course en quelques mots (si course non-répertoriée):</label><br/>
                 <input type="text" id="raceCustom" size=100 value="Kermesse de la journée Ports Ouvertes" th:field="*{customedRace}"  /><br/>
-
                     <label for="boatType">Type d'embarcation admise:</label><br/>
                   <select id="boatType" th:field="*{admissRowingBoat}" required>1 à sélectionner
                     <option value="ALL" selected>ALL</option>
@@ -150,7 +147,6 @@
                     <option value="Trek_2x" >Trek_2x</option>
                     <option value="Trek_4x" >Trek_4x</option>
                   </select><br/>
-
                     <label for="ageCategory">Catégorie admise:</label>
                   <select id="ageCategory"  th:field="*{admissCategory}"  >1 à sélectionner
                     <option value="ALL_OPEN" selected>ALL_OPEN</option>
@@ -180,18 +176,17 @@
                     <option value="L" >L</option>
                     <option value="M" >M</option>
                 </select><br/>
-
                     <label for="raceDescription">Description complémentaire(handicaps, règles particulières...):</label><br/>
                 <input type="text" id="raceDescription" size=200 th:field="*{description}"  required/>
                 <br/>
+                    </section>
+                    <!-- End of Repeated Items -->
+                </section>
+                <!-- End of Repeater -->
+            <!-- End of Team Form -->
+                <input type="submit" value="Enregistrer et continuer"/>
+            </form>
             </section>
-                <div class="input-group">
-                    <input type="submit" value="Enregistrer et continuer"/>
-                </div><br/>
-                </form>
-
-            
-
         </article>     
 <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
 </body> 

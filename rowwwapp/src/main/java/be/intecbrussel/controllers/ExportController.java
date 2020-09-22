@@ -17,6 +17,7 @@ public class ExportController {
     private final CompensationService compensationService;
     private final RaceService raceService;
 
+
     @Autowired
     public ExportController(RowerService rowerServiceService, ScheduledRaceService scheduledRaceService, TeamService teamService, CompetitionService competitionService, CompensationService compensationService, RaceService raceService) {
         this.rowerService = rowerServiceService;
@@ -25,12 +26,13 @@ public class ExportController {
         this.competitionService = competitionService;
         this.compensationService = compensationService;
         this.raceService = raceService;
+
     }
 
     /**
      * Handle request to download an Excel document in the part "Competition"
      */
-    @GetMapping("/rowwwapp/competition/results/document")
+    @GetMapping("/rowwwapp/competition/results/rowwwapp_competition_data.xls")
     public ExcelViewCompetition downloadCompetitionDatas(Model model) {
         model.addAttribute("competitions", competitionService.getAllCompetitionDay());
         model.addAttribute("races", raceService.getAllRace());
@@ -40,7 +42,7 @@ public class ExportController {
     /**
      * Handle request to download an Excel document in the part "Registration"
      */
-    @GetMapping("/rowwwapp/registration/results/document")
+    @GetMapping("/rowwwapp/registration/results/rowwwapp_registration_data.xls")
     public ExcelViewRegistration downloadRegistrationDatas(Model model) {
         model.addAttribute("rowers", rowerService.getAllRowers());
         model.addAttribute("teams", teamService.getAllTeams());

@@ -28,17 +28,16 @@ public class Rower {
     @NotNull(message = "La date de naissance est requise")
     private Date birthDate;
     @NotNull(message = "Le club est requis")
-    @Size(min=2, max=30)
     private String club;
     private String licenceNumber;
     private Disability disability;
     private RaceExperience raceExperience;
     private Category category;
 
-    private float categoryCoef;
-    private float genderCoef;
+    private String categoryCoef;
+    private String genderCoef;
     private int age;
-    private float rowerHandicap;
+    private String rowerHandicap;
     @ManyToOne(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -47,17 +46,6 @@ public class Rower {
     //Constructor///////////////////
 
     public Rower() {
-        this.firstName = "Leen";
-        this.lastName = "VaartWel";
-        this.gender = Gender.FEMALE;
-        this.nationality = "Belge";
-        this.birthDate = Date.valueOf(LocalDate.of(1970,3,24));
-        this.club = "Royal 1865";
-        this.licenceNumber = "14.125.78";
-        this.disability = Disability.Option_0;
-        this.raceExperience = RaceExperience.NON_BEGINNER;
-        this.categoryCoef = 0;
-        this.genderCoef = 0.2f;
 
     }
 
@@ -118,20 +106,32 @@ public class Rower {
         this.raceExperience = raceExperience;
     }
 
-    public float getCategoryCoef() {
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getCategoryCoef() {
         return categoryCoef;
     }
 
-    public void setCategoryCoef(float categoryCoef) {
+    public void setCategoryCoef(String categoryCoef) {
         this.categoryCoef = categoryCoef;
     }
 
-    public float getGenderCoef() {
+    public String getGenderCoef() {
         return genderCoef;
     }
 
-    public void setGenderCoef(float genderCoef) {
+    public void setGenderCoef(String genderCoef) {
         this.genderCoef = genderCoef;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setRowerHandicap(String rowerHandicap) {
+        this.rowerHandicap = rowerHandicap;
     }
 
     public int getAge() {
@@ -178,12 +178,13 @@ public class Rower {
         this.licenceNumber = licenceNumber;
     }
 
-    public float getRowerHandicap() {
+    public String getRowerHandicap() {
         return rowerHandicap;
     }
 
     public void setRowerHandicap() {
-        this.rowerHandicap = rowerHandicap(this.categoryCoef,this.genderCoef);
+        this.rowerHandicap = String.valueOf(rowerHandicap(this.categoryCoef,
+                this.genderCoef));
     }
 
     public Team getTeam() {
@@ -200,8 +201,10 @@ public class Rower {
         int birthYear = birthDate.toLocalDate().getYear();
         return actualYear-birthYear;
     }
-    public float rowerHandicap( float categoryCoef, float genderCoef){
-        return this.categoryCoef*this.genderCoef;
+    public double rowerHandicap(String categoryCoef, String genderCoef){
+        Double categoryCoefNumber = Double.valueOf(categoryCoef);
+        Double genderCoefNumber = Double.valueOf(genderCoef);
+        return categoryCoefNumber*genderCoefNumber;
     }
 
     //Override methods////////////////////////////

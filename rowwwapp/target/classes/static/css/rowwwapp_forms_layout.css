@@ -55,6 +55,7 @@ div{
 }
 table {
     border-collapse: collapse;
+
     box-sizing: border-box;
 }
 th {
@@ -96,7 +97,6 @@ img:hover {
 }
 a{
     position: relative;
-    margin-left: 160px;
     box-sizing: border-box;
     border:1px solid black;
     text-align: center ;

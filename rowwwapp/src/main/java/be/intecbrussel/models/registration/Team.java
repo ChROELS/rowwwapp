@@ -1,16 +1,21 @@
 package be.intecbrussel.models.registration;
 
 
-import be.intecbrussel.models.competition.Race;
+
+import be.intecbrussel.models.enums.Category;
+import be.intecbrussel.models.enums.Disability;
 import be.intecbrussel.models.enums.RowingBoat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
+@NamedQuery(name="Team.findByName",query="SELECT t FROM Team t WHERE t.name = ?1")
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,15 +36,10 @@ public class Team {
     private Rower cox;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Rower stroke;
-    private float teamHandicap;
+    private String teamHandicap;
 
     //Constructor///////////////////
     public Team() {
-        name="Three men in a boat";
-        type=RowingBoat.TRIPLE_SCULL_3X;
-        sizeOfCrew=3;
-        teamHandicap=0.3f;
-        crew=new ArrayList<>();
     }
     //Getters and setters//////////
 
@@ -87,16 +87,27 @@ public class Team {
         return cox;
     }
 
-    public void setCox(Rower cox) {
-        this.cox = cox;
+    //This method should be adapted when I will be able to propose to the client to save more than one Rower in the crew
+    public void setCox(String licenseNumber) {
+        Rower rowerToFind = new Rower();
+        rowerToFind.setAge(25);
+        rowerToFind.setBirthDate(Date.valueOf(LocalDate.of(1995,3,24)));
+        rowerToFind.setLicenceNumber(licenseNumber);
+        rowerToFind.setCategory(Category.Master_A);
+        rowerToFind.setClub("Les royals");
+        rowerToFind.setDisability(Disability.Option_0);
+        //...
+        this.cox = rowerToFind;
     }
 
     public Rower getStroke() {
         return stroke;
     }
 
-    public void setStroke(Rower stroke) {
-        this.stroke = stroke;
+    public void setStroke(String licenseNumber) {
+        Rower rowerToFind = new Rower();
+        rowerToFind.setLicenceNumber(licenseNumber);
+        this.cox = rowerToFind;
     }
 
     public RowingBoat getType() {
@@ -107,24 +118,24 @@ public class Team {
         this.type = type;
     }
 
-    public float getTeamHandicap() {
+    public String getTeamHandicap() {
         return teamHandicap;
     }
 
-    public void setTeamHandicap(float teamHandicap) {
-        this.teamHandicap = calculateTeamHandicap(this.crew);
+    public void setTeamHandicap() {
+        this.teamHandicap = String.valueOf(calculateTeamHandicap(this.crew));
     }
     //specific methods///////////////////////////////
-    public float calculateTeamHandicap(List<Rower> crew){
-        float eachRowerHandicap = 0.0f;
-        List<Float> sumOfRowerHandicap = new ArrayList<>();
-        float totalOfRowerHandicap = 0.0f;
+    public double calculateTeamHandicap(List<Rower> crew){
+        double eachRowerHandicap;
+        List<Double> sumOfRowerHandicap = new ArrayList<>();
+        double totalOfRowerHandicap = 0;
         for (Rower r: crew
         ) {
-            eachRowerHandicap = r.getRowerHandicap();
+            eachRowerHandicap = Double.parseDouble(r.getRowerHandicap());
             sumOfRowerHandicap.add(eachRowerHandicap);
         }
-        Optional<Float> totalOfCrewHandicap = sumOfRowerHandicap.stream().reduce(Float::sum);
+        Optional<Double> totalOfCrewHandicap = sumOfRowerHandicap.stream().reduce(Double::sum);
         if(totalOfCrewHandicap.isPresent()){
             totalOfRowerHandicap = totalOfCrewHandicap.get();
         }
@@ -132,9 +143,9 @@ public class Team {
     }
    public String getListCrewMembers(List<Rower> rowers){
         Map<Integer,String> crewNames = new TreeMap<>();
-        String firstName= "";
-        String lastName="";
-        String name="";
+        String firstName;
+        String lastName;
+        String name;
         int i=0;
        for (Rower r: crew
             ) {

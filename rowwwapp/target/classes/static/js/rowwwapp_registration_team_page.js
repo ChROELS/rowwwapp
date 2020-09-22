@@ -13,4 +13,9 @@ function loadPageResults(){
 function loadPageTeam(){
     window.location.assign("http://localhost:8080/rowwwapp/competition/team");
 }
+$(document).ready(function(){
+$(function(){
+    $("#repeater").createRepeater();
+});
+});
   

@@ -8,22 +8,28 @@ import be.intecbrussel.models.registration.Rower;
 import be.intecbrussel.models.registration.ScheduledRace;
 import be.intecbrussel.models.registration.Team;
 import be.intecbrussel.service.*;
+import be.intecbrussel.views.ExcelViewCompetition;
 import be.intecbrussel.views.ExcelViewRegistration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.*;
 
+
+/**Get methods are also mapped to a specific url. In their implementations, comes a showForm method with for argument(s)
+ * a model so that the template can associate each fields of the forms to the models attributes. It return the name
+ * of a template of the page.
+ * PostMapping methods have a similar structure except that with @Validated and BindingResult (note that the order of parameters is important), the business logic will
+ * check if entries correspond to what is expected for each models and send the user to a page accordingly +
+ * One of the cool things about Spring MVC is that it will take your form parameters and automatically bind them to a Product object.
+ * The object is automatically created and passed into your controller method.
+ * The Spring Framework saves you from the mundane work of parsing out HTTP request parameters.*/
 
 @Controller
 @RequestMapping("/")
@@ -45,18 +51,6 @@ private final TeamService teamService;
         this.scheduledRaceService = scheduledRaceService;
         this.teamService = teamService;
     }
-
-
-    /**Get methods are also mapped to a specific url. In their implementations, comes a showForm method with for argument(s)
-    *a model so that the template can associate each fields of the forms to the models attributes. It return the name
-    *of a template of the page*/
-
-    /**PostMapping methods have a similar structure except that with @Validated and BindingResult (note that the order of parameters is important), the business logic will
-     *check if entries correspond to what is expected for each models and send the user to a page accordingly +
-     * One of the cool things about Spring MVC is that it will take your form parameters and automatically bind them to a Product object.
-     * The object is automatically created and passed into your controller method.
-     * The Spring Framework saves you from the mundane work of parsing out HTTP request parameters.*/
-
 
     ////////////////////////////Deel Competition//////////////////////////////////////////////////
     @GetMapping("/rowwwapp/competition")
@@ -116,8 +110,6 @@ private final TeamService teamService;
         attributes.put("compensations",compensationService.getAllCompensations());
         model.addAllAttributes(attributes);
         return "rowwwapp_competition_page_exports"; }
-
-
     ////////////////////////////Deel Registration//////////////////////////////////////////////////
     @GetMapping("/rowwwapp/registration/scheduledRace")
     public String showScheduledRace(Model model){
@@ -132,7 +124,7 @@ private final TeamService teamService;
         }else {
             scheduledRaceService.createScheduledRace(scheduledRaceForm);
         }
-        return "redirect:/rowwwapp/registration/scheduledRace";
+        return "redirect:/rowwwapp/registration/rower";
 
     }
     //****************************************************************//
@@ -150,14 +142,9 @@ private final TeamService teamService;
         }else {
             rowerService.createRower(rowerForm);
         }
-        return "redirect:/rowwwapp/registration/rower";
+        return "redirect:/rowwwapp/registration/team";
     }
-    //****************************************************************//
-    @GetMapping("/rowwwapp/registration/rower/results")
-    public String showRowerResults(Model model){
-        model.addAttribute("rowers",rowerService.getAllRowers());
-        return "rowwwapp_registration_rower_results";
-    }
+
     //****************************************************************//
     @GetMapping("/rowwwapp/registration/team")
     public String showTeam(Model model){
@@ -174,7 +161,7 @@ private final TeamService teamService;
         }else {
             teamService.createTeam(teamForm);
         }
-        return "redirect:/rowwwapp/registration/team";
+        return "redirect:/rowwwapp/registration/results";
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/registration/results")
@@ -183,5 +170,13 @@ private final TeamService teamService;
         model.addAttribute("rowers",rowerService.getAllRowers());
         model.addAttribute("teams",teamService.getAllTeams());
         return "rowwwapp_registration_page_exports";}
+    @PostMapping("/rowwwapp/registration/results")
+    public String deleteTeam(String name, Model model){
+        model.addAttribute("scheduledRaces", scheduledRaceService.getAllScheduledRaces());
+        model.addAttribute("rowers",rowerService.getAllRowers());
+        model.addAttribute("teams",teamService.getAllTeams());
+        teamService.deleteTeam(name);
+        return "rowwwapp_registration_page_exports";
+    }
 
 }

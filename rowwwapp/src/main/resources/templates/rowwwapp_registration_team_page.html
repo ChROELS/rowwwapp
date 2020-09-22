@@ -7,12 +7,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/repeater.js" th:src="@{/js/repeater.js}"></script>
-    <!-- repeater plugin provided by vijaybajrot  -->
     <script src="../static/js/rowwwapp_registration_team_page.js" th:src="@{/js/rowwwapp_registration_team_page.js}"></script>
     </head>
     <body>
-    <header>Participer: étape 4</header>
+    <header>Participer: étape 3</header>
     <article>
         <!-- part Infos Scheduled Races -->
         <h1>Vos données</h1><br/>
@@ -83,50 +81,53 @@
         </div><br/>
         <button id="buttonTeamToggle">Equipe >>></button><br/>
     <section id="teamForm">
+        <!--/*@thymesVar id="teamForm" type="be.intecbrussel.models.registration.Team"*/-->
+        <form action="#" id="teamForm2"  method="post" th:action="@{/rowwwapp/registration/team}" th:object="${teamForm}">
         <section id="repeater">
             <!-- Repeater Heading -->
             <section class="repeater-heading">
-                <button class="btn btn-primary repeater-add-btn">Afficher le formulaire </button>
+                <button class="btn btn-primary repeater-add-btn">Afficher le formulaire (en cours de développement) </button>
                 <p>*une ou plusieurs fois selon le nombre d'équipes à constituer</p>
             </section>
             <!-- Repeated Items -->
             <section class="items" data-group="test">
-            <!--/*@thymesVar id="teamForm" type="be.intecbrussel.models.registration.Team"*/-->
-        <form action="#" id="teamForm2"  method="post" th:action="@{/rowwwapp/registration/team}" th:object="${teamForm}">
           <label for="teamName">Nom d'identification de l'équipe:</label><br/>
-            <input type="text" id="teamName" size="50" value="Les Royals" th:field="*{name}" required/><br/>
-          <label for="boatType">Type d'embarcation:</label><br/>
-          <select id="boatType" th:field="*{type}"  required>1 à sélectionner:
-            <option value="2-" selected>2-</option>
-            <option value="4-">4-</option>
-            <option value="2+">2+</option>
-            <option value="4+">4+</option>
-            <option value="8+">8+</option>
-            <option value="1x">1x</option>
-            <option value="2x">2x</option>
-            <option value="3x">3x</option>
-            <option value="4x">4x</option>
-            <option value="8x">8x</option>
-            <option value="4-">4-</option>
-            <option value="dinghy">dinghy</option>
-            <option value="tender">tender</option>
-            <option value="yole">yole</option>
-            <option value="canöe">canöe_skiff</option>
-            <option value="canadian trek skiff">canadian_trek_skiff</option>
-            <option value="trek_1x">trek_1x</option>
-            <option value="trek_2x">trek_2x</option>
-            <option value="trek_4x">trek_4x</option>  
-          </select><br/>
-            <label for="cox">Barreur(euse):</label><br/>
-            <input type="text" id="cox" size="50" value="nom" th:field="*{cox}" required/><br/>
-            <label for="nage">Nage:</label><br/>
-            <input type="text" id="nage" size="50" value="nom" th:field="*{stroke}" required/><br/>
-            <input type="submit"/>
-        </form>
+            <input type="text" id="teamName" size="50" th:field="*{name}" required/><br/>
+                <label for="boatType">Type d'embarcation admise:</label><br/>
+                <select id="boatType" th:field="*{type}" required>1 à sélectionner
+                    <option value="ALL" selected>ALL</option>
+                    <option value="SWEEP_COXLESS_PAIR_2_MINUS" >SWEEP_COXLESS_PAIR_2_MINUS</option>
+                    <option value="SWEEP_COXLESS_PAIR_4_MINUS" >SWEEP_COXLESS_PAIR_4_MINUS</option>
+                    <option value="SWEEP_COXLESS_PAIR_2_PLUS" >SWEEP_COXLESS_PAIR_2_PLUS</option>
+                    <option value="SWEEP_COXLESS_PAIR_4_PLUS" >SWEEP_COXLESS_PAIR_4_PLUS</option>
+                    <option value="SWEEP_EIGHT_8_PLUS" >SWEEP_EIGHT_8_PLUS</option>
+                    <option value="SINGLE_SCULL_1X" >SINGLE_SCULL_1X</option>
+                    <option value="DOUBLE_SCULL_2X" >DOUBLE_SCULL_2X</option>
+                    <option value="TRIPLE_SCULL_3X" >TRIPLE_SCULL_3X</option>
+                    <option value="QUAD_SCULL_4X" >QUAD_SCULL_4X</option>
+                    <option value="OCTUPLE_SCULL_8X" >OCTUPLE_SCULL_8X</option>
+                    <option value="QUEEP_4_MINUS" >QUEEP_4_MINUS</option>
+                    <option value="ROWING_DINGHY" >ROWING_DINGHY</option>
+                    <option value="Tender" >Tender</option>
+                    <option value="Yole" >Yole</option>
+                    <option value="Canöe" >Canöe</option>
+                    <option value="Canadian_trek" >Canadian_trek</option>
+                    <option value="Trek_1x" >Trek_1x</option>
+                    <option value="Trek_2x" >Trek_2x</option>
+                    <option value="Trek_4x" >Trek_4x</option>
+                </select><br/>
+            <label >Barreur(euse):</label><br/>
+            <p>*En cours de développement</p>
+            <label >Nage:</label><br/>
+                <p>*En cours de développement</p>
+
+
             </section>
             <!-- End of Repeated Items -->
         </section>
         <!-- End of Repeater -->
+            <input type="submit" value="Enregistrer et continuer"/>
+        </form>
     </section>
         <!-- End of Team Form -->
 

@@ -60,7 +60,7 @@ public class ExcelViewRegistration extends AbstractXlsView {
                 teamRow.createCell(1).setCellValue(t.getName());
                 teamRow.createCell(2).setCellValue(t.getType().name());
                 teamRow.createCell(3).setCellValue(t.getSizeOfCrew());
-                teamRow.createCell(4).setCellValue(t.getSizeOfCrew());
+                teamRow.createCell(4).setCellValue(t.getRace().getNumber());
                 teamRow.createCell(5).setCellValue(t.getListCrewMembers(t.getCrew()));
                 teamRow.createCell(6).setCellValue(String.format("%s %s", t.getCox().getFirstName(), t.getCox().getLastName()));
                 teamRow.createCell(7).setCellValue(String.format("%s %s", t.getStroke().getFirstName(), t.getStroke().getLastName()));

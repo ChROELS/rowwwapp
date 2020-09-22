@@ -10,7 +10,7 @@
     <script src="../static/js/rowwwapp_registration_page_exports.js" th:src="@{/js/rowwwapp_registration_page_exports.js}"></script>
     </head>
     <body>
-    <header>Inscription aux courses/documents</header>
+    <header>Participer: récapitulatif</header>
     <article>
         <!-- part Infos Scheduled Races -->
         <h1>Course sélectionnée</h1>
@@ -78,23 +78,33 @@
                 </tr>
             </table>
         </div>
-        <!--part Modification-->
-        <br/>
-        <button id="buttonModToggle">Modification d'équipe</button><br/>
-        <section id="modifications">
-            <form id="modification1">
-                <label for="teamName">Nom d'identification de l'équipe:</label><br/>
-                <input type="text" id="teamName" size="50" required/><br/>
-                <label for="clubNumber">Numéro de license du rameur à remplacer:</label><br/>
-                <input type="number" id="clubNumber" pattern="[0-9]{2}.[0-9]{2}.[0-9]{3}" title="01.01.001" required/><br/>
-            </form>
-
-        <form id="modbuttons">
-            <input type="submit" id="ToRegistrationPage" value="Inscrire le nouveau rameur"/><br/>
-            <input type="submit" id="newRower" value="Modifier l'inscription d'un autre rameur"/><br/>
-            <input type="submit" id="modCompleted" value="Enregistrer et exporter"/><br/>
-        </form>
-        </section>
+        <!-- part Infos Teams -->
+        <h1>Equipes</h1><br/>
+        <div>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Barreur (en cours de développement)</th>
+                    <th>Nage (en cours de développement)</th>
+                    <th>Membres de l'équipes</th>
+                    <th>Taille de l'équipe</th>
+                    <th>Type d'embarcation</th>
+                    <th>Handicap</th>
+                    <th>Course</th>
+                </tr>
+                <tr th:each="t: ${teams}">
+                    <td th:if="${t.equals(null)}">Aucune équipe n'est encore inscrite</td>
+                    <td th:text="${t.getId()}"></td>
+                    <td th:text="${t.getName()}"></td>
+                    <td th:text="${t.getCrew() }"></td>
+                    <td th:text="${t.getSizeOfCrew() }"></td>
+                    <td th:text="${t.getType() }"></td>
+                    <td th:text="${t.getTeamHandicap() }"></td>
+                    <td th:text="${t.getRace().getNumber() }"></td>
+                </tr>
+            </table>
+        </div>
         <!--part Forfeit-->
         <br/>
         <button id="buttonForfeitToggle">Forfait</button><br/>
@@ -102,14 +112,19 @@
             <form id="forfait1">
                 <label for="teamForfaitName">Nom d'identification de l'équipe:</label><br/>
                 <input type="text" id="teamForfaitName" size="50" value="" required/><br/>
-                <label for="reasons">Raisons éventuelles:</label><br/>
-                <input type="text" id="reasons" value="" size="200"/><br/>
+                <input type="submit" value="Enregistrer"/>
             </form>
         </section>
         <!--part Exportation-->
-
+        <button id="toCompetition" onclick="loadPageRegistration()">Participer à une autre course</button><br/>
         <br/>
-        <a th:href="'/@{/rowwwapp/registration/results/document}'">Télécharger ces données</a><br/>
+        <a th:href="'/@{/rowwwapp/registration/results/rowwwapp_registration_data.xls}'">Télécharger ces données</a><br/>
+        <br/>
+        <div>
+            <form th:action="@{/rowwwapp/logout}" method="post">
+                <input type="submit" value="Quitter"/>
+            </form>
+        </div><br/>
 
     </article>
     <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>

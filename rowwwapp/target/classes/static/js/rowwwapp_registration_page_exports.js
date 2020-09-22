@@ -16,7 +16,5 @@ $(document).ready(function(){
     $(modbuttons).toggle(1000);
   });
 });
-function loadPageRegistration(){window.location.assign("http://localhost:8080/rowwwapp/registration/team");}
-function loadPageDownload() {
-  window.location.assign("http://localhost:8080/rowwwapp/registration/results/document");
-}
+function loadPageRegistration(){window.location.assign("http://localhost:8080/rowwwapp/registration/scheduledRace");}
+

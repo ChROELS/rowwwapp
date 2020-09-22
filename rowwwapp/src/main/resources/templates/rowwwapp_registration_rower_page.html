@@ -7,8 +7,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/repeater.js" th:src="@{/js/repeater.js}"></script>
-    <!-- repeater plugin provided by vijaybajrot  -->
     <script src="../static/js/rowwwapp_registration_rower_page.js" th:src="@{/js/rowwwapp_registration_rower_page.js}"></script>
     </head>
     <body>
@@ -46,17 +44,17 @@
       <br/>
       <button id="buttonRowerToggle">Participant(e) >>></button><br/>
         <section id="rowerForm">
+            <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
+            <form action="#" id="rower1" method="post" th:action="@{/rowwwapp/registration/rower}"
+                  th:object="${rowerForm}">
         <section id="repeater">
             <!-- Repeater Heading -->
             <section class="repeater-heading">
-                <button class="btn btn-primary repeater-add-btn">Afficher le formulaire </button>
+                <button class="btn btn-primary repeater-add-btn">Afficher le formulaire (en cours de développement) </button>
                 <p>*une ou plusieurs fois selon le nombre de participants</p>
             </section>
             <!-- Repeated Items -->
             <section class="items" data-group="test">
-            <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
-          <form action="#" id="rower1" method="post" th:action="@{/rowwwapp/registration/rower}"
-                th:object="${rowerForm}">
             <label for="firstname">Prénom:</label><br>
               <input type="text" name="Prénom" id="firstname" size=50  th:field="*{firstName}" required/><br/>
               <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur d'encodage du prénom</p>
@@ -65,8 +63,8 @@
               <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Erreur d'encodage du nom</p>
             <label for="gender">Genre:</label><br/>
                 <select id="gender" th:field="*{gender}" required>
-                  <option value="M" selected>M</option>
-                  <option value="F">F</option>
+                  <option value="MALE" selected>MALE</option>
+                  <option value="FEMALE">FEMALE</option>
                 </select><br/>
             <label for="nationality">Nationalité:</label><br>
               <input type="text" name="Nationalité" id="nationality"  th:field="*{nationality}" required/><br/>
@@ -74,35 +72,33 @@
             <label for="birthdate">Date de naissance:</label><br>
               <input type="date" name="Date de naissance" id="birthdate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/1940" th:field="*{birthDate}" required><br/>
             <label for="club">Nom du club/association:</label><br>
-              <input type="text" name="Club" id="club"  th:field="*{birthDate}" required/><br/>
+              <input type="text" name="Club" id="club"  th:field="*{club}" required/><br/>
             <label for="clubNumber">Numéro de license:</label><br/>
-              <input type="number" id="clubNumber" pattern="[0-9]{2}.[0-9]{2}.[0-9]{3}"  title="01.01.001" th:field="*{licenceNumber}" /><br/>
+              <input type="text" id="clubNumber" pattern="[0-9]{2}.[0-9]{2}.[0-9]{3}"  title="01.01.001" th:field="*{licenceNumber}" /><br/>
               <p th:if="${#fields.hasErrors('licenceNumber')}" th:errors="*{licenceNumber}">Erreur d'encodage du numéro de licence</p>
             <label for="disabilityType">Type d'handicap:</label><br/>
               <select id="disabilityType" th:field="*{disability}" >1 à sélectionner:
-                  <option value="no disability" selected> </option>
-                  <option value="rowers with minimal or no trunk function who primarily propel the boat through arm and shoulder function. These rowers have poor sitting balance, which requires them to be strapped to the boat/seat"></option>
-                  <option value="rowers that have functional use of arms and trunk but have weakness/absence of leg function to slide the seat"></option>
-                  <option value="rowers with residual function in the legs which allows them to slide the seat. This class also includes athletes with vision impairment"></option>
+                  <option value="Option_0" selected>Sans handicap</option>
+                  <option value="Option_1">Stabilité réduite (nécessité d'être attaché)</option>
+                  <option value="Option_2">Mobilité motrice réduite (aide au glissement)</option>
+                  <option value="Option_3">Mobilité motrice limitée mais suffisante et/ou vue réduite</option>
               </select><br/>
               <br/>
             <label>Expérience:</label> 
             <label class="container">Débutant<br/>
-              <input type="radio" checked="checked" name="radio" value="Débutant" th:field="*{raceExperience}" >
+              <input type="radio" checked="checked" name="radio" value="BEGINNER" th:field="*{raceExperience}" >
                 <span class="checkmark"></span>
               </label>
             <label class="container">Non-débutant
-                <input type="radio" name="radio" value="Non-débutant" th:field="*{raceExperience}">
+                <input type="radio" name="radio" value="NON_BEGINNER" th:field="*{raceExperience}">
                 <span class="checkmark"></span>
             </label><br/>
-              <div class="input-group">
-                  <input type="submit" value="Enregistrer et continuer"/>
-              </div>
-          </form>
         <!-- End of Repeated Items -->
         </section>
         <!-- End of Repeater -->
   </section>
+                <input type="submit" value="Enregistrer et continuer"/>
+            </form>
         </section>
     </article>
     <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>

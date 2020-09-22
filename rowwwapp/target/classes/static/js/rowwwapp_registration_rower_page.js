@@ -13,5 +13,9 @@ function loadPageRower(){
 function loadPageResults(){
     window.location.assign("http://localhost:8080/rowwwapp/registration/rower/results");
 }
-
+$(document).ready(function(){
+    $(function(){
+        $("#repeater").createRepeater();
+    });
+});
   

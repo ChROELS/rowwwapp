@@ -3,17 +3,24 @@ package be.intecbrussel.service;
 import be.intecbrussel.models.registration.Team;
 import be.intecbrussel.repositories.CRUDOperationsTeam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TeamService {
+    @PersistenceContext
+    private EntityManager em;
     private final CRUDOperationsTeam teamRepository;
 
     @Autowired
     public TeamService(CRUDOperationsTeam teamRepository) {
+
         this.teamRepository = teamRepository;
     }
 
@@ -39,6 +46,13 @@ public class TeamService {
         }else{
             return false;
         }
+    }
+    public boolean deleteTeam(String name){
+        Query q = em.createNamedQuery("Team.findByName");
+        q.setParameter(1, name);
+        Team teamByName = (Team) q.getSingleResult();
+        teamRepository.delete(teamByName);
+        return teamRepository.findById(teamByName.getId()).isPresent();
     }
     public List<Team> getAllTeams(){
         return (List<Team>) (teamRepository.findAll());
