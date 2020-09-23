@@ -1,7 +1,7 @@
 package be.intecbrussel.controllers;
 
+import be.intecbrussel.ViewResolvers.ExcelViewResolverCompetition;
 import be.intecbrussel.service.*;
-import be.intecbrussel.views.ExcelViewCompetition;
 import be.intecbrussel.views.ExcelViewRegistration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,18 +26,17 @@ public class ExportController {
         this.competitionService = competitionService;
         this.compensationService = compensationService;
         this.raceService = raceService;
-
     }
 
     /**
      * Handle request to download an Excel document in the part "Competition"
      */
     @GetMapping("/rowwwapp/competition/results/rowwwapp_competition_data.xls")
-    public ExcelViewCompetition downloadCompetitionDatas(Model model) {
+    public ExcelViewResolverCompetition downloadCompetitionDatas(Model model) {
         model.addAttribute("competitions", competitionService.getAllCompetitionDay());
         model.addAttribute("races", raceService.getAllRace());
         model.addAttribute("compensations", compensationService.getAllCompensations());
-        return new ExcelViewCompetition();
+        return new ExcelViewResolverCompetition();
     }
     /**
      * Handle request to download an Excel document in the part "Registration"
