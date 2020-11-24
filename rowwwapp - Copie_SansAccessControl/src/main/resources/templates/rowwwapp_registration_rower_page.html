@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"  lang="fr">
+<head>
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+        <title>registration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/rowwwapp_registration_rower_page.js" th:src="@{/js/rowwwapp_registration_rower_page.js}"></script>
+    <script src="../static/js/repeater.js" th:src="@{/js/repeater.js}"></script>
+</head>
+    <body>
+
+    <!--Navigation bar-->
+    <ul>
+        <li><a th:href="@{/rowwwapp/bienvenue}">Accueil</a></li>
+        <li><header>Participer: étape 2</header></li>
+        <li style="float:right"><a th:href="@{/rowwwapp/logout}">Log Out</a></li>
+        <li style="float:right" sec:authorize="isAuthenticated()">Logged In</li>
+    </ul>
+    <!--One row-->
+    <div class="row">
+        <!--Three columns-->
+        <div class="column side">
+        </div>
+
+        <div class="column middle">
+    <article>
+      <!-- part form -->             
+      <br/>
+      <button id="buttonRowerToggle">Participant(e) >>></button><br/>
+        <section id="rowerForm">
+            <!--/*@thymesVar id="rowerForm" type="be.intecbrussel.models.registration.Rower"*/-->
+            <form action="#" id="rower1" method="post" th:action="@{/rowwwapp/registration/rower}" th:object="${rowerForm}">
+
+                <h4>Détails par personne (champs requis*)</h4>
+                <label for="race">Numéro de la course à rejoindre*:</label><br/>
+                <input type="number" id="race" th:field="*{raceNumber}" required/><br/>
+                <label for="firstname">Prénom*:</label><br>
+                    <input type="text" name="Prénom" id="firstname" size=50 title="maximum 50 caractères" th:field="*{firstName}" required/><br/>
+                <label for="lastname">Nom*:</label><br>
+                    <input type="text" name="Nom" id="lastname" size=50 title="maximum 50 caractères" th:field="*{lastName}"  required/><br/>
+                <label for="gender">Genre*:</label><br/>
+                    <select id="gender" th:field="*{gender}" required>
+                    <option value="MALE" selected>MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    </select><br/>
+                <label for="nationality">Nationalité:</label><br>
+                    <input type="text" name="Nationalité" id="nationality" title="par ex.: Belge" th:field="*{nationality}"/><br/>
+                <label for="birthdate">Date de naissance*:</label><br>
+                    <input type="date" name="Date de naissance" id="birthdate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/1940" th:field="*{birthDate}" required><br/>
+
+                <label for="club">Nom du club/association:</label><br>
+                    <input type="text" name="Club" id="club" title="par ex.: Royal 1865" th:field="*{club}" /><br/>
+                <label for="clubNumber">Numéro de license:</label><br/>
+                    <input type="text" id="clubNumber" pattern="[0-9]{2}.[0-9]{2}.[0-9]{3}" value="01.01.001" th:field="*{licenceNumber}"/><br/>
+                <label for="disabilityType">Type d'handicap*:</label><br/>
+                    <select id="disabilityType" th:field="*{disability}" required>1 à sélectionner:
+                        <option value="Option_0" selected>Sans handicap</option>
+                        <option value="Option_1">Stabilité réduite (nécessité d'être attaché)</option>
+                        <option value="Option_2">Mobilité motrice réduite (aide au glissement)</option>
+                        <option value="Option_3">Mobilité motrice limitée mais suffisante et/ou vue réduite</option>
+                    </select><br/>
+              <br/>
+                <label>Expérience:</label>
+                    <label class="container">Débutant<br/>
+                        <input type="radio" checked="checked" name="radio" value="BEGINNER" th:field="*{raceExperience}" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Non-débutant
+                        <input type="radio" name="radio" value="NON_BEGINNER" th:field="*{raceExperience}">
+                        <span class="checkmark"></span>
+                    </label><br/>
+                    <label>Position:</label>
+                        <label class="container">Rameur(euse)<br/>
+                            <input type="radio" checked="checked" name="radio" value="ROWER" th:field="*{position}" >
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Barreur(euse)<br/>
+                            <input type="radio" checked="checked" name="radio" value="COX" th:field="*{position}" >
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Nage
+                            <input type="radio" name="radio" value="STROKE" th:field="*{position}">
+                            <span class="checkmark"></span>
+                        </label><br/>
+                <label>Enregistrer un(e) autre rameur(euse) en plus de celui(celle)-ci ?</label><br/>
+                <label class="container">Oui
+                    <input type="radio" name="radio" value="oui" th:field="*{isLastRower}" >
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Non
+                    <input type="radio" name="radio" value="non" th:field="*{isLastRower}" >
+                    <span class="checkmark"></span>
+                </label>
+                    <input type="submit" value="Enregistrer et continuer"/>
+            </form>
+
+  </section>
+    </article>
+        </div>
+        <div class="column side">
+        </div>
+        <!--End of One row-->
+    </div>
+    <div class="row">
+        <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
+    </div>
+    </body> 
+</html>

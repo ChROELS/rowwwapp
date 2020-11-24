@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"  lang="fr">
+<head>
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+        <title>save and continue</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/rowwwapp_registration_page_exports.js" th:src="@{/js/rowwwapp_registration_page_exports.js}"></script>
+    </head>
+    <body>
+
+    <!--Navigation bar-->
+    <ul>
+        <li><a th:href="@{/rowwwapp/bienvenue}">Accueil</a></li>
+        <li><header>Participer: récapitulatif</header></li>
+        <li style="float:right"><a th:href="@{/rowwwapp/logout}">Log Out</a></li>
+        <li style="float:right" sec:authorize="isAuthenticated()">Logged In</li>
+    </ul>
+    <!--One row-->
+    <div class="row">
+        <!--Three columns-->
+        <div class="column side">
+        </div>
+
+        <div class="column middle">
+    <article>
+        <!-- part Infos Scheduled Races -->
+        <h2>Course sélectionnée</h2>
+        <div>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Lieu</th>
+                    <th>Date</th>
+                    <th>Numéro officiel</th>
+                    <th>Type de course</th>
+                    <th>Type de course si non répertiorée ci-dessus</th>
+                    <th>Coefficient d'handicap par catégories (si applicable)</th>
+                    <th>Coefficient d'handicap par genre (si applicable)</th>
+                </tr>
+                <tr th:each="scheduledRace: ${scheduledRaceForm}">
+                    <td th:if="${scheduledRace.equals(null)}">Aucune course n'est encore sélectionée</td>
+                    <td th:text="${scheduledRace.getId()}"></td>
+                    <td th:text="${scheduledRace.location}"></td>
+                    <td th:text="${scheduledRace.date}"></td>
+                    <td th:text="${scheduledRace.number }"></td>
+                    <td th:text="${scheduledRace.raceType }"></td>
+                    <td th:text="${scheduledRace.customedRace }"></td>
+                    <td th:text="${scheduledRace.coefficientCategory }"></td>
+                    <td th:text="${scheduledRace.coefficientGender }"></td>
+                </tr>
+            </table>
+        </div>
+        <!-- part Infos Teams -->
+        <h1>Equipes</h1><br/>
+        <div>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Taille de l'équipe</th>
+                    <th>Type d'embarcation</th>
+                    <th>Membres de l'équipes</th>
+                    <th>Barreur</th>
+                    <th>Nage</th>
+                    <th>Handicap</th>
+                </tr>
+                <tr th:each="t: ${teams}">
+                    <td th:if="${t.equals(null)}">Aucune équipe n'est encore inscrite</td>
+                    <td th:text="${t.getId()}"></td>
+                    <td th:text="${t.getName()}"></td>
+                    <td th:text="${t.getSizeOfCrew() }"></td>
+                    <td th:text="${t.getType() }"></td>
+                    <span th:if="${!t.getCrew().isEmpty()}">
+                        <td th:text="${t.getCrew() }"></td>
+                        <td th:text="${t.getCox() }"></td>
+                        <td th:text="${t.getStroke() }"></td>
+                        <td th:text="${t.getTeamHandicap() }"></td>
+                    </span>
+                </tr>
+            </table>
+        </div>
+        <!-- part Infos Rowers -->
+        <h1>Participants inscrits</h1><br/>
+        <div>
+            <table>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Age</th>
+                    <th>Catégorie</th>
+                    <th>Coefficient d'handicap pour la catégorie (si applicable)</th>
+                    <th>Genre</th>
+                    <th>Coefficient d'handicap pour le genre (si applicable)</th>
+                    <th>Club</th>
+                    <th>Numéro de licence</th>
+                    <th>Nationalité</th>
+                    <th>Expérience</th>
+                    <th>Handicap (si applicable)</th>
+                    <th>Equipe</th>
+                </tr>
+                <tr th:each="rower:${rowers}">
+                    <td th:if="${rower.equals(null)}">Aucun participant n'est encore inscrit</td>
+                    <td th:text="${rower.getId()}"></td>
+                    <td th:text="${rower.getFirstName()}"></td>
+                    <td th:text="${rower.getLastName()}"></td>
+                    <td th:text="${rower.getBirthDate() }"></td>
+                    <td th:text="${rower.getAge() }"></td>
+                    <td th:text="${rower.getCategory() }"></td>
+                    <td th:text="${rower.getCategoryCoef() }"></td>
+                    <td th:text="${rower.getGender() }"></td>
+                    <td th:text="${rower.getGenderCoef() }"></td>
+                    <td th:text="${rower.getClub() }"></td>
+                    <td th:text="${rower.getLicenceNumber() }"></td>
+                    <td th:text="${rower.getNationality() }"></td>
+                    <td th:text="${rower.getRaceExperience() }"></td>
+                    <td th:text="${rower.getRowerHandicap() }"></td>
+                    <td th:text="${rower.getTeamName()}"></td>
+                </tr>
+            </table>
+        </div>
+        <!--part Forfeit-->
+        <br/>
+        <button id="buttonForfeitToggle">Forfait</button><br/>
+        <section id="Forfeit">
+            <form id="forfait1">
+                <label for="teamForfaitName">Nom d'identification de l'équipe:</label><br/>
+                <input type="text" id="teamForfaitName" size="50" value="" required/><br/>
+                <input type="submit" value="Enregistrer"/>
+            </form>
+        </section>
+        <!--part Exportation-->
+        <button id="toCompetition" onclick="loadPageRegistration()">Participer à une autre course</button><br/>
+        <br/>
+        <section>
+        <p>Télécharger ces données (.csv)</p>
+        <a th:href="@{/rowwwapp/registration/results/rowwwapp_rower_data.csv}">Rameur(s)(euses)</a><br/>
+        <br/>
+        <a th:href="@{/rowwwapp/registration/results/rowwwapp_team_data.csv}">Equipe(s)</a><br/>
+        <br/>
+        <a th:href="@{/rowwwapp/registration/results/rowwwapp_scheduledRace_data.csv}">Course(s) prévue(s)</a><br/>
+        </section>
+        <section>
+            <p>Télécharger ces données (.xlsx)</p>
+            <a th:href="@{/rowwwapp/registration/results/rowwwapp_rower_data.xlsx}">Rameur(s)(euses)</a><br/>
+            <br/>
+            <a th:href="@{/rowwwapp/registration/results/rowwwapp_team_data.xlsx}">Equipe(s)</a><br/>
+            <br/>
+            <a th:href="@{/rowwwapp/registration/results/rowwwapp_scheduledRace_data.xlsx}">Course(s) prévue(s)</a><br/>
+        </section>
+    </article>
+        </div>
+        <div class="column side">
+        </div>
+        <!--End of One row-->
+    </div>
+    <div class="row">
+        <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
+    </div>
+  </body> 
+</html>    

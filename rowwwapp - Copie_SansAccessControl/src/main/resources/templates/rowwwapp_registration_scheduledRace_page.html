@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+        <title>registration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/rowwwapp_registration_scheduledRace_page.js" th:src="@{/js/rowwwapp_registration_scheduledRace_page.js}"></script>
+    </head>
+    <body>
+    <!--Navigation bar-->
+    <ul>
+        <li><a th:href="@{/rowwwapp/bienvenue}">Accueil</a></li>
+        <li><header>Participer: étape 1</header></li>
+        <li style="float:right"><a th:href="@{/rowwwapp/logout}">Log Out</a></li>
+        <li style="float:right" sec:authorize="isAuthenticated()">Logged In</li>
+    </ul>
+    <!--One row-->
+    <div class="row">
+        <!--Three columns-->
+        <div class="column side">
+        </div>
+
+        <div class="column middle">
+    <article>
+       <!-- part 1 -->
+<br/>
+<button id="buttonRaceToggle">Course sélectionnée >>></button><br/>
+  <section id="raceForm">
+      <!--/*@thymesVar id="scheduledRaceForm" type="be.intecbrussel.models.registration.ScheduledRace"*/-->
+      <form action="#" id="raceForm2" method="post" th:action="@{/rowwwapp/registration/scheduledRace}"
+            th:object="${scheduledRaceForm}">
+          <h4>champs requis*</h4>
+      <label for="location">Lieu*:</label><br/>
+        <input type="text" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel" value="Bruxelles" th:field="*{location}" required/><br/>
+      <label for=dateOfCompetition>Date*:</label><br/>
+        <input type="date" id="dateOfCompetition" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" th:field="*{date}" required><br/>
+      <label for="raceNumber">Numéro officiel de la course*:</label><br/>
+          <input type="number" id="raceNumber" value="0" th:field="*{number}" required/><br/>
+      <label for="raceType">Type de course:</label><br/>
+          <select id="raceType" th:field="*{raceType}" >1 à sélectionner
+              <option value="UNKNOWN" selected>UNKNOWN</option>
+              <option value="UNCLASSIFIED" >UNCLASSIFIED</option>
+              <option value="INLINE_C1" >INLINE_C1</option>
+              <option value="INLINE_C2" >INLINE_C2</option>
+              <option value="INLINE_C4" >INLINE_C4</option>
+              <option value="JUNIOR_SLALOM" >JUNIOR_SLALOM</option>
+              <option value="JUNIOR_BIATHLON" >JUNIOR_BIATHLON</option>
+              <option value="JUNIOR_DUATHLON" >JUNIOR_DUATHLON</option>
+              <option value="JUNIOR_TRIATHLON" >JUNIOR_TRIATHLON</option>
+              <option value="TETE_DE_RIVIERE" >TETE_DE_RIVIERE</option>
+              <option value="HANDICAP" >HANDICAP</option>
+              <option value="REGATTA" >REGATTA</option>
+              <option value="TREK" >TREK</option>
+              <option value="CHALLENGE" >CHALLENGE</option>
+          </select><br/>
+      <label for="raceCustom">Type de course en quelques mots (si course non-répertoriée):</label><br/>
+          <input type="text" id="raceCustom" size=100 title="Maximum 100 caractères" th:field="*{customedRace}"/><br/>
+      <label for="categoryCoef">Coefficient relatif à la catégorie du rameur pour le calcul d'un handicap (si applicable):</label><br/>
+            <input type="text" id="categoryCoef" pattern="[0-9]{1}.[0-9]{2}" value="0.0" th:field="*{coefficientCategory}"/><br/>
+      <label for="genderCoef">Coefficient relatif au genre du rameur pour le calcul d'un handicap (si applicable):</label><br/>
+            <input type="text" id="genderCoef" pattern="[0-9]{1}.[0-9]{2}" value="0.0" th:field="*{coefficientGender}"/><br/>
+      <label for="amountTeam">Nombre d'équipes à inscrire:</label><br/>
+          <input type="number" id="amountTeam" value="1" th:field="*{amountOfTeams}"/><br/>
+
+
+          <input type="submit" value="Enregistrer et continuer"/>
+      </form>
+
+    </section>
+</article>
+        </div>
+        <div class="column side">
+        </div>
+        <!--End of One row-->
+    </div>
+    <div class="row">
+        <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
+    </div>
+</body> 
+</html>

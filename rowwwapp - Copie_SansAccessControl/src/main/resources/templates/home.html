@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-type" content="text/html:charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--defines the character set for the HTML file-->
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+    <title>rowwapp/home</title>
+</head>
+<body>
+<!--Navigation bar-->
+<ul>
+
+    <li>Bienvenue sur</li>
+    <li></li>
+    <li></li>
+    <li style="float: right">rowwwapp!</li>
+
+</ul>
+<!--One row-->
+<div class="row">
+    <!--Three columns-->
+    <div class="column side">
+    </div>
+    <div class="column middle">
+        <section th:if="${logoutValue}">
+            <p style="color:red">Vous êtes déconnecté(e), à bientôt!</p>
+        </section>
+        <section>
+            <a th:href="@{/rowwwapp}">Se connecter</a>
+        </section>
+    </div>
+    <div class="column side">
+    </div>
+</div>
+<!--Footer-->
+<footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
+</body>
+</html>
