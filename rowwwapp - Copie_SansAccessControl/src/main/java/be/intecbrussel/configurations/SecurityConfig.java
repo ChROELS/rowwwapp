@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public UserDetailsService userDetailsService(){
         //User.withDefaultPasswordEncoder() is considered unsafe for production and is only intended for sample applications
-        UserDetails user = User.withDefaultPasswordEncoder().username("Michel").password("j'aimeramersurlesflots").
+        UserDetails user = User.withDefaultPasswordEncoder().username("username").password("password").
                 roles("USER").build();
         return new InMemoryUserDetailsManager(user);
         //In memory user store with a single user
