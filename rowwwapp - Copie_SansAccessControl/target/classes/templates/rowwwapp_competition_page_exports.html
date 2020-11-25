@@ -47,6 +47,7 @@
                     <th>Règles</th>
                     <th>Contacts</th>
                     <th>Règles complémentaires</th>
+                    <th>Courses</th>
                 </tr>
                 <tr th:each="comp : ${competitions}">
                     <td th:if="${comp.equals(null)}">Aucune compétition n'est encore enregistrée</td>
@@ -67,6 +68,7 @@
                     <td th:text="${comp.getForfeitRules() }"></td>
                     <td th:text="${comp.getForfeitContact() }"></td>
                     <td th:text="${comp.getComplementaryRules() }"></td>
+                    <td th:text="${comp.getRaces() }"></td>
                 </tr>
             </table>
         </div>
@@ -104,6 +106,7 @@
                     <td th:text="${race.getAdmissCategory() }"></td>
                     <td th:text="${race.getAdmissRowingBoat() }"></td>
                     <td th:text="${race.getRaceExperience() }"></td>
+                    <td th:text="${race.getCompetition().getName()}"></td>
                 </tr>
             </table>
         </div><br/>
@@ -145,8 +148,9 @@
                 <tr th:each="comp: ${compensations}">
                     <td th:if="${comp.equals(null)}">Aucune compensation n'est encore enregistrée</td>
                     <td th:text="${comp.getId()}">
-                    <td th:text="${comp.getCompensationFemale()}"></td>
+                    <td th:text="${comp.getCompetition().getName()}"></td>
                     <td th:text="${comp.getCompensationMale()}"></td>
+                    <td th:text="${comp.getCompensationFemale()}"></td>
                     <td th:text="${comp.getPR1()}"></td>
                     <td th:text="${comp.getPR2()}"></td>
                     <td th:text="${comp.getPR3()}"></td>

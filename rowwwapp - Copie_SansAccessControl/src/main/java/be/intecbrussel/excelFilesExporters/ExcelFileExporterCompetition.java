@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExcelFileExporterCompetition {
@@ -63,6 +64,8 @@ public class ExcelFileExporterCompetition {
             header.getCell(14).setCellStyle(style);
             header.createCell(15).setCellValue("Règles complémentaires");
             header.getCell(15).setCellStyle(style);
+            header.createCell(16).setCellValue("Courses au programme");
+            header.getCell(16).setCellStyle(style);
             //Tell what values to place under each header on each rows
             int rowCount = 1;
             if (competitions != null) {
@@ -84,6 +87,9 @@ public class ExcelFileExporterCompetition {
                     cRow.createCell(13).setCellValue(c.getForfeitRules());
                     cRow.createCell(14).setCellValue(c.getForfeitContact());
                     cRow.createCell(15).setCellValue(c.getComplementaryRules());
+                    for (int i = 16; i<(16+(c.getRaces().size()));i++) {
+                        cRow.createCell(i).setCellValue(Arrays.toString(c.getRaces().toArray()));
+                    }
                 }
             }
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -139,6 +145,8 @@ public class ExcelFileExporterCompetition {
             headerRace.getCell(11).setCellStyle(styleRace);
             headerRace.createCell(12).setCellValue("Description");
             headerRace.getCell(12).setCellStyle(styleRace);
+            headerRace.createCell(13).setCellValue("Compétition");
+            headerRace.getCell(13).setCellStyle(styleRace);
 
             int rowCountRace = 1;
             if (races != null) {
@@ -150,13 +158,14 @@ public class ExcelFileExporterCompetition {
                     cRace.createCell(3).setCellValue(r.getName());
                     cRace.createCell(4).setCellValue(r.getDistance());
                     cRace.createCell(5).setCellValue(r.getMaxTime());
-                    cRace.createCell(6).setCellValue(r.getRacetype().name());
+                    cRace.createCell(6).setCellValue(r.getRacetype().toString());
                     cRace.createCell(7).setCellValue(r.getCustomedRace());
-                    cRace.createCell(8).setCellValue(r.getRaceExperience().name());
-                    cRace.createCell(9).setCellValue(r.getRaceImpact().name());
-                    cRace.createCell(10).setCellValue(r.getAdmissCategory().name());
-                    cRace.createCell(11).setCellValue(r.getAdmissRowingBoat().name());
+                    cRace.createCell(8).setCellValue(r.getRaceExperience().toString());
+                    cRace.createCell(9).setCellValue(r.getRaceImpact().toString());
+                    cRace.createCell(10).setCellValue(r.getAdmissCategory().toString());
+                    cRace.createCell(11).setCellValue(r.getAdmissRowingBoat().toString());
                     cRace.createCell(12).setCellValue(r.getDescription());
+                    cRace.createCell(13).setCellValue(r.getCompetition().toString());
                 }
             }
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -275,6 +284,7 @@ public class ExcelFileExporterCompetition {
                     rowComp.createCell(24).setCellValue(comp.getK());
                     rowComp.createCell(25).setCellValue(comp.getL());
                     rowComp.createCell(26).setCellValue(comp.getM());
+                    rowComp.createCell(27).setCellValue(comp.getCompetition().toString());
                 }
             }
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

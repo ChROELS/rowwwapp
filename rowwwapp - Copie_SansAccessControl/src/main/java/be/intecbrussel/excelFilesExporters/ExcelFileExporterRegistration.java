@@ -42,16 +42,14 @@ public class ExcelFileExporterRegistration {
             header.getCell(2).setCellStyle(style);
             header.createCell(3).setCellValue("Taille de l'équipe");
             header.getCell(3).setCellStyle(style);
-            header.createCell(4).setCellValue("Course sélectionnée");
+            header.createCell(4).setCellValue("Membres de l'équipe");
             header.getCell(4).setCellStyle(style);
-            header.createCell(5).setCellValue("Membres de l'équipe");
+            header.createCell(5).setCellValue("Barreur");
             header.getCell(5).setCellStyle(style);
-            header.createCell(6).setCellValue("Barreur");
+            header.createCell(6).setCellValue("Nage");
             header.getCell(6).setCellStyle(style);
-            header.createCell(7).setCellValue("Nage");
+            header.createCell(7).setCellValue("Handicap");
             header.getCell(7).setCellStyle(style);
-            header.createCell(8).setCellValue("Handicap");
-            header.getCell(8).setCellStyle(style);
 
             int rowCount = 1;
             if(teams!=null) {
@@ -59,21 +57,20 @@ public class ExcelFileExporterRegistration {
                     Row teamRow = sheet.createRow(rowCount++);
                     teamRow.createCell(0).setCellValue(t.getId());
                     teamRow.createCell(1).setCellValue(t.getName());
-                    teamRow.createCell(2).setCellValue(t.getType().name());
+                    teamRow.createCell(2).setCellValue(t.getType().toString());
                     teamRow.createCell(3).setCellValue(t.getSizeOfCrew());
-                    teamRow.createCell(4).setCellValue("non repris");
-                    teamRow.createCell(5).setCellValue(t.getListCrewMembers(t.getCrew()));
+                    teamRow.createCell(4).setCellValue(t.getListCrewMembers(t.getCrew()));
                     if(t.getCox()!=null) {
-                        teamRow.createCell(6).setCellValue(String.format("%s %s", t.getCox().getFirstName(), t.getCox().getLastName()));
+                        teamRow.createCell(5).setCellValue(String.format("%s %s", t.getCox().getFirstName(), t.getCox().getLastName()));
+                    }else {
+                        teamRow.createCell(5).setCellValue("-");
+                    }
+                    if(t.getStroke()!=null) {
+                        teamRow.createCell(6).setCellValue(String.format("%s %s", t.getStroke().getFirstName(), t.getStroke().getLastName()));
                     }else {
                         teamRow.createCell(6).setCellValue("-");
                     }
-                    if(t.getStroke()!=null) {
-                        teamRow.createCell(7).setCellValue(String.format("%s %s", t.getStroke().getFirstName(), t.getStroke().getLastName()));
-                    }else {
-                        teamRow.createCell(7).setCellValue("-");
-                    }
-                    teamRow.createCell(8).setCellValue(t.getTeamHandicap());
+                    teamRow.createCell(7).setCellValue(t.getTeamHandicap());
                 }
             }
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -138,14 +135,14 @@ public class ExcelFileExporterRegistration {
                     teamRow.createCell(1).setCellValue(r.getLastName());
                     teamRow.createCell(2).setCellValue(r.getFirstName());
                     teamRow.createCell(3).setCellValue(r.getNationality());
-                    teamRow.createCell(4).setCellValue(r.getGender().name());
+                    teamRow.createCell(4).setCellValue(r.getGender().toString());
                     teamRow.createCell(5).setCellValue(r.getBirthDate());
                     teamRow.createCell(6).setCellValue(r.getClub());
                     teamRow.createCell(7).setCellValue(r.getLicenceNumber());
-                    teamRow.createCell(8).setCellValue(r.getDisability().name());
+                    teamRow.createCell(8).setCellValue(r.getDisability().toString(r.getDisability()));
                     teamRow.createCell(9).setCellValue(r.getRaceExperience().name());
                     if(r.getCategory()!=null)
-                        teamRow.createCell(10).setCellValue(r.getCategory().name());
+                        teamRow.createCell(10).setCellValue(r.getCategory().toString());
                     else
                         teamRow.createCell(10).setCellValue("-");
                     teamRow.createCell(11).setCellValue(r.getAge());
@@ -204,7 +201,7 @@ public class ExcelFileExporterRegistration {
                     raceRow.createCell(1).setCellValue(s.getNumber());
                     raceRow.createCell(2).setCellValue(s.getLocation());
                     raceRow.createCell(3).setCellValue(s.getDate());
-                    raceRow.createCell(4).setCellValue(s.getRaceType().name());
+                    raceRow.createCell(4).setCellValue(s.getRaceType().toString());
                     raceRow.createCell(5).setCellValue(s.getCustomedRace());
                     raceRow.createCell(6).setCellValue(s.getCoefficientCategory());
                     raceRow.createCell(7).setCellValue(s.getCoefficientGender());

@@ -47,6 +47,10 @@ private Rower rowerToSave;
 private ScheduledRace scheduledRaceToSave;
 private Team teamToSave;
 private List<Rower> rowersToSave = new ArrayList<>();
+private Competition competitionToSave;
+private Race raceToSave;
+private List<Race> raceListToSave = new ArrayList<>();
+private Compensation compensationToSave;
 
 
     @Autowired
@@ -67,7 +71,7 @@ private List<Rower> rowersToSave = new ArrayList<>();
     @PostMapping("/rowwwapp/competition")
     public String checkAndCreateCompetitionInfos(Competition competitionForm2, Model model){
             model.addAttribute("competitionForm2",competitionForm2);
-            competitionService.createCompetitionDay(competitionForm2);
+            competitionToSave = (Competition) model.getAttribute("competitionForm2");
             return "redirect:/rowwwapp/competition/race";
 
     }
@@ -75,14 +79,19 @@ private List<Rower> rowersToSave = new ArrayList<>();
     @GetMapping("/rowwwapp/competition/race")
     public String showRace(Model model){
         model.addAttribute("raceForm2", new Race());
-        model.addAttribute("competitions", competitionService.getAllCompetitionDay());
-        model.addAttribute("races", raceService.getAllRace());
+        model.addAttribute("competitions", competitionToSave);
+        model.addAttribute("races", raceListToSave);
         return "rowwwapp_competition_race_page";
     }
     @PostMapping("/rowwwapp/competition/race")
     public String checkRaceInfos(Race raceForm2,Model model){
         model.addAttribute("raceForm2", raceForm2);
-            raceService.createRace(raceForm2);
+        raceToSave = (Race) model.getAttribute("raceForm2");
+        if(raceToSave!=null) {
+            raceToSave.setName();
+            raceToSave.setCompetition(competitionToSave);
+            raceListToSave.add(raceToSave);
+        }
             if(raceForm2.getLastRace().equals("non")) {
                 return "redirect:/rowwwapp/competition/compensation";
             }else{
@@ -93,14 +102,24 @@ private List<Rower> rowersToSave = new ArrayList<>();
     @GetMapping("/rowwwapp/competition/compensation")
     public String showCompensation(Model model){
         model.addAttribute("compensationForm2", new Compensation());
-        model.addAttribute("races", raceService.getAllRace());
+        model.addAttribute("races", raceListToSave);
         return "rowwwapp_competition_compensation_page";
     }
     @PostMapping("/rowwwapp/competition/compensation")
     public String checkCompensationInfos(Compensation compensationForm2,Model model){
         model.addAttribute("compensationForm2",compensationForm2);
-            compensationService.createCompensation(compensationForm2);
-            return "redirect:/rowwwapp/competition/results";
+        compensationToSave = (Compensation) model.getAttribute("compensationForm2");
+        if(compensationToSave!=null) {
+            compensationToSave.setCompetition(competitionToSave);
+        }
+        for (Race r: raceListToSave
+             ) {
+            competitionToSave.addRace(raceToSave);
+            raceService.createRace(r);
+        }
+        compensationService.createCompensation(compensationToSave);
+        competitionService.createCompetitionDay(competitionToSave);
+        return "redirect:/rowwwapp/competition/results";
 
     }
     //****************************************************************//

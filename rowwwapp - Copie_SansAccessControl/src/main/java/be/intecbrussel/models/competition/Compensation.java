@@ -71,6 +71,9 @@ public class Compensation {
 
     private String M;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Competition competition;
+
 
     @Autowired
     public Compensation() {
@@ -109,6 +112,14 @@ public class Compensation {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Competition getCompetition() {
+        return competition;
+    }
+
+    public void setCompetition(Competition competition) {
+        this.competition = competition;
     }
 
     public String getCompensationMale() {

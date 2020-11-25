@@ -11,4 +11,8 @@ public enum RaceExperience {
         return valueOf(value);
     }
 
+    @Override
+    public String toString() {
+        return "RaceExperience{"+name()+"}";
+    }
 }

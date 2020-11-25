@@ -94,7 +94,7 @@ public class Race {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
+    public void setName() {
         this.name = composeName(racetype,customedRace,raceExperience,admissRowingBoat,gender,admissCategory);
     }
 
@@ -172,11 +172,14 @@ public class Race {
     //specific methods///////////////////////////////
     public String composeName(RaceType racetype, String customRace, RaceExperience raceExperience, RowingBoat rowingBoat,
                               Gender gender, Category category){
-        if(this.customedRace!=null&&!this.customedRace.equals("")){
-            return this.name + " "+racetype.name()+" "+ raceExperience.name()+
-                    " "+rowingBoat.name()+" "+category.name()+" "+gender.name();
+        if(customRace==null||customRace.equals("")){
+            return racetype+" "+ raceExperience+
+                    " "+rowingBoat+" "+category+" "+gender;
+        }else{
+            return customRace+" "+ raceExperience+
+                    " "+rowingBoat+" "+category+" "+gender;
         }
-        return"";
+
     }
 
     //override methods///////////////////////////////

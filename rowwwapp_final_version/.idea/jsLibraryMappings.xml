@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{jquery, jquery-1.12.4}" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/templates/rowwwapp_competition_page.html" libraries="{bootstrap}" />
-    <file url="PROJECT" libraries="{jquery}" />
-  </component>
-</project>

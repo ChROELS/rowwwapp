@@ -10,8 +10,9 @@ public enum RaceType {
     RaceType(String value){
 
     }
-    public static RaceType findRace(String value){
-        return valueOf(value);
-    }
 
+    @Override
+    public String toString() {
+        return "RaceType{"+name()+"}";
+    }
 }

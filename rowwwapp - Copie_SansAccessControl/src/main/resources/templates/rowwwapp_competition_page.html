@@ -38,11 +38,11 @@
             <section id="competitionForm">
                 <h4>chanps requis*</h4>
                 <label for="name">Nom officiel*:</label><br/>
-                    <input type="text" id="name" size=100  value="maximum 100 caractères" title="par exemple: Régates internationales de Bruxelles" th:field="*{name}" required/><br/>
+                    <input type="text" id="name" size=100  title="par exemple: Régates internationales de Bruxelles" th:field="*{name}" required/><br/>
                 <label for="dayDescription">Description (organisateurs, patronage...):</label><br/>
-                    <input type="text" id="dayDescription" size=200 value="maximum 200 caractères" title="par exemple: Royal Sport Nautique de Bruxelles 1865" th:field="*{description}"/><br/>
+                    <input type="text" id="dayDescription" size=200  title="par exemple: Royal Sport Nautique de Bruxelles 1865" th:field="*{description}"/><br/>
                 <label for="location">Lieu*:</label><br/>
-                    <input type="text" th:field="*{placeOfEvent}" id="location" size=100 value="maximum 100 caractères" title="par exemple: Centre nautique de Hazewinkel" required/><br/>
+                    <input type="text" th:field="*{placeOfEvent}" id="location" size=100 title="par exemple: Centre nautique de Hazewinkel" required/><br/>
                 <label for="dateOfCompetition">Date*:</label><br/>
                     <input type="date" id="dateOfCompetition" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" th:field="*{date}" required/><br/>
              </section>
@@ -51,11 +51,11 @@
             <br/>
             <section id="inscriptionForm">
                 <label for="inscriptionDescription">Règles:</label><br/>
-                    <input type="text" id="inscriptionDescription" value="maximum 200 caractères" size=200 th:field="*{registrationRules}"/><br/>
+                    <input type="text" id="inscriptionDescription" size=200 th:field="*{registrationRules}"/><br/>
                 <label for="contactsInfos">Adresse de contact:</label><br/>
-                    <input type="text" id="contactsInfos" size=100 value="maximum 100 caractères" title="par exemple: royalregatta@royal1865.be" th:field="*{registrationContact}"/><br/>
+                    <input type="text" id="contactsInfos" size=100 title="par exemple: royalregatta@royal1865.be" th:field="*{registrationContact}"/><br/>
                 <label for="inscriptionCost"> Coût (euros):</label><br/>
-                    <input type="number" id="inscriptionCost" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" title="00.00" th:field="*{registrationCost}"/><br/>
+                    <input type="text" id="inscriptionCost" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" title="00.00" th:field="*{registrationCost}"/><br/>
                 <label for="limitDate">Date limite d'inscription:</label><br/>
                     <input type="date" id="limitDate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" th:field="*{registrationLimit}"/><br/>
             </section>
@@ -68,9 +68,9 @@
                 <label for="fofeitLimitDate">Date limite de déclaration des forfaits:</label><br/>
                     <input type="date" id="fofeitLimitDate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" th:field="*{forfeitLimit}"/><br/>
                 <label for="forfeitContactsInfos">Contact:</label><br/>
-                    <input type="text" id="forfeitContactsInfos" size=100 value="maximum 100 caractères" th:field="*{forfeitContact}"/><br/>
+                    <input type="text" id="forfeitContactsInfos" size=100 th:field="*{forfeitContact}"/><br/>
                 <label for="forfeitInscriptionDescription">Règles:</label><br/>
-                    <input type="text" id="forfeitInscriptionDescription" size=200 value="maximum 200 caractères" th:field="*{forfeitRules}"/><br/>
+                    <input type="text" id="forfeitInscriptionDescription" size=200 th:field="*{forfeitRules}"/><br/>
             </section>
 
             <button id="buttonLotteryToggle">Tirage au sort des départs >>></button><br/><br/>
@@ -78,16 +78,16 @@
                 <label for="lotteryLimitDate" >Date de rendez-vous:</label><br/>
                     <input type="date" id="lotteryLimitDate" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" title="01/01/2000" th:field="*{lotteryDate}"/><br/>
                 <label for="lotteryInscriptionDescription" >Règles :</label><br/>
-                    <input type="text" id="lotteryInscriptionDescription" size=200 value="maximum 200 caractères" th:field="*{lotteryRules}"/><br/>
+                    <input type="text" id="lotteryInscriptionDescription" size=200 th:field="*{lotteryRules}"/><br/>
                 <label for="address" >Adresse:</label><br/>
-                    <input type="text" id="address" size=100 value="maximum 100 caractères" title="par exemple, salle des fêtes de ..." th:field="*{lotteryContact}"/><br/>
+                    <input type="text" id="address" size=100 title="par exemple, salle des fêtes de ..." th:field="*{lotteryContact}"/><br/>
             </section>
 
             <button id="buttonInfosToggle">Informations complémentaires >>></button><br/>
             <br/>
             <section id="infosForm">
                 <label for="infos">Règles concernant le classement, les récompenses, les dossards, la pesée...:</label><br/>
-                    <input type="text" id="infos" size=1000 value="maximum 1000 caractères" th:field="*{complementaryRules}"/><br/>
+                    <input type="text" id="infos" size=1000 th:field="*{complementaryRules}"/><br/>
             </section>
 
             <input type="submit" value="Enregistrer et continuer"/>
