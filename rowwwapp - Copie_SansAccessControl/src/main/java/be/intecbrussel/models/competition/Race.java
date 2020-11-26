@@ -95,7 +95,8 @@ public class Race {
         return name;
     }
     public void setName() {
-        this.name = composeName(racetype,customedRace,raceExperience,admissRowingBoat,gender,admissCategory);
+        this.name = composeName(racetype.getValue(),customedRace,
+                raceExperience.getValue(),admissRowingBoat.getValue(),gender.getValue(),admissCategory.getValue());
     }
 
     public String getDistance() {
@@ -170,8 +171,8 @@ public class Race {
 
 
     //specific methods///////////////////////////////
-    public String composeName(RaceType racetype, String customRace, RaceExperience raceExperience, RowingBoat rowingBoat,
-                              Gender gender, Category category){
+    public String composeName(String racetype, String customRace, String raceExperience, String rowingBoat,
+                              String gender, String category){
         if(customRace==null||customRace.equals("")){
             return racetype+" "+ raceExperience+
                     " "+rowingBoat+" "+category+" "+gender;
@@ -195,5 +196,14 @@ public class Race {
         if(id != null)
             return (int) (41*id);
         return 41;
+    }
+
+    @Override
+    public String toString() {
+        return "Race{" +
+                "number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", startingTime='" + startingTime + '\'' +
+                '}';
     }
 }

@@ -50,7 +50,7 @@
                     <th>Courses</th>
                 </tr>
                 <tr th:each="comp : ${competitions}">
-                    <td th:if="${comp.equals(null)}">Aucune compétition n'est encore enregistrée</td>
+                    <td th:if="${comp.equals(null)}" th:text="Aucune compétition enregistrée"></td>
                     <td th:text="${comp.getId()}">
                     <td th:text="${comp.getPlaceOfEvent()}"></td>
                     <td th:text="${comp.getDate()}"></td>
@@ -64,7 +64,7 @@
                     <td th:text="${comp.getLotteryRules() }"></td>
                     <td th:text="${comp.getLotteryContact() }"></td>
                     <td th:text="${comp.getForfeitLimit()}"></td>
-                    <td th:text="${comp.getForfeitLimitHour().toUpperCase() }"></td>
+                    <td th:text="${comp.getForfeitLimitHour() }"></td>
                     <td th:text="${comp.getForfeitRules() }"></td>
                     <td th:text="${comp.getForfeitContact() }"></td>
                     <td th:text="${comp.getComplementaryRules() }"></td>
@@ -92,7 +92,7 @@
                     <th>Compétition</th>
                 </tr>
                 <tr th:each="race : ${races}">
-                    <td th:if="${race.equals(null)}">Aucune course n'est encore enregistrée</td>
+                    <td th:if="${race.equals(null)}" th:text="Aucune course enregistrée"></td>
                     <td th:text="${race.getId()}">
                     <td th:text="${race.getNumber()}"></td>
                     <td th:text="${race.getName()}"></td>
@@ -106,7 +106,7 @@
                     <td th:text="${race.getAdmissCategory() }"></td>
                     <td th:text="${race.getAdmissRowingBoat() }"></td>
                     <td th:text="${race.getRaceExperience() }"></td>
-                    <td th:text="${race.getCompetition().getName()}"></td>
+                    <td th:if="${!race.getCompetition().equals(null)}" th:text="${race.getCompetition().getDate()}"></td>
                 </tr>
             </table>
         </div><br/>
@@ -146,9 +146,9 @@
                 </tr>
                 <!--/*@thymesVar id="comp" type="be.intecbrussel.models.competition.Compensation"*/-->
                 <tr th:each="comp: ${compensations}">
-                    <td th:if="${comp.equals(null)}">Aucune compensation n'est encore enregistrée</td>
+                    <td th:if="${comp.equals(null)}" th:text="Aucune compensation enregistrée"></td>
                     <td th:text="${comp.getId()}">
-                    <td th:text="${comp.getCompetition().getName()}"></td>
+                    <td th:if="${!comp.getCompetition().equals(null)}" th:text="${comp.getCompetition().getDate()}"></td>
                     <td th:text="${comp.getCompensationMale()}"></td>
                     <td th:text="${comp.getCompensationFemale()}"></td>
                     <td th:text="${comp.getPR1()}"></td>

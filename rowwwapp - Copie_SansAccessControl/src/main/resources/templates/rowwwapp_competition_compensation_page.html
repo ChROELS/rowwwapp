@@ -48,7 +48,7 @@
                 <th>Date de compétition</th>
             </tr>
         <tr th:each="race : ${races}">
-                <td th:if="${race.equals(null)}">Aucune course n'est encore enregistrée</td>
+            <td th:if="${race.equals(null)}" th:text="Aucune course enregistrée"></td>
                 <td th:text="${race.getId()}">
                 <td th:text="${race.getNumber()}"></td>
                 <td th:text="${race.getName()}"></td>
@@ -62,7 +62,7 @@
                 <td th:text="${race.getAdmissCategory() }"></td>
                 <td th:text="${race.getAdmissRowingBoat() }"></td>
                 <td th:text="${race.getRaceExperience() }"></td>
-                <td th:text="${race.getCompetition()}"></td>
+            <td th:if="${!race.getCompetition().equals(null)}" th:text="${race.getCompetition().getDate() }"></td>
         </tr>
         </table>
     </div><br/>

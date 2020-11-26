@@ -135,14 +135,14 @@ public class ExcelFileExporterRegistration {
                     teamRow.createCell(1).setCellValue(r.getLastName());
                     teamRow.createCell(2).setCellValue(r.getFirstName());
                     teamRow.createCell(3).setCellValue(r.getNationality());
-                    teamRow.createCell(4).setCellValue(r.getGender().toString());
+                    teamRow.createCell(4).setCellValue(r.getGender().getValue());
                     teamRow.createCell(5).setCellValue(r.getBirthDate());
                     teamRow.createCell(6).setCellValue(r.getClub());
                     teamRow.createCell(7).setCellValue(r.getLicenceNumber());
                     teamRow.createCell(8).setCellValue(r.getDisability().toString(r.getDisability()));
-                    teamRow.createCell(9).setCellValue(r.getRaceExperience().name());
+                    teamRow.createCell(9).setCellValue(r.getRaceExperience().getValue());
                     if(r.getCategory()!=null)
-                        teamRow.createCell(10).setCellValue(r.getCategory().toString());
+                        teamRow.createCell(10).setCellValue(r.getCategory().getValue());
                     else
                         teamRow.createCell(10).setCellValue("-");
                     teamRow.createCell(11).setCellValue(r.getAge());
@@ -201,7 +201,7 @@ public class ExcelFileExporterRegistration {
                     raceRow.createCell(1).setCellValue(s.getNumber());
                     raceRow.createCell(2).setCellValue(s.getLocation());
                     raceRow.createCell(3).setCellValue(s.getDate());
-                    raceRow.createCell(4).setCellValue(s.getRaceType().toString());
+                    raceRow.createCell(4).setCellValue(s.getRaceType().getValue());
                     raceRow.createCell(5).setCellValue(s.getCustomedRace());
                     raceRow.createCell(6).setCellValue(s.getCoefficientCategory());
                     raceRow.createCell(7).setCellValue(s.getCoefficientGender());

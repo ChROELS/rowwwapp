@@ -51,7 +51,7 @@
                         <th>Règles complémentaires</th>
                     </tr>
                     <tr th:each="comp : ${competitions}">
-                        <td th:if="${comp.equals(null)}">Aucune compétition n'est encore enregistrée</td>
+                        <td th:if="${comp.equals(null)}" th:text="Aucune compétition enregistrée"></td>
                         <td th:text="${comp.getId()}">
                         <td th:text="${comp.getPlaceOfEvent()}"></td>
                         <td th:text="${comp.getDate()}"></td>
@@ -93,7 +93,7 @@
                     <th>Date de compétition</th>
                 </tr>
                 <tr th:each="race : ${races}">
-                    <td th:if="${race.equals(null)}">Aucune course n'est encore enregistrée</td>
+                    <td th:if="${race.equals(null)}" th:text="Aucune course enregistrée"></td>
                     <td th:text="${race.getId()}">
                     <td th:text="${race.getNumber()}"></td>
                     <td th:text="${race.getName()}"></td>
@@ -107,7 +107,7 @@
                     <td th:text="${race.getAdmissCategory() }"></td>
                     <td th:text="${race.getAdmissRowingBoat() }"></td>
                     <td th:text="${race.getRaceExperience() }"></td>
-                    <td th:text="${race.getCompetition() }"></td>
+                    <td th:if="${!race.getCompetition().equals(null)}" th:text="${race.getCompetition().getDate() }"></td>
                 </tr>
             </table>
             </div>
@@ -145,9 +145,15 @@
                         <span class="checkmark"></span>
                     </label>
                     <label class="container">Non-débutants
-                        <input type="radio" name="radio" checked="checked" value="NON-BEGINNER" th:field="*{raceExperience}" >
+                        <input type="radio" name="radio" checked="checked" value="NON_BEGINNER" th:field="*{raceExperience}" >
                         <span class="checkmark"></span>
                     </label>
+                <label for="raceGender">Type de course (genres):</label><br/>
+                <select id="raceGender" th:field="*{gender}" >1 à sélectionner
+                    <option value="ALL" selected>ALL</option>
+                    <option value="FEMALE" >FEMALE</option>
+                    <option value="MALE" >MALE</option>
+                </select><br/>
                 <label for="raceType">Type de course:</label><br/>
                     <select id="raceType" th:field="*{racetype}" >1 à sélectionner
                         <option value="UNKNOWN" selected>UNKNOWN</option>

@@ -41,7 +41,7 @@
                     <th>Coefficient d'handicap par genre (si applicable)</th>
                 </tr>
                 <tr th:each="scheduledRace: ${scheduledRaceForm}">
-                    <td th:if="${scheduledRace.equals(null)}">Aucune course n'est encore sélectionée</td>
+                    <td th:if="${scheduledRace.equals(null)}" th:text="Aucune course inscrite"></td>
                     <td th:text="${scheduledRace.getId()}"></td>
                     <td th:text="${scheduledRace.location}"></td>
                     <td th:text="${scheduledRace.date}"></td>
@@ -68,7 +68,7 @@
                     <th>Handicap</th>
                 </tr>
                 <tr th:each="t: ${teams}">
-                    <td th:if="${t.equals(null)}">Aucune équipe n'est encore inscrite</td>
+                    <td th:if="${t.equals(null)}" th:text="Aucune équipe inscrite"></td>
                     <td th:text="${t.getId()}"></td>
                     <td th:text="${t.getName()}"></td>
                     <td th:text="${t.getSizeOfCrew() }"></td>
@@ -104,7 +104,7 @@
                     <th>Equipe</th>
                 </tr>
                 <tr th:each="rower:${rowers}">
-                    <td th:if="${rower.equals(null)}">Aucun participant n'est encore inscrit</td>
+                    <td th:if="${rower.equals(null)}" th:text="Aucun participant inscrit"></td>
                     <td th:text="${rower.getId()}"></td>
                     <td th:text="${rower.getFirstName()}"></td>
                     <td th:text="${rower.getLastName()}"></td>

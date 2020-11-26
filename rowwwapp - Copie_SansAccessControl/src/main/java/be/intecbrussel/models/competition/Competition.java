@@ -218,4 +218,13 @@ public class Competition {
         return 31;
     }
 
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", placeOfEvent='" + placeOfEvent + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

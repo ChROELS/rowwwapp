@@ -71,7 +71,7 @@ public class Compensation {
 
     private String M;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Competition competition;
 
 

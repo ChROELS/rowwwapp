@@ -10,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 public class ExcelFileExporterCompetition {
@@ -88,7 +87,7 @@ public class ExcelFileExporterCompetition {
                     cRow.createCell(14).setCellValue(c.getForfeitContact());
                     cRow.createCell(15).setCellValue(c.getComplementaryRules());
                     for (int i = 16; i<(16+(c.getRaces().size()));i++) {
-                        cRow.createCell(i).setCellValue(Arrays.toString(c.getRaces().toArray()));
+                        cRow.createCell(i).setCellValue(c.getRaces().get(i-16).toString());
                     }
                 }
             }
@@ -158,12 +157,12 @@ public class ExcelFileExporterCompetition {
                     cRace.createCell(3).setCellValue(r.getName());
                     cRace.createCell(4).setCellValue(r.getDistance());
                     cRace.createCell(5).setCellValue(r.getMaxTime());
-                    cRace.createCell(6).setCellValue(r.getRacetype().toString());
+                    cRace.createCell(6).setCellValue(r.getRacetype().getValue());
                     cRace.createCell(7).setCellValue(r.getCustomedRace());
-                    cRace.createCell(8).setCellValue(r.getRaceExperience().toString());
-                    cRace.createCell(9).setCellValue(r.getRaceImpact().toString());
-                    cRace.createCell(10).setCellValue(r.getAdmissCategory().toString());
-                    cRace.createCell(11).setCellValue(r.getAdmissRowingBoat().toString());
+                    cRace.createCell(8).setCellValue(r.getRaceExperience().getValue());
+                    cRace.createCell(9).setCellValue(r.getRaceImpact().getValue());
+                    cRace.createCell(10).setCellValue(r.getAdmissCategory().getValue());
+                    cRace.createCell(11).setCellValue(r.getAdmissRowingBoat().getValue());
                     cRace.createCell(12).setCellValue(r.getDescription());
                     cRace.createCell(13).setCellValue(r.getCompetition().toString());
                 }

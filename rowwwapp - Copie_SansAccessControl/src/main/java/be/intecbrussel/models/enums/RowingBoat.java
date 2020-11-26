@@ -9,11 +9,13 @@ public enum RowingBoat {
     QUEEP_4_MINUS("4-"),ROWING_DINGHY("Dinghy"),ROWING_TENDER("Tender"),YOLE("Yole"),
     CANOE_SKIFF("Canöe"),CANADIAN_TREK_SKIFF("Canadian_trek"),SINGLE_TREK_SKIFF_1X("Trek_1x"),
     DOUBLE_TREK_SKIFF_2X("Trek_2x"),QUAD_TREK_SKIFF_4X("Trek_4x");
-
+    private final String value;
     RowingBoat(String value){
-
+        this.value = value;
     }
-
+    public String getValue(){
+        return this.value;
+    }
     public static RowingBoat findBoat(String value){
         return valueOf(value);
     }

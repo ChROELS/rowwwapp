@@ -117,8 +117,8 @@ private Compensation compensationToSave;
             competitionToSave.addRace(raceToSave);
             raceService.createRace(r);
         }
-        compensationService.createCompensation(compensationToSave);
         competitionService.createCompetitionDay(competitionToSave);
+        compensationService.createCompensation(compensationToSave);
         return "redirect:/rowwwapp/competition/results";
 
     }
