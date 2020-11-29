@@ -15,4 +15,4 @@ $(document).ready(function(){
   });
 });
 function loadPageRegistration(){window.location.assign("http://localhost:8080/rowwwapp/registration/scheduledRace");}
-
+function loadPageDatabase(){window.location.assign("http://localhost:8080/rowwwapp/console/");}

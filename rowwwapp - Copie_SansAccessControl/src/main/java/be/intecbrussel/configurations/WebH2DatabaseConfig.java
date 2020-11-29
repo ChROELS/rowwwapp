@@ -12,7 +12,7 @@ public class WebH2DatabaseConfig {
     @Bean
     ServletRegistrationBean h2servletRegistration(){
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new WebServlet());
-        servletRegistrationBean.addUrlMappings("/console/*");
+        servletRegistrationBean.addUrlMappings("/rowwwapp/console/*");
         return servletRegistrationBean;
     }
 }

@@ -86,6 +86,8 @@ private Compensation compensationToSave;
     @PostMapping("/rowwwapp/competition/race")
     public String checkRaceInfos(Race raceForm2,Model model){
         model.addAttribute("raceForm2", raceForm2);
+        model.addAttribute("competitions", competitionToSave);
+        model.addAttribute("races", raceListToSave);
         raceToSave = (Race) model.getAttribute("raceForm2");
         if(raceToSave!=null) {
             raceToSave.setName();
@@ -103,6 +105,7 @@ private Compensation compensationToSave;
     public String showCompensation(Model model){
         model.addAttribute("compensationForm2", new Compensation());
         model.addAttribute("races", raceListToSave);
+        model.addAttribute("competitions", competitionToSave);
         return "rowwwapp_competition_compensation_page";
     }
     @PostMapping("/rowwwapp/competition/compensation")
@@ -140,7 +143,7 @@ private Compensation compensationToSave;
         return "rowwwapp_registration_scheduledRace_page";
     }
     @PostMapping("/rowwwapp/registration/scheduledRace")
-    public String checkScheduledRace(ScheduledRace scheduledRaceForm,Model model, BindingResult bindingResult){
+    public String checkScheduledRace(ScheduledRace scheduledRaceForm,Model model){
         model.addAttribute("scheduledRaceForm", scheduledRaceForm);
         scheduledRaceToSave = (ScheduledRace)model.getAttribute("scheduledRaceForm");
         return "redirect:/rowwwapp/registration/rower";
@@ -150,54 +153,68 @@ private Compensation compensationToSave;
     @GetMapping("/rowwwapp/registration/rower")
     public String showRower(Model model){
         model.addAttribute("rowerForm",new Rower());
+        model.addAttribute("scheduledRaceForm", scheduledRaceToSave);
         return "rowwwapp_registration_rower_page";
     }
     @PostMapping("/rowwwapp/registration/rower")
     public String checkRower(Rower rowerForm,Model model){
         model.addAttribute("rowerForm", rowerForm);
+        model.addAttribute("scheduledRaceForm", scheduledRaceToSave);
         //transient object to populate
         rowerToSave = (Rower) model.getAttribute("rowerForm");
-        if(rowerToSave != null) {
-            rowerToSave.setAge();
-            rowerToSave.setCategory();
-            rowerToSave.setRace(scheduledRaceToSave);
-            rowerToSave.setGenderCoef();
-            rowerToSave.setCategoryCoef();
-            rowerToSave.setRowerHandicap();
-            rowersToSave.add(rowerToSave);
-        }
-        if(rowerForm.getIsLastRower().equals("oui")){
+        try{
+            if (rowerToSave != null) {
+                rowerToSave.setAge();
+                rowerToSave.setCategory();
+                rowerToSave.setRace(scheduledRaceToSave);
+                rowerToSave.setGenderCoef(scheduledRaceToSave.getCoefficientGender());
+                rowerToSave.setCategoryCoef(scheduledRaceToSave.getCoefficientCategory());
+                rowerToSave.setRowerHandicap();
+                rowersToSave.add(rowerToSave);
+            }
+            if (rowerForm.getIsLastRower().equals("oui")) {
+                return "redirect:/rowwwapp/registration/rower";
+            } else {
+                return "redirect:/rowwwapp/registration/team";
+            }
+        }catch(Exception e){
             return "redirect:/rowwwapp/registration/rower";
-        }else {
-            return "redirect:/rowwwapp/registration/team";
         }
     }
     //****************************************************************//
     @GetMapping("/rowwwapp/registration/team")
     public String showTeam(Model model){
         model.addAttribute("teamForm", new Team());
+        model.addAttribute("scheduledRaceForm", scheduledRaceToSave);
+        model.addAttribute("rowerForm", rowersToSave);
         return "rowwwapp_registration_team_page";
     }
     @PostMapping("/rowwwapp/registration/team")
     public String checkTeam(Team teamForm,Model model){
         model.addAttribute("teamForm",teamForm);
         //transient object to populate
-        teamToSave = (Team) model.getAttribute("teamForm");;
-        if(teamToSave!=null) {
-            for (int i = 0; i < rowersToSave.size(); i++) {
-                rowersToSave.get(i).setTeam(teamToSave);
-                teamToSave.addCrewMember(rowersToSave.get(i));
-                teamToSave.setCox(rowersToSave.get(i).getPosition() == Position.COX ? rowersToSave.get(i) : null);
-                teamToSave.setStroke(rowersToSave.get(i).getPosition() == Position.STROKE ? rowersToSave.get(i) : null);
+        teamToSave = (Team) model.getAttribute("teamForm");
+        try {
+            if (teamToSave != null) {
+                for (int i = 0; i < rowersToSave.size(); i++) {
+                    rowersToSave.get(i).setTeam(teamToSave);
+                    teamToSave.addCrewMember(rowersToSave.get(i));
+                    teamToSave.setCox(rowersToSave.get(i).getPosition() == Position.COX ? rowersToSave.get(i) : null);
+                    teamToSave.setStroke(rowersToSave.get(i).getPosition() == Position.STROKE ? rowersToSave.get(i) : null);
+                }
+                teamToSave.setTeamHandicap();
             }
+            //This order --> rower/team/race objects -- to avoid Hibernate PersistentObjectException
+            for (int i = 0; i < rowersToSave.size(); i++) {
+                rowerService.createRower(rowersToSave.get(i));
+            }
+            scheduledRaceToSave.setTeam(teamToSave);
+            teamService.createTeam(teamToSave);
+            scheduledRaceService.createScheduledRace(scheduledRaceToSave);
+            return "redirect:/rowwwapp/registration/results";
+        }catch (Exception e){
+            return "redirect:/rowwwapp/registration/team";
         }
-        //This order --> rower/team/race objects -- to avoid Hibernate PersistentObjectException
-        for (int i = 0; i < rowersToSave.size(); i++) {
-            rowerService.createRower(rowersToSave.get(i));
-        }
-        teamService.createTeam(teamToSave);
-        scheduledRaceService.createScheduledRace(scheduledRaceToSave);
-        return "redirect:/rowwwapp/registration/results";
     }
 
 
@@ -214,7 +231,6 @@ private Compensation compensationToSave;
         model.addAttribute("scheduledRaces", scheduledRaceService.getAllScheduledRaces());
         model.addAttribute("rowers",rowerService.getAllRowers());
         model.addAttribute("teams",teamService.getAllTeams());
-        teamService.deleteTeam(name);
         return "rowwwapp_registration_page_exports";
     }
     //****************************************************************//

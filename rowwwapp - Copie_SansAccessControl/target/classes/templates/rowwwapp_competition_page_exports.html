@@ -26,7 +26,8 @@
         <div class="column middle">
     <article>
         <!-- part 1 -->
-        <h1>Jour de compétition</h1>
+        <h1>Vos données</h1><br/>
+        <h2>Jour de compétition</h2>
         <div>
             <table >
                 <tr>
@@ -49,8 +50,8 @@
                     <th>Règles complémentaires</th>
                     <th>Courses</th>
                 </tr>
+                <tr th:if="${competitions==null}">Aucune compétition enregistrée</tr>
                 <tr th:each="comp : ${competitions}">
-                    <td th:if="${comp.equals(null)}" th:text="Aucune compétition enregistrée"></td>
                     <td th:text="${comp.getId()}">
                     <td th:text="${comp.getPlaceOfEvent()}"></td>
                     <td th:text="${comp.getDate()}"></td>
@@ -71,8 +72,8 @@
                     <td th:text="${comp.getRaces() }"></td>
                 </tr>
             </table>
-        </div>
-        <h1>Course du jour de compétition</h1>
+        </div><br/>
+        <h2>Course du jour de compétition</h2>
         <div>
             <table >
                 <tr>
@@ -91,8 +92,8 @@
                     <th>Expérience admise</th>
                     <th>Compétition</th>
                 </tr>
+                <tr th:if="${races==null}">Aucune course enregistrée</tr>
                 <tr th:each="race : ${races}">
-                    <td th:if="${race.equals(null)}" th:text="Aucune course enregistrée"></td>
                     <td th:text="${race.getId()}">
                     <td th:text="${race.getNumber()}"></td>
                     <td th:text="${race.getName()}"></td>
@@ -106,11 +107,11 @@
                     <td th:text="${race.getAdmissCategory() }"></td>
                     <td th:text="${race.getAdmissRowingBoat() }"></td>
                     <td th:text="${race.getRaceExperience() }"></td>
-                    <td th:if="${!race.getCompetition().equals(null)}" th:text="${race.getCompetition().getDate()}"></td>
+                    <td th:if="${race.getCompetition()!=null}" th:text="${race.getCompetition().getDate()}"></td>
                 </tr>
             </table>
         </div><br/>
-        <h1>Compensations prévues</h1>
+        <h2>Compensations prévues</h2>
         <div>
             <table >
                 <tr>
@@ -144,9 +145,8 @@
                     <th>L</th>
                     <th>M</th>
                 </tr>
-                <!--/*@thymesVar id="comp" type="be.intecbrussel.models.competition.Compensation"*/-->
+                <tr th:if="${compensations==null}">Aucune compensation enregistrée</tr>
                 <tr th:each="comp: ${compensations}">
-                    <td th:if="${comp.equals(null)}" th:text="Aucune compensation enregistrée"></td>
                     <td th:text="${comp.getId()}">
                     <td th:if="${!comp.getCompetition().equals(null)}" th:text="${comp.getCompetition().getDate()}"></td>
                     <td th:text="${comp.getCompensationMale()}"></td>
@@ -182,6 +182,7 @@
         <!-- part 2 -->
         <section>
         <button id="toCompetition" onclick="loadPageCompetition()">Organiser une autre compétition</button><br/>
+            <button id="toDatabase" onclick="loadPageDatabase()">Accéder à la console de la base de données</button><br/>
         </section>
         <section>
         <p>Télécharger ces données (.csv)</p>

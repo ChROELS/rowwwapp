@@ -49,9 +49,10 @@
                         <th>Règles</th>
                         <th>Contacts</th>
                         <th>Règles complémentaires</th>
+                        <th>Courses</th>
                     </tr>
+                    <tr th:if="${competitions==null}">Aucune compétition enregistrée</tr>
                     <tr th:each="comp : ${competitions}">
-                        <td th:if="${comp.equals(null)}" th:text="Aucune compétition enregistrée"></td>
                         <td th:text="${comp.getId()}">
                         <td th:text="${comp.getPlaceOfEvent()}"></td>
                         <td th:text="${comp.getDate()}"></td>
@@ -69,49 +70,49 @@
                         <td th:text="${comp.getForfeitRules() }"></td>
                         <td th:text="${comp.getForfeitContact() }"></td>
                         <td th:text="${comp.getComplementaryRules() }"></td>
+                        <td th:text="${comp.getRaces() }"></td>
+                    </tr>
+                </table>
+            </div><br/>
+            <h2>Course du jour de compétition</h2>
+            <div>
+                <table >
+                    <tr>
+                        <th>Id</th>
+                        <th>Numéro</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Distance</th>
+                        <th>Temps max.</th>
+                        <th>Heure de départ</th>
+                        <th>Type de course</th>
+                        <th>Course sur-mesure</th>
+                        <th>Envergure</th>
+                        <th>Catégorie</th>
+                        <th>Type de bateau</th>
+                        <th>Expérience admise</th>
+                        <th>Compétition</th>
+                    </tr>
+                    <tr th:if="${races==null}">Aucune course enregistrée</tr>
+                    <tr th:each="race : ${races}">
+                        <td th:text="${race.getId()}">
+                        <td th:text="${race.getNumber()}"></td>
+                        <td th:text="${race.getName()}"></td>
+                        <td th:text="${race.getDescription() }"></td>
+                        <td th:text="${race.getDistance() }"></td>
+                        <td th:text="${race.getMaxTime() }"></td>
+                        <td th:text="${race.getStartingTime() }"></td>
+                        <td th:text="${race.getRacetype() }"></td>
+                        <td th:text="${race.getCustomedRace() }"></td>
+                        <td th:text="${race.getRaceImpact() }"></td>
+                        <td th:text="${race.getAdmissCategory() }"></td>
+                        <td th:text="${race.getAdmissRowingBoat() }"></td>
+                        <td th:text="${race.getRaceExperience() }"></td>
+                        <td th:if="${race.getCompetition()!=null}" th:text="${race.getCompetition().getDate()}"></td>
                     </tr>
                 </table>
             </div>
          <br/>
-            <h2>Course</h2>
-            <div>
-            <table >
-                <tr>
-                    <th>Id</th>
-                    <th>Numéro</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Distance</th>
-                    <th>Temps max.</th>
-                    <th>Heure de départ</th>
-                    <th>Type de course</th>
-                    <th>Course sur-mesure</th>
-                    <th>Envergure</th>
-                    <th>Catégorie</th>
-                    <th>Type de bateau</th>
-                    <th>Expérience admise</th>
-                    <th>Date de compétition</th>
-                </tr>
-                <tr th:each="race : ${races}">
-                    <td th:if="${race.equals(null)}" th:text="Aucune course enregistrée"></td>
-                    <td th:text="${race.getId()}">
-                    <td th:text="${race.getNumber()}"></td>
-                    <td th:text="${race.getName()}"></td>
-                    <td th:text="${race.getDescription() }"></td>
-                    <td th:text="${race.getDistance() }"></td>
-                    <td th:text="${race.getMaxTime() }"></td>
-                    <td th:text="${race.getStartingTime() }"></td>
-                    <td th:text="${race.getRacetype() }"></td>
-                    <td th:text="${race.getCustomedRace() }"></td>
-                    <td th:text="${race.getRaceImpact() }"></td>
-                    <td th:text="${race.getAdmissCategory() }"></td>
-                    <td th:text="${race.getAdmissRowingBoat() }"></td>
-                    <td th:text="${race.getRaceExperience() }"></td>
-                    <td th:if="${!race.getCompetition().equals(null)}" th:text="${race.getCompetition().getDate() }"></td>
-                </tr>
-            </table>
-            </div>
-            <br/>
             <button id="buttonRaceInfosToggle">Course >>></button><br/>
             <section id="raceForm">
             <!--/*@thymesVar id="raceForm2" type="be.intecbrussel.models.competition.Race"*/-->

@@ -192,6 +192,8 @@ public class ExcelFileExporterRegistration {
             headerRace.getCell(6).setCellStyle(styleRace);
             headerRace.createCell(7).setCellValue("Handicap (coefficient) selon le genre");
             headerRace.getCell(7).setCellStyle(styleRace);
+            headerRace.createCell(8).setCellValue("Equipe inscrite");
+            headerRace.getCell(8).setCellStyle(styleRace);
 
             int rowCountRace = 1;
             if(scheduledRaces!=null) {
@@ -205,6 +207,7 @@ public class ExcelFileExporterRegistration {
                     raceRow.createCell(5).setCellValue(s.getCustomedRace());
                     raceRow.createCell(6).setCellValue(s.getCoefficientCategory());
                     raceRow.createCell(7).setCellValue(s.getCoefficientGender());
+                    raceRow.createCell(8).setCellValue(s.getTeam().toString());
                 }
             }
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

@@ -2,7 +2,7 @@
 body{
     position: relative;
     box-sizing: border-box;
-    max-width: fit-content;
+    max-width: border-box;
     background-position: center;
     height: auto;
     background-image: linear-gradient(darkslategray,darkolivegreen);

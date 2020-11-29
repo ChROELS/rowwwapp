@@ -27,7 +27,8 @@ public class ScheduledRace {
     String coefficientGender;
     String coefficientCategory;
     int amountOfTeams;
-
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Team team;
 
     @Autowired
     public ScheduledRace() {
@@ -106,6 +107,13 @@ public class ScheduledRace {
         this.amountOfTeams = amountOfTeams;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     //Override methods////////////////////////////
     @Override
@@ -130,6 +138,7 @@ public class ScheduledRace {
                 ", customedRace='" + customedRace + '\'' +
                 ", coefficientGender=" + coefficientGender +
                 ", coefficientCategory=" + coefficientCategory +
+                ", team=" + team +
                 '}';
     }
 }

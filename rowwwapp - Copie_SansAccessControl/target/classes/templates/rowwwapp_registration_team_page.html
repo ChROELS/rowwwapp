@@ -26,7 +26,76 @@
 
         <div class="column middle">
             <article>
-    <br>
+                <h1>Vos données</h1><br/>
+                <!-- part Infos Scheduled Races -->
+                <h2>Course sélectionnée</h2>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Lieu</th>
+                            <th>Date</th>
+                            <th>Numéro officiel</th>
+                            <th>Type de course</th>
+                            <th>Type de course si non répertiorée ci-dessus</th>
+                            <th>Coefficient d'handicap par catégories (si applicable)</th>
+                            <th>Coefficient d'handicap par genre (si applicable)</th>
+                        </tr>
+                        <tr th:if="${scheduledRaceForm==null}">Aucune course inscrite</tr>
+                        <tr th:if="${scheduledRaceForm!=null}">
+                            <td th:text="${scheduledRaceForm.getId()}"></td>
+                            <td th:text="${scheduledRaceForm.location}"></td>
+                            <td th:text="${scheduledRaceForm.date}"></td>
+                            <td th:text="${scheduledRaceForm.number }"></td>
+                            <td th:text="${scheduledRaceForm.raceType }"></td>
+                            <td th:text="${scheduledRaceForm.customedRace }"></td>
+                            <td th:text="${scheduledRaceForm.coefficientCategory }"></td>
+                            <td th:text="${scheduledRaceForm.coefficientGender }"></td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- part Infos Rowers -->
+                <h2>Participants inscrits</h2><br/>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Date de naissance</th>
+                            <th>Age</th>
+                            <th>Catégorie</th>
+                            <th>Coefficient d'handicap pour la catégorie (si applicable)</th>
+                            <th>Genre</th>
+                            <th>Coefficient d'handicap pour le genre (si applicable)</th>
+                            <th>Club</th>
+                            <th>Numéro de licence</th>
+                            <th>Nationalité</th>
+                            <th>Expérience</th>
+                            <th>Catégorie physique</th>
+                            <th>Handicap (si applicable)</th>
+                            <th>Equipe</th>
+                        </tr>
+                        <tr th:if="${rowerForm==null}">Aucun participant inscrit</tr>
+                        <tr th:each="rower:${rowerForm}">
+                            <td th:text="${rower.getId()}"></td>
+                            <td th:text="${rower.getFirstName()}"></td>
+                            <td th:text="${rower.getLastName()}"></td>
+                            <td th:text="${rower.getBirthDate() }"></td>
+                            <td th:text="${rower.getAge() }"></td>
+                            <td th:text="${rower.getCategory() }"></td>
+                            <td th:text="${rower.getCategoryCoef() }"></td>
+                            <td th:text="${rower.getGender() }"></td>
+                            <td th:text="${rower.getGenderCoef() }"></td>
+                            <td th:text="${rower.getClub() }"></td>
+                            <td th:text="${rower.getLicenceNumber() }"></td>
+                            <td th:text="${rower.getNationality() }"></td>
+                            <td th:text="${rower.getRaceExperience() }"></td>
+                            <td th:text="${rower.getDisability().toString(rower.getDisability()) }"></td>
+                            <td th:text="${rower.getRowerHandicap() }"></td>
+                            <td th:text="${rower.getTeamName()}"></td>
+                        </tr>
+                    </table>
+                </div>
     <br/>
         <button id="buttonTeamToggle">Equipe >>></button><br/>
     <section id="teamForm">

@@ -78,7 +78,7 @@ public class Rower extends Object {
     }
 
     public void setRaceNumber(int raceNumber) {
-        this.raceNumber = raceNumber;
+        this.raceNumber = Math.abs(raceNumber);
     }
 
     public String getTeamName() {
@@ -150,16 +150,16 @@ public class Rower extends Object {
         return categoryCoef;
     }
 
-    public void setCategoryCoef() {
-        this.categoryCoef = String.valueOf(race.getCoefficientCategory());
+    public void setCategoryCoef(String value) {
+        this.categoryCoef = value;
     }
 
     public String getGenderCoef() {
         return genderCoef;
     }
 
-    public void setGenderCoef() {
-        this.genderCoef = String.valueOf(race.getCoefficientGender());
+    public void setGenderCoef(String value) {
+        this.genderCoef = value;
     }
 
     public int getAge() {
@@ -218,7 +218,7 @@ public class Rower extends Object {
         return rowerHandicap;
     }
 
-    public void setRowerHandicap() {
+    public void setRowerHandicap() throws Exception {
         this.rowerHandicap = rowerHandicap(this.categoryCoef,
                 this.genderCoef);
     }
@@ -234,10 +234,18 @@ public class Rower extends Object {
 
 
     //specific methods///////////////////////////////
-    public double rowerHandicap(String categoryCoef, String genderCoef){
-        Double categoryCoefNumber = Double.valueOf(categoryCoef);
-        Double genderCoefNumber = Double.valueOf(genderCoef);
-        return categoryCoefNumber*genderCoefNumber;
+    public double rowerHandicap(String categoryCoef, String genderCoef) {
+        double categoryCoefNumber;
+        double genderCoefNumber;
+        try {
+            categoryCoefNumber = Double.parseDouble(categoryCoef);
+            genderCoefNumber = Double.parseDouble(genderCoef);
+            return categoryCoefNumber * genderCoefNumber;
+        }catch(Exception e){
+            categoryCoefNumber = 0.00;
+            genderCoefNumber = 0.00;
+            return categoryCoefNumber * genderCoefNumber;
+        }
     }
     public int calculateAge(Date birthDate){
         int actualYear = LocalDate.now().getYear();

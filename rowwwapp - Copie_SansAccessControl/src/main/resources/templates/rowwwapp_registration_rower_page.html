@@ -27,6 +27,34 @@
 
         <div class="column middle">
     <article>
+        <h1>Vos données</h1><br/>
+        <!-- part Infos Scheduled Races -->
+        <h2>Course sélectionnée</h2>
+        <div>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Lieu</th>
+                    <th>Date</th>
+                    <th>Numéro officiel</th>
+                    <th>Type de course</th>
+                    <th>Type de course si non répertiorée ci-dessus</th>
+                    <th>Coefficient d'handicap par catégories (si applicable)</th>
+                    <th>Coefficient d'handicap par genre (si applicable)</th>
+                </tr>
+                <tr th:if="${scheduledRaceForm==null}">Aucune course inscrite</tr>
+                <tr th:if="${scheduledRaceForm!=null}">
+                    <td th:text="${scheduledRaceForm.getId()}"></td>
+                    <td th:text="${scheduledRaceForm.location}"></td>
+                    <td th:text="${scheduledRaceForm.date}"></td>
+                    <td th:text="${scheduledRaceForm.number }"></td>
+                    <td th:text="${scheduledRaceForm.raceType }"></td>
+                    <td th:text="${scheduledRaceForm.customedRace }"></td>
+                    <td th:text="${scheduledRaceForm.coefficientCategory }"></td>
+                    <td th:text="${scheduledRaceForm.coefficientGender }"></td>
+                </tr>
+            </table>
+        </div>
       <!-- part form -->             
       <br/>
       <button id="buttonRowerToggle">Participant(e) >>></button><br/>

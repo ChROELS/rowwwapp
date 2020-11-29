@@ -28,8 +28,54 @@
 <article>
     <!-- part 1 -->
     <h1>Vos données</h1><br/>
+    <h2>Jour de compétition</h2>
     <div>
-        <h2>Course</h2>
+        <table >
+            <tr>
+                <th>Id</th>
+                <th>Lieu</th>
+                <th>Date</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Date limite d'inscription</th>
+                <th>Montant</th>
+                <th>Règles d'inscription</th>
+                <th>Contacts</th>
+                <th>Date du tirage au sort</th>
+                <th>Règles</th>
+                <th>Contacts</th>
+                <th>Date limite pour forfait</th>
+                <th>Heure limite pour forfait</th>
+                <th>Règles</th>
+                <th>Contacts</th>
+                <th>Règles complémentaires</th>
+                <th>Courses</th>
+            </tr>
+            <tr th:if="${competitions==null}">Aucune compétition enregistrée</tr>
+            <tr th:each="comp : ${competitions}">
+                <td th:text="${comp.getId()}">
+                <td th:text="${comp.getPlaceOfEvent()}"></td>
+                <td th:text="${comp.getDate()}"></td>
+                <td th:text="${comp.getName() }"></td>
+                <td th:text="${comp.getDescription() }"></td>
+                <td th:text="${comp.getRegistrationLimit()}"></td>
+                <td th:text="${comp.getRegistrationCost() }"></td>
+                <td th:text="${comp.getRegistrationRules() }"></td>
+                <td th:text="${comp.getRegistrationContact() }"></td>
+                <td th:text="${comp.getLotteryDate()}"></td>
+                <td th:text="${comp.getLotteryRules() }"></td>
+                <td th:text="${comp.getLotteryContact() }"></td>
+                <td th:text="${comp.getForfeitLimit()}"></td>
+                <td th:text="${comp.getForfeitLimitHour() }"></td>
+                <td th:text="${comp.getForfeitRules() }"></td>
+                <td th:text="${comp.getForfeitContact() }"></td>
+                <td th:text="${comp.getComplementaryRules() }"></td>
+                <td th:text="${comp.getRaces() }"></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h2>Course du jour de compétition</h2>
         <table >
             <tr>
                 <th>Id</th>
@@ -47,8 +93,8 @@
                 <th>Expérience admise</th>
                 <th>Date de compétition</th>
             </tr>
+            <tr th:if="${races==null}">Aucune course enregistrée</tr>
         <tr th:each="race : ${races}">
-            <td th:if="${race.equals(null)}" th:text="Aucune course enregistrée"></td>
                 <td th:text="${race.getId()}">
                 <td th:text="${race.getNumber()}"></td>
                 <td th:text="${race.getName()}"></td>
@@ -62,7 +108,7 @@
                 <td th:text="${race.getAdmissCategory() }"></td>
                 <td th:text="${race.getAdmissRowingBoat() }"></td>
                 <td th:text="${race.getRaceExperience() }"></td>
-            <td th:if="${!race.getCompetition().equals(null)}" th:text="${race.getCompetition().getDate() }"></td>
+            <td th:if="${race.getCompetition()!=null}" th:text="${race.getCompetition().getDate() }"></td>
         </tr>
         </table>
     </div><br/>

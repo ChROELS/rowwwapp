@@ -68,7 +68,7 @@ public class Team {
     }
 
     public void setSizeOfCrew(int sizeOfCrew) {
-        this.sizeOfCrew = this.crew.size();
+        this.sizeOfCrew = Math.abs(this.crew.size());
     }
 
     public List<Rower> getCrew() {
@@ -114,7 +114,7 @@ public class Team {
     public double calculateTeamHandicap(List<Rower> crew){
         double eachRowerHandicap;
         List<Double> sumOfRowerHandicap = new ArrayList<>();
-        double totalOfRowerHandicap = 0;
+        double teamHandicap = 0;
         for (Rower r: crew
         ) {
             eachRowerHandicap = r.getRowerHandicap();
@@ -122,9 +122,13 @@ public class Team {
         }
         Optional<Double> totalOfCrewHandicap = sumOfRowerHandicap.stream().reduce(Double::sum);
         if(totalOfCrewHandicap.isPresent()){
-            totalOfRowerHandicap = totalOfCrewHandicap.get();
+            teamHandicap = totalOfCrewHandicap.get()/sizeOfCrew;
         }
-        return totalOfRowerHandicap/sizeOfCrew;
+        if(Double.valueOf(teamHandicap).isInfinite()) {
+            return 0.00;
+        }else{
+            return Math.round(teamHandicap);
+        }
     }
    public String getListCrewMembers(List<Rower> rowers){
         Map<Integer,String> crewNames = new TreeMap<>();

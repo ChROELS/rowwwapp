@@ -26,6 +26,7 @@
 
         <div class="column middle">
     <article>
+        <h1>Vos données</h1><br/>
         <!-- part Infos Scheduled Races -->
         <h2>Course sélectionnée</h2>
         <div>
@@ -40,8 +41,8 @@
                     <th>Coefficient d'handicap par catégories (si applicable)</th>
                     <th>Coefficient d'handicap par genre (si applicable)</th>
                 </tr>
-                <tr th:each="scheduledRace: ${scheduledRaceForm}">
-                    <td th:if="${scheduledRace.equals(null)}" th:text="Aucune course inscrite"></td>
+                <tr th:if="${scheduledRaces==null}">Aucune course inscrite</tr>
+                <tr th:each="scheduledRace: ${scheduledRaces}">
                     <td th:text="${scheduledRace.getId()}"></td>
                     <td th:text="${scheduledRace.location}"></td>
                     <td th:text="${scheduledRace.date}"></td>
@@ -54,7 +55,7 @@
             </table>
         </div>
         <!-- part Infos Teams -->
-        <h1>Equipes</h1><br/>
+        <h2>Equipes</h2>
         <div>
             <table>
                 <tr>
@@ -67,8 +68,8 @@
                     <th>Nage</th>
                     <th>Handicap</th>
                 </tr>
+                <tr th:if="${teams==null}">Aucune équipe inscrite</tr>
                 <tr th:each="t: ${teams}">
-                    <td th:if="${t.equals(null)}" th:text="Aucune équipe inscrite"></td>
                     <td th:text="${t.getId()}"></td>
                     <td th:text="${t.getName()}"></td>
                     <td th:text="${t.getSizeOfCrew() }"></td>
@@ -83,7 +84,7 @@
             </table>
         </div>
         <!-- part Infos Rowers -->
-        <h1>Participants inscrits</h1><br/>
+        <h2>Participants inscrits</h2><br/>
         <div>
             <table>
                 <tr>
@@ -103,8 +104,8 @@
                     <th>Handicap (si applicable)</th>
                     <th>Equipe</th>
                 </tr>
+                <tr th:if="${rowers==null}">Aucun participant inscrite</tr>
                 <tr th:each="rower:${rowers}">
-                    <td th:if="${rower.equals(null)}" th:text="Aucun participant inscrit"></td>
                     <td th:text="${rower.getId()}"></td>
                     <td th:text="${rower.getFirstName()}"></td>
                     <td th:text="${rower.getLastName()}"></td>
@@ -124,18 +125,10 @@
                 </tr>
             </table>
         </div>
-        <!--part Forfeit-->
         <br/>
-        <button id="buttonForfeitToggle">Forfait</button><br/>
-        <section id="Forfeit">
-            <form id="forfait1">
-                <label for="teamForfaitName">Nom d'identification de l'équipe:</label><br/>
-                <input type="text" id="teamForfaitName" size="50" value="" required/><br/>
-                <input type="submit" value="Enregistrer"/>
-            </form>
-        </section>
         <!--part Exportation-->
         <button id="toCompetition" onclick="loadPageRegistration()">Participer à une autre course</button><br/>
+        <button id="toDatabase" onclick="loadPageDatabase()">Accéder à la console de la base de données</button><br/>
         <br/>
         <section>
         <p>Télécharger ces données (.csv)</p>
