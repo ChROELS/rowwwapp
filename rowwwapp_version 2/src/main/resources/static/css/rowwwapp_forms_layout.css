@@ -1,0 +1,364 @@
+/* Style the body (general style settings) */
+body{
+    position: absolute;
+    background-position: center;
+    height: auto;
+    background-image: linear-gradient(darkslategray,darkolivegreen);
+    background-color: darkolivegreen;
+    background-repeat: no-repeat;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/* Style the header */
+header{
+
+}
+/* Style the navigation bar */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background-color: #333;
+    border:none;
+    position: relative;
+    top:0;
+    width: 100%;
+}
+li {
+    float: left;
+    display: block;
+    padding: 14px 16px;
+    color: darkolivegreen;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+    border:none;
+    text-decoration: none;
+}
+li a {
+    color: white;
+    padding: 14px 16px;
+    border:none;
+}
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+    border:none;
+    color: lightgrey;
+}
+.active {
+    background-color: maroon;
+}
+/* Style the article */
+article{
+    position: relative;
+    left: 0px;
+    z-index: 1;
+    padding: 20px;
+    text-align: left;
+    font-size: 14px;
+    height:100%;
+    width: 100%;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+}
+/* Left and right column */
+.column.side {
+    width: 0%;
+}
+/* Middle column */
+.column.middle {
+    margin-top: 30px;
+    width: 100%;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+}
+section{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #FFF;
+}
+label{
+    margin-left: 4px;
+    margin-bottom: 2px;
+}
+p{
+    background-color: yellowgreen;
+    color: maroon;
+}
+div{
+
+}
+/* Create tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+}
+th {
+    background-color: maroon;
+    position: relative;
+    color: white;
+    padding: 8px;
+    text-align: -webkit-center;
+    width: 100%;
+    box-sizing: border-box;
+}
+#input_row, #input_row2{
+    background-color: midnightblue; color: white;
+    width: auto;
+}
+tr{
+    box-sizing: border-box;
+    background-color: white;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+    height: 50px;
+    color: black;
+    width: auto;
+}
+tr:nth-child(even) {background-color: darkgray; text-align: center;
+    padding: 10px;
+    margin: 20px;
+    height: 50px;color: black;width: auto;}
+tr:hover {}
+td{
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    width: border-box;
+}
+/* Create the titles */
+h1{
+    position: relative;
+    text-align: center;
+}
+h2{
+    position: relative;
+    text-align: center;
+}
+/* Create the welcome image */
+img{
+    position: static;
+    padding: 10px;
+    opacity: 1.0;
+    width: 100%;
+
+}
+
+a{
+    position: relative;
+    box-sizing: border-box;
+    border:1px solid black;
+    text-align: center ;
+    font-size: 24px;
+    font-weight: bolder;
+    padding: 5px;
+    width: 100%;
+    cursor: pointer;
+    background-color: transparent;
+}
+a:hover{
+    border:1px solid lightgrey;
+    background-color: lightgrey;
+    color: black;
+}
+a:active{
+    border:1px solid black;
+
+}
+a:active:after{
+    border:1px solid black;
+    color: black;
+}
+button {
+    position: static;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    border:1px solid black;
+    text-align: center ;
+    font-size: 24px;
+    font-weight: bolder;
+    padding: 4px;
+    width: 100%;
+    cursor: pointer;
+    background-color: transparent;
+}
+button:hover {
+    border:1px solid maroon;
+    background-color: maroon;
+    color: white;
+}
+
+button:active{
+    border:1px solid black;
+
+}
+
+button:active:after{
+    border:1px solid black;
+    color: black;
+}
+
+input{
+    outline:black 2px;
+    width:100%;
+    border: none;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color:lightgrey;
+    color: black;
+}
+input:focus{
+    background-color:darkred;
+}
+input[type=number]{
+    background-color:lightgray;
+    color: black;
+    margin: 8px 0;
+}
+/* Remove arrow-spinner on Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* on Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    margin: 8px 0;
+}
+input[type=date]{
+    background-color:lightgray;
+    color: black;
+    margin: 8px 0;
+}
+input[type=text]{
+    background-color:lightgray;
+    color: black;
+    margin: 8px 0;
+    position: center;
+}
+input[type=submit] {
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+    padding: 15px 32px;
+    width: 250px;
+    border: 1px solid darkgreen;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+.input-group input[type=submit] {
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+    padding: 15px 32px;
+    width: 250px;
+    border: 1px solid darkgreen;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+input[type=submit]:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+
+input[type=submit]:hover {
+    background-color:darkred;
+    color:lightgray;
+}
+
+select {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    background-color: lightgray;
+    margin: 8px 0;
+}
+.container1{
+    position: relative;
+    border: none;
+    background-color: lightgray;
+    color:black;
+    cursor: pointer;
+    height: 25px;
+    padding-top: 12px;
+    padding-left: 35px;
+    margin-bottom: 8px;
+    font: 1em sans-serif;
+    display: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Hide the browser's default radio button */
+.container1 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100%;
+    height: 25px;
+    width: 25px;
+    background-color: lightslategray;
+}
+
+/* On mouse-over, add a red background color */
+.container1:hover input ~ .checkmark {
+    background-color: darkred;
+}
+/* When the radio button is checked, add a red border */
+.container1 input:checked ~ .checkmark {
+    background-color: darkred;
+}
+/* Create the indicator */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the indicator when checked */
+.container1 input:checked ~ .checkmark:after {
+    display: block;
+}
+/* Style the footer */
+footer{
+    position: static;
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: lighter;
+}
+

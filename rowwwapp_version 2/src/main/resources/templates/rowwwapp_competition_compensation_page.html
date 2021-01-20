@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--Important to create a xml nameSpace for thymeleaf. If I dont, each time I use th: I receive the message namespace is not bound-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+<head>
+    <title>competition</title>
+    <link href="../static/css/rowwwapp_forms_layout.css" th:href="@{/css/rowwwapp_forms_layout.css}" rel="stylesheet" media="screen">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/rowwwapp_competition_compensation_page.js" th:src="@{/js/rowwwapp_competition_compensation_page.js}"></script>
+</head>
+<body>
+
+<!--Navigation bar-->
+<ul>
+    <li><a th:href="@{/rowwwapp/bienvenue}">Accueil</a></li>
+    <li><header>Organiser: étape 3</header></li>
+    <li style="float:right"><a th:href="@{/rowwwapp/logout}">Log Out</a></li>
+    <li style="float:right" sec:authorize="isAuthenticated()">Logged In</li>
+</ul>
+<!--One row-->
+<div class="row">
+    <!--Three columns-->
+    <div class="column side">
+    </div>
+
+    <div class="column middle">
+<article>
+    <!-- part 1 -->
+    <h1>Vos données</h1><br/>
+    <h2>Jour de compétition</h2>
+    <div>
+        <table >
+            <tr>
+                <th>Id</th>
+                <th>Lieu</th>
+                <th>Date</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Date limite d'inscription</th>
+                <th>Montant</th>
+                <th>Règles d'inscription</th>
+                <th>Contacts</th>
+                <th>Date du tirage au sort</th>
+                <th>Règles</th>
+                <th>Contacts</th>
+                <th>Date limite pour forfait</th>
+                <th>Heure limite pour forfait</th>
+                <th>Règles</th>
+                <th>Contacts</th>
+                <th>Règles complémentaires</th>
+                <th>Courses</th>
+            </tr>
+            <tr th:if="${competitions==null}">Aucune compétition enregistrée</tr>
+            <tr th:each="comp : ${competitions}">
+                <td th:text="${comp.getId()}">
+                <td th:text="${comp.getPlaceOfEvent()}"></td>
+                <td th:text="${comp.getDate()}"></td>
+                <td th:text="${comp.getName() }"></td>
+                <td th:text="${comp.getDescription() }"></td>
+                <td th:text="${comp.getRegistrationLimit()}"></td>
+                <td th:text="${comp.getRegistrationCost() }"></td>
+                <td th:text="${comp.getRegistrationRules() }"></td>
+                <td th:text="${comp.getRegistrationContact() }"></td>
+                <td th:text="${comp.getLotteryDate()}"></td>
+                <td th:text="${comp.getLotteryRules() }"></td>
+                <td th:text="${comp.getLotteryContact() }"></td>
+                <td th:text="${comp.getForfeitLimit()}"></td>
+                <td th:text="${comp.getForfeitLimitHour() }"></td>
+                <td th:text="${comp.getForfeitRules() }"></td>
+                <td th:text="${comp.getForfeitContact() }"></td>
+                <td th:text="${comp.getComplementaryRules() }"></td>
+                <td th:text="${comp.getRaces() }"></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h2>Course du jour de compétition</h2>
+        <table >
+            <tr>
+                <th>Id</th>
+                <th>Numéro</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Distance</th>
+                <th>Temps max.</th>
+                <th>Heure de départ</th>
+                <th>Type de course</th>
+                <th>Course sur-mesure</th>
+                <th>Envergure</th>
+                <th>Catégorie</th>
+                <th>Type de bateau</th>
+                <th>Expérience admise</th>
+                <th>Date de compétition</th>
+            </tr>
+            <tr th:if="${races==null}">Aucune course enregistrée</tr>
+        <tr th:each="race : ${races}">
+                <td th:text="${race.getId()}">
+                <td th:text="${race.getNumber()}"></td>
+                <td th:text="${race.getName()}"></td>
+                <td th:text="${race.getDescription() }"></td>
+                <td th:text="${race.getDistance() }"></td>
+                <td th:text="${race.getMaxTime() }"></td>
+                <td th:text="${race.getStartingTime() }"></td>
+                <td th:text="${race.getRacetype() }"></td>
+                <td th:text="${race.getCustomedRace() }"></td>
+                <td th:text="${race.getRaceImpact() }"></td>
+                <td th:text="${race.getAdmissCategory() }"></td>
+                <td th:text="${race.getAdmissRowingBoat() }"></td>
+                <td th:text="${race.getRaceExperience() }"></td>
+            <td th:if="${race.getCompetition()!=null}" th:text="${race.getCompetition().getDate() }"></td>
+        </tr>
+        </table>
+    </div><br/>
+<button id="buttonCompensationToggle">Compensations pour les courses open, mixtes, à handicap >>></button><br/>
+<br/>
+    <!--/*@thymesVar id="compensationForm2" type="be.intecbrussel.models.competition.Compensation"*/-->
+    <form action="#" method="post" th:action="@{/rowwwapp/competition/compensation}" th:object="${compensationForm2}">
+        <section id="compensationForm">
+        <label for="compensationMale">Homme :</label><br/>
+        <input type="text" id="compensationMale" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{compensationMale}"/><br/>
+        <label for="compensationFemale">Femme :</label><br/>
+        <input type="text" id="compensationFemale" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{compensationFemale}"/><br/>
+        <label for="compensationBeg">BEG :</label><br/>
+        <input type="text" id="compensationBeg" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{BEG}" /><br/>
+        <label for="compensationPR3">PR3 :</label><br/>
+        <input type="text" id="compensationPR3" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{PR3}" /><br/>
+        <label for="compensationPR2">PR2 :</label><br/>
+        <input type="text" id="compensationPR2" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{PR2}" /><br/>
+        <label for="compensationPR1">PR1 :</label><br/>
+        <input type="text" id="compensationPR1" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{PR1}" /><br/>
+        <label for="compensationJ10">J10 :</label><br/>
+        <input id="compensationJ10" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" th:field="*{j10}" type="text" value="00.00"/><br/>
+        <label for="compensationJ12">J12 :</label><br/>
+        <input type="text" id="compensationJ12" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{j12}" /><br/>
+        <label for="compensationJ14">J14 :</label><br/>
+        <input type="text" id="compensationJ14" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{j14}" /><br/>
+        <label for="compensationJ16">J16 :</label><br/>
+        <input type="text" id="compensationJ16" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{j16}" /><br/>
+        <label for="compensationJ18">J18 :</label><br/>
+        <input type="text" id="compensationJ18" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{j18}" /><br/>
+        <label for="compensationU23">U23 :</label><br/>
+        <input type="text" id="compensationU23" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{u23}" /><br/>
+        <label for="compensationSA">S_A :</label><br/>
+        <input type="text" id="compensationSA" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{s_A}" /><br/>
+        <label for="compensationSB">S_B :</label><br/>
+        <input type="text" id="compensationSB" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{s_B}" /><br/>
+        <label for="compensationA">A :</label><br/>
+        <input type="text" id="compensationA" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{a}" /><br/>
+        <label for="compensationB">B :</label><br/>
+        <input type="text" id="compensationB" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{b}" /><br/>
+        <label for="compensationC">C :</label><br/>
+        <input type="text" id="compensationC" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{c}" /><br/>
+        <label for="compensationD">D :</label><br/>
+        <input type="text" id="compensationD" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{d}" /><br/>
+        <label for="compensationE">E :</label><br/>
+        <input type="text" id="compensationE" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{e}" /><br/>
+        <label for="compensationF">F :</label><br/>
+        <input type="text" id="compensationF" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{f}" /><br/>
+        <label for="compensationG">G :</label><br/>
+        <input type="text" id="compensationG" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{g}" /><br/>
+        <label for="compensationH">H :</label><br/>
+        <input type="text" id="compensationH" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{h}" /><br/>
+        <label for="compensationI">I :</label><br/>
+        <input type="text" id="compensationI" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{i}" /><br/>
+        <label for="compensationJ">J :</label><br/>
+        <input type="text" id="compensationJ" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{j}" /><br/>
+        <label for="compensationK">K :</label><br/>
+        <input type="text" id="compensationK" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{k}" /><br/>
+        <label for="compensationL">L :</label><br/>
+        <input type="text" id="compensationL" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{l}" /><br/>
+        <label for="compensationM">M :</label><br/>
+        <input type="text" id="compensationM" pattern="[0-9]+[0-9]+.+[0-9]+[0-9]" value="00.00" th:field="*{m}" /><br/>
+        </section>
+        <div class="input-group">
+            <input type="submit" value="Enregistrer et continuer"/>
+        </div>
+    </form>
+</article>
+    </div>
+    <div class="column side">
+    </div>
+    <!--End of One row-->
+</div>
+<div class="row">
+    <footer>Christine Roels, Intec Brussel Java EE Developer, persoonlijk project 2020</footer>
+</div>
+</body>
+</html>
